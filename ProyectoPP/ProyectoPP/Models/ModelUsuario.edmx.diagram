@@ -5,19 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="07d9252ff0134e1cb5d5f5778c584b85" Name="Diagram1">
-        <EntityTypeShape EntityType="patopurificModel.persona" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="patopurificModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="5.875" />
-        <EntityTypeShape EntityType="patopurificModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="14.25" />
-        <EntityTypeShape EntityType="patopurificModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="11.625" />
-        <EntityTypeShape EntityType="patopurificModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="patopurificModel.permisos" Width="1.5" PointX="2.25" PointY="9" />
-        <EntityTypeShape EntityType="patopurificModel.telefono" Width="1.5" PointX="5.25" PointY="2" />
-        <AssociationConnector Association="patopurificModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="patopurificModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="patopurificModel.FK__persona__id__37703C52" />
-        <AssociationConnector Association="patopurificModel.FK__telefono__cedula__3864608B" />
-        <AssociationConnector Association="patopurificModel.AspNetUserRoles" />
-        <AssociationConnector Association="patopurificModel.permisos_asociados_roles" />
+        <EntityTypeShape EntityType="patopurificModel.persona" Width="1.5" PointX="6.875" PointY="1.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
