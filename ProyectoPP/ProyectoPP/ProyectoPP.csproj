@@ -205,6 +205,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>ModelUsuario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>ModelUsuario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>ModelUsuario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ModelUsuario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelUsuario.Context.cs">
@@ -222,7 +234,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelUsuario.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\permisos.cs">
+      <DependentUpon>ModelUsuario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\persona.cs">
+      <DependentUpon>ModelUsuario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\telefono.cs">
       <DependentUpon>ModelUsuario.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

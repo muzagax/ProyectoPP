@@ -12,26 +12,21 @@ namespace ProyectoPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class persona
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public persona()
+        public AspNetRoles()
         {
-            this.telefono = new HashSet<telefono>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.permisos = new HashSet<permisos>();
         }
     
-        public string nombre { get; set; }
-        public string apellido1 { get; set; }
-        public string apellido2 { get; set; }
-        public string cedula { get; set; }
-        public string carne { get; set; }
-        public System.DateTime fechaNac { get; set; }
-        public string email { get; set; }
-        public string id { get; set; }
-        public string genero { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<telefono> telefono { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<permisos> permisos { get; set; }
     }
 }

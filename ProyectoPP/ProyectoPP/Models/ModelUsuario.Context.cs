@@ -26,5 +26,11 @@ namespace ProyectoPP.Models
         }
     
         public virtual DbSet<persona> persona { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<permisos> permisos { get; set; }
+        public virtual DbSet<telefono> telefono { get; set; }
     }
 }
