@@ -88,6 +88,8 @@ namespace ProyectoPP.Controllers
 
             if (ModelState.IsValid)
             {
+                string ID = user.Id.ToString();
+                persona.id = ID;
                 db.persona.Add(persona);
                 db.SaveChanges();
                 return RedirectToAction("Index");
