@@ -12,7 +12,7 @@ namespace ProyectoPP.Controllers
 
         patopurificEntitiesRoles baseDatos = new patopurificEntitiesRoles();
         // GET: Roles
-        public ActionResult Index()
+        public ActionResult RolesView()
         {
 
             Roles modelo = new Roles();
