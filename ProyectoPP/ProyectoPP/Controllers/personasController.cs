@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Security.Claims;
 using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Threading.Tasks;
 using ProyectoPP.Models;
 
 namespace ProyectoPP.Controllers
@@ -13,6 +19,33 @@ namespace ProyectoPP.Controllers
     public class personasController : Controller
     {
         private patopurificEntities db = new patopurificEntities();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
 
         // GET: personas
         public ActionResult Index()
@@ -46,8 +79,13 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
+        public async Task<ActionResult> Create([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
         {
+
+            var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
+            string pass = "ucr."+ persona.carne;
+            var result = await UserManager.CreateAsync(user, pass);
+
             if (ModelState.IsValid)
             {
                 db.persona.Add(persona);

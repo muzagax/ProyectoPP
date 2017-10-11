@@ -49,8 +49,7 @@ namespace ProyectoPP.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Display(Name = "Carne")]
         public string Email { get; set; }
 
         [Required]
