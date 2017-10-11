@@ -1,0 +1,49 @@
+﻿@model ProyectoPP.Models.Roles
+
+@{
+    ViewBag.Title = "VistaRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Roles</h2>
+
+<p>
+
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Funcionalidad
+        </th>
+        <th>
+            Rol
+        </th>
+    </tr>
+
+
+
+    @for (int i = 0; i < Model.ListaRoles.Count; i++)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.ListaRoles.ElementAt(i).Name)
+            </td>
+        </tr>
+
+
+
+    }
+
+    @for (int i = 0; i < Model.ListaPermisos.Count; i++)
+    {
+    }
+
+
+
+
+
+</table>
+
+
+
