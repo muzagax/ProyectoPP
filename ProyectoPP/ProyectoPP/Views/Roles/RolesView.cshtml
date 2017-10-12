@@ -56,7 +56,7 @@
                         @Html.DisplayFor(modelItem => (Model.ListaRoles.ElementAt(j).Name))
                         @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).rol))
                         *@
-                        <input checked="checked" type="checkbox" id="cbox1" value="first_checkbox" disabled>
+                        <input checked="checked" type="checkbox" id="@(i)_@(j)" value="first_checkbox" disabled>
                     </td>
                 }
                 else
@@ -68,7 +68,7 @@
                             @Html.DisplayFor(modelItem => (Model.ListaRoles.ElementAt(j).Name))
                             @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).rol))
                             *@
-                            <input type="checkbox" id="cbox1" value="first_checkbox" disabled>
+                            <input type="checkbox" id="@(i)_@(j)" value="first_checkbox" disabled>
                         </td>
                     }
                 }
@@ -84,10 +84,27 @@
 
 </table>
 <p align="right">
-    <input type="submit" value="Editar" class="a" />
-    <input type="submit" value="Aceptar" class="b" />
-    <input type="submit" value="Cancelar" class="c" />
+    <button onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))">Editar</button>
+    <button >Aceptar</button>
+    <button>Cancelar</button>
 </p>
+
+<script>
+    function Editar(numRoles, numPermisos)
+    {
+        alert("Asigne los roles usando los checkbox");
+
+        for (var i = 0; i < numPermisos; i++)
+        {
+            for (var j = 0; j < numRoles; j++)
+            {  
+                document.getElementById(i+'_'+j).removeAttribute("disabled");
+            }
+        }
+        
+    }
+</script>
+
 
 
 
