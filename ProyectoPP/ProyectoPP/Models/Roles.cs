@@ -17,7 +17,7 @@ namespace ProyectoPP.Models
             }
 
             public string rol { get; set; }
-            string permiso  { get; set; }
+            public string permiso  { get; set; }
         }
         public permisos ModeloPermisos { get; set; }
         public AspNetRoles ModeloNetRoles { get; set; }
