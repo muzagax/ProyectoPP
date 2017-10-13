@@ -83,10 +83,14 @@
 
 
 </table>
+
 <p align="right">
     <button onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))">Editar</button>
-    <button >Aceptar</button>
-    <button>Cancelar</button>
+    <button>Aceptar</button>
+    @using (Html.BeginForm("RolesView", "Roles"))
+    {
+        <input type="submit" value="Cancelar"/>
+    }
 </p>
 
 <script>
