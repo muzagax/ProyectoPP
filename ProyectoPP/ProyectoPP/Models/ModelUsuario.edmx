@@ -14,10 +14,8 @@
           <Property Name="apellido2" Type="varchar" MaxLength="20" />
           <Property Name="cedula" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="carne" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="fechaNac" Type="date" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="40" />
           <Property Name="id" Type="nvarchar" MaxLength="128" />
-          <Property Name="genero" Type="char" MaxLength="1" />
         </EntityType>
         <EntityContainer Name="patopurificModelStoreContainer">
           <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
@@ -38,10 +36,8 @@
           <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="cedula" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="carne" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="fechaNac" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="genero" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -52,10 +48,8 @@
           <EntitySetMapping Name="persona">
             <EntityTypeMapping TypeName="patopurificModel.persona">
               <MappingFragment StoreEntitySet="persona">
-                <ScalarProperty Name="genero" ColumnName="genero" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="fechaNac" ColumnName="fechaNac" />
                 <ScalarProperty Name="carne" ColumnName="carne" />
                 <ScalarProperty Name="cedula" ColumnName="cedula" />
                 <ScalarProperty Name="apellido2" ColumnName="apellido2" />

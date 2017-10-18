@@ -28,18 +28,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.carne)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaNac)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.genero)
-            </th>
+             </th>
             <th></th>
         </tr>
 
@@ -58,18 +50,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.carne)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaNac)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.email)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.genero)
-                </td>
+                
+               
                 <td>
                     @Html.ActionLink("Detalles", "Details", new { id = item.cedula })
                 </td>

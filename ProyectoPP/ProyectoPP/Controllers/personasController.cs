@@ -118,11 +118,14 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
+        public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,email")] persona persona)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(persona).State = EntityState.Modified;
+
+                //string "UPDATE tblCustomers  SET Email = 'None'  WHERE  = 'Smith'
+              //  db.persona.SqlQuery();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

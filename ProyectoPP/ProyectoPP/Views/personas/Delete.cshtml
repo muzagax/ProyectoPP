@@ -14,6 +14,21 @@
         <h4>Usuario:</h4>
         <hr />
         <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.carne)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.carne)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.cedula)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.cedula)
+            </dd>
+
             <dt>
                 @Html.DisplayNameFor(model => model.nombre)
             </dt>
@@ -38,21 +53,7 @@
                 @Html.DisplayFor(model => model.apellido2)
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.carne)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.carne)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.fechaNac)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.fechaNac)
-            </dd>
+        
 
             <dt>
                 @Html.DisplayNameFor(model => model.email)
@@ -62,13 +63,7 @@
                 @Html.DisplayFor(model => model.email)
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.genero)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.genero)
-            </dd>
 
         </dl>
 

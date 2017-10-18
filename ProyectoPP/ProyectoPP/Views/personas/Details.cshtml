@@ -11,6 +11,20 @@ l﻿@model ProyectoPP.Models.persona
     <h4>persona</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carne)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.carne)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.cedula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.cedula)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
@@ -35,21 +49,8 @@ l﻿@model ProyectoPP.Models.persona
             @Html.DisplayFor(model => model.apellido2)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.carne)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.carne)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaNac)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaNac)
-        </dd>
+               
 
         <dt>
             @Html.DisplayNameFor(model => model.email)
@@ -59,21 +60,7 @@ l﻿@model ProyectoPP.Models.persona
             @Html.DisplayFor(model => model.email)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.id)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.genero)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.genero)
-        </dd>
 
     </dl>
 </div>
