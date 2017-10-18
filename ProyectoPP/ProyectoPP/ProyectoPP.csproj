@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -201,12 +202,31 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\personasController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>ModelRoles.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelRoles.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelRoles.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelRoles.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelRoles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelRoles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelRoles.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelUsuario.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,19 +242,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelUsuario.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\permisos.cs">
+      <DependentUpon>ModelRoles.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\persona.cs">
       <DependentUpon>ModelUsuario.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="duck-185014_960_720.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModelRoles.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelRoles.edmx</DependentUpon>
+      <LastGenOutput>ModelRoles.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelRoles.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelRoles.edmx</DependentUpon>
+      <LastGenOutput>ModelRoles.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ModelUsuario.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelUsuario.edmx</DependentUpon>
@@ -256,6 +291,13 @@
     </EntityDeploy>
     <Content Include="Models\ModelUsuario.edmx.diagram">
       <DependentUpon>ModelUsuario.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ModelRoles.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelRoles.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelRoles.edmx.diagram">
+      <DependentUpon>ModelRoles.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -308,9 +350,11 @@
     <Content Include="Views\personas\Details.cshtml" />
     <Content Include="Views\personas\Edit.cshtml" />
     <Content Include="Views\personas\Index.cshtml" />
+    <Content Include="Views\Roles\RolesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RolesController2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

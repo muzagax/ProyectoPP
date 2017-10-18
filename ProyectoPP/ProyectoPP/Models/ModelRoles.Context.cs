@@ -13,10 +13,10 @@ namespace ProyectoPP.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class patopurificEntities : DbContext
+    public partial class patopurificEntitiesRoles : DbContext
     {
-        public patopurificEntities()
-            : base("name=patopurificEntities")
+        public patopurificEntitiesRoles()
+            : base("name=patopurificEntitiesRoles")
         {
         }
     
@@ -25,6 +25,7 @@ namespace ProyectoPP.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<persona> persona { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<permisos> permisos { get; set; }
     }
 }

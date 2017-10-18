@@ -1,0 +1,117 @@
+﻿@model ProyectoPP.Models.Roles
+
+@{
+    ViewBag.Title = "VistaRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Roles</h2>
+
+<p>
+
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Funcionalidad
+        </th>
+        <th></th>
+        <th>
+            Rol
+        </th>
+    </tr>
+    <th>
+        
+    </th>
+
+
+    @for (int i = 0; i < Model.ListaRoles.Count; i++)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => Model.ListaRoles.ElementAt(i).Name)
+        </td>
+
+
+
+    }
+
+    <tr></tr>
+
+    @for (int i = 0; i < Model.ListaPermisos.Count; i++)
+    {
+        <td>@Html.DisplayFor(modelItem => Model.ListaPermisos.ElementAt(i).permiso)</td>
+
+        for (int j = 0; j < Model.ListaRoles.Count; j++)
+        {
+            for (int k = 0; k < Model.ListaAscociaciones.Count; k++)
+            {
+                if (Model.ListaRoles.ElementAt(j).Name == Model.ListaAscociaciones.ElementAt(k).rol &&
+                Model.ListaPermisos.ElementAt(i).permiso == Model.ListaAscociaciones.ElementAt(k).permiso)
+                {
+                    <td>
+                        @*
+                        @Html.DisplayFor(modelItem => (Model.ListaPermisos.ElementAt(i).permiso))
+                        @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).permiso))
+                        @Html.DisplayFor(modelItem => (Model.ListaRoles.ElementAt(j).Name))
+                        @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).rol))
+                        *@
+                        <input checked="checked" type="checkbox" id="@(i)_@(j)" value="first_checkbox" disabled>
+                    </td>
+                }
+                else
+                {
+                    if (k == Model.ListaAscociaciones.Count - 1 && Model.ListaRoles.ElementAt(j).permisos.Contains(Model.ListaPermisos.ElementAt(i))== false)
+                    {
+                        <td>
+                            @*
+                            @Html.DisplayFor(modelItem => (Model.ListaRoles.ElementAt(j).Name))
+                            @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).rol))
+                            *@
+                            <input type="checkbox" id="@(i)_@(j)" value="first_checkbox" disabled>
+                        </td>
+                    }
+                }
+            }
+        }
+        <tr></tr>
+
+    }
+
+
+
+
+
+</table>
+
+<p align="right">
+    <button onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))">Editar</button>
+    <button>Aceptar</button>
+    @using (Html.BeginForm("RolesView", "Roles"))
+    {
+        <input type="submit" value="Cancelar"/>
+    }
+</p>
+
+<script>
+    function Editar(numRoles, numPermisos)
+    {
+        alert("Asigne los roles usando los checkbox");
+
+        for (var i = 0; i < numPermisos; i++)
+        {
+            for (var j = 0; j < numRoles; j++)
+            {  
+                document.getElementById(i+'_'+j).removeAttribute("disabled");
+            }
+        }
+        
+    }
+</script>
+
+
+
+
+
+
+

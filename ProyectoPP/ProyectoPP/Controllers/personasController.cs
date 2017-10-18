@@ -1,21 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Security.Claims;
 using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoPP.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Threading.Tasks;
+using ProyectoPP.Models;
 
 namespace ProyectoPP.Controllers
 {
     public class personasController : Controller
     {
         private patopurificEntities db = new patopurificEntities();
+        private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
 
         public ApplicationUserManager UserManager
         {
@@ -28,6 +45,7 @@ namespace ProyectoPP.Controllers
                 _userManager = value;
             }
         }
+
 
         // GET: personas
         public ActionResult Index()
@@ -61,11 +79,17 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
+        public async Task<ActionResult> Create([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
         {
+
+            var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
+            string pass = "ucr."+ persona.carne;
+            var result = await UserManager.CreateAsync(user, pass);
+
             if (ModelState.IsValid)
             {
-                
+                string ID = user.Id.ToString();
+                persona.id = ID;
                 db.persona.Add(persona);
                 db.SaveChanges();
                 return RedirectToAction("Index");
