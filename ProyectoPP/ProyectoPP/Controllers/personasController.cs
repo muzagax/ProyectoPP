@@ -83,6 +83,8 @@ namespace ProyectoPP.Controllers
         {
 
             var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
+
+
             string pass = "ucr."+ persona.carne;
             var result = await UserManager.CreateAsync(user, pass);
 
