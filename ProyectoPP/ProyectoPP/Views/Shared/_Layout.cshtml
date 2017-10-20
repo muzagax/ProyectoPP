@@ -1,4 +1,27 @@
 ﻿<!DOCTYPE html>
+
+@functions 
+{
+    /*
+    private ProyectoPP.Models.patopurificEntities db = new ProyectoPP.Models.patopurificEntities();
+
+    private ProyectoPP.Models.ApplicationDbContext context = new ProyectoPP.Models.ApplicationDbContext();
+
+    private bool revisarPermisos(string permiso)
+    {
+        
+        String userID = System.Web.HttpContext.Current.User.Identity.Name;
+        var rol = context.Users.Find(userID).Roles.First();
+        var permisoID = context..Where(m => m.nombre == permiso).First().codigo;
+        var listaRoles = db.Rol_Permisos.Where(m => m.permiso == permisoID).ToList().Select(n => n.rol);
+        bool userRol = listaRoles.Contains(rol.RoleId);
+
+        return userRol;
+        
+    }
+    */
+}
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,12 +44,12 @@
                 @Html.ActionLink("SCRUM Planning", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
-                    <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
+                        <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

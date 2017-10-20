@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h2>Administración de usuarios</h2>
+    <h2>Administración de Usuarios</h2>
     <p>
-        @Html.ActionLink("Insertar nuevo", "Create")
+        @Html.ActionLink("Insertar nuevo", "Create", null, new { @style = "font-size:x-large" })
     </p>
 
 
@@ -28,7 +28,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.carne)
             </th>
-            
             <th>
                 @Html.DisplayNameFor(model => model.email)
              </th>
@@ -50,7 +49,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.carne)
                 </td>
-                
                 <td>
                     @Html.DisplayFor(modelItem => item.email)
                 </td>
