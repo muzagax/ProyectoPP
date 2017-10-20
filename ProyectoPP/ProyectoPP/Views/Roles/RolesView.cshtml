@@ -56,7 +56,7 @@
                         @Html.DisplayFor(modelItem => (Model.ListaRoles.ElementAt(j).Name))
                         @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).rol))
                         *@
-                        <input checked="checked" type="checkbox" id="@(i)_@(j)" value="first_checkbox" disabled>
+                        <input checked="checked" type="checkbox" id="@(i)_@(j)" value="1" disabled>
                     </td>
                 }
                 else
@@ -68,7 +68,7 @@
                             @Html.DisplayFor(modelItem => (Model.ListaRoles.ElementAt(j).Name))
                             @Html.DisplayFor(modelItem => (Model.ListaAscociaciones.ElementAt(k).rol))
                             *@
-                            <input type="checkbox" id="@(i)_@(j)" value="first_checkbox" disabled>
+                            <input type="checkbox" id="@(i)_@(j)" value="1" disabled>
                         </td>
                     }
                 }
@@ -92,7 +92,7 @@
     }))
     {
         <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))">Editar</button>
-        <button type="button">Aceptar</button>
+        <input type="submit" value="Aceptar"/>
         <input type="submit" value="Cancelar" />
     }
 </p>

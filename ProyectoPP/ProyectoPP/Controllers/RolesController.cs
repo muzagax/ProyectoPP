@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPP.Models;
 
+using System.Threading.Tasks;
+
+
 namespace ProyectoPP.Controllers
 {
     public class RolesController : Controller
@@ -32,6 +35,15 @@ namespace ProyectoPP.Controllers
             }
 
             return View(modelo);
+        }
+
+        [HttpPost, ActionName("Aceptar")]
+        [ValidateAntiForgeryToken]
+        public ActionResult  AceptarAux()
+        {
+
+
+            return RedirectToAction("RolesView");
         }
     }
 }
