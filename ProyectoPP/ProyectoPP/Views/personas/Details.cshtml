@@ -1,15 +1,14 @@
-l﻿@model ProyectoPP.Models.persona
+﻿@model ProyectoPP.Models.persona
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles</h2>
+<h2>Detalles de Usuario</h2>
 
 <div>
-    <h4>persona</h4>
-    <hr />
+       
     <dl class="dl-horizontal">
 
         <dt>
@@ -18,49 +17,41 @@ l﻿@model ProyectoPP.Models.persona
         <dd>
             @Html.DisplayFor(model => model.carne)
         </dd>
+        <br/><!-- aLa etiqueta br/ agrega un espacio entre los valores mostrados en pantalla-->
         <dt>
             @Html.DisplayNameFor(model => model.cedula)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.cedula)
         </dd>
-
+        <br/>
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.nombre)
         </dd>
-
+        <br/>
         <dt>
             @Html.DisplayNameFor(model => model.apellido1)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.apellido1)
         </dd>
-
+        <br/>
         <dt>
             @Html.DisplayNameFor(model => model.apellido2)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.apellido2)
         </dd>
-
-
-               
-
+        <br/>
         <dt>
             @Html.DisplayNameFor(model => model.email)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.email)
         </dd>
-
-
 
     </dl>
 </div>
