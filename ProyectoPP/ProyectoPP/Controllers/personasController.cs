@@ -79,22 +79,40 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
+        public async Task<ActionResult> Create(PersonaCrear persona)
         {
-
+            // se crea un aplication user para el aspnetuser
             var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
+            
 
+            //puesto que PersonaCrear posee más datos que los que necesita la base de datos se crea userentry
+            var userEntry = new persona(); 
+            userEntry.apellido1 = persona.apellido1;
+            userEntry.apellido2 = persona.apellido2;
+            userEntry.nombre = persona.nombre;
+            userEntry.cedula = persona.cedula;
+            userEntry.carne = persona.carne;
+            userEntry.email = persona.email;
+            
 
+            //genera el password generico
             string pass = "ucr."+ persona.carne;
+            //metodo para crear el usuario con su contraseña de aspnetuser
             var result = await UserManager.CreateAsync(user, pass);
 
             if (ModelState.IsValid)
             {
-                string ID = user.Id.ToString();
-                persona.id = ID;
-                db.persona.Add(persona);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (result.Succeeded)
+                {
+                    string ID = user.Id.ToString();
+                    userEntry.id = ID;
+                    db.persona.Add(userEntry);
+                    db.SaveChanges();
+
+
+                    await this.UserManager.AddToRoleAsync(user.Id, persona.rol);
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(persona);
