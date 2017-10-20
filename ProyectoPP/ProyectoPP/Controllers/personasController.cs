@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using ProyectoPP.Models;
+using System.Text.RegularExpressions;
 
 namespace ProyectoPP.Controllers
 {
@@ -109,8 +110,9 @@ namespace ProyectoPP.Controllers
                     db.persona.Add(userEntry);
                     db.SaveChanges();
 
+                    var resultado = await this.UserManager.AddToRoleAsync(ID, persona.rol);
 
-                    await this.UserManager.AddToRoleAsync(user.Id, persona.rol);
+
                     return RedirectToAction("Index");
                 }
             }
