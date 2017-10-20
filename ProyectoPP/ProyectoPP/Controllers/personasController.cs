@@ -79,7 +79,7 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
+        public async Task<ActionResult> Aceptar([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
         {
 
             var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
@@ -98,6 +98,15 @@ namespace ProyectoPP.Controllers
             }
 
             return View(persona);
+        }
+
+        // POST: personas/Cancelar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Cancelar([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
+        {
+
+            return View();
         }
 
         // GET: personas/Edit/5
