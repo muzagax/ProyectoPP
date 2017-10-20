@@ -10,9 +10,9 @@
     <h2>Eliminar</h2>
 
     <h3>¿Está seguro que desea eliminar este usuario?</h3>
+     
     <div>
-        <h4>Usuario:</h4>
-        <hr />
+       
         <dl class="dl-horizontal">
 
             <dt>
@@ -21,60 +21,50 @@
             <dd>
                 @Html.DisplayFor(model => model.carne)
             </dd>
-
+            <Br />
             <dt>
                 @Html.DisplayNameFor(model => model.cedula)
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.cedula)
             </dd>
-
+            <Br />
             <dt>
                 @Html.DisplayNameFor(model => model.nombre)
             </dt>
-
             <dd>
                 @Html.DisplayFor(model => model.nombre)
             </dd>
-
+            <Br />
             <dt>
                 @Html.DisplayNameFor(model => model.apellido1)
             </dt>
-
             <dd>
                 @Html.DisplayFor(model => model.apellido1)
             </dd>
-
+            <Br />
             <dt>
                 @Html.DisplayNameFor(model => model.apellido2)
             </dt>
-
             <dd>
                 @Html.DisplayFor(model => model.apellido2)
             </dd>
-
-        
-
+            <Br />
             <dt>
                 @Html.DisplayNameFor(model => model.email)
             </dt>
-
             <dd>
                 @Html.DisplayFor(model => model.email)
             </dd>
 
-
-
         </dl>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions no-color">
-                <input type="submit" value="Eliminar" class="btn btn-default" /> |
-                @Html.ActionLink("Cancelar", "Index")
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Aceptar" class="btn btn-default" />
             </div>
-        }
+        </div>
+
     </div>
+
 </body>

@@ -100,15 +100,6 @@ namespace ProyectoPP.Controllers
             return View(persona);
         }
 
-        // POST: personas/Cancelar
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Cancelar([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,fechaNac,email,id,genero")] persona persona)
-        {
-
-            return View();
-        }
-
         // GET: personas/Edit/5
         public ActionResult Edit(string id)
         {
