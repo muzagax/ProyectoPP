@@ -46,5 +46,16 @@ namespace ProyectoPP.Models
     public string id { get; set; }
 
 }
+    public class PersonaCrear
+    {
+        public string nombre { get; set; }
+        public string apellido1 { get; set; }
+        public string apellido2 { get; set; }
+        public string cedula { get; set; }
+        public string carne { get; set; }
+        public string email { get; set; }
+        public string id { get; set; }
+        public string rol { get; set; }
+    }
 
 }
