@@ -8,8 +8,6 @@
 <h2>Insertar un usuario</h2>
 
 
-
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -33,8 +31,6 @@
                 @Html.ValidationMessageFor(model => model.carne, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -60,12 +56,6 @@
             </div>
         </div>
 
-
-        
-
-
-
-
         <div class="form-group">
             @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -77,16 +67,23 @@
         <div class="form-group">
             @Html.Label("Contraseña", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="asteriscos"
-                       id="myTextBox"
-                       name="myTextBox"
-                       type="text"
-                       value="**********" />
+                <input type="text" name="pass" value="**********" disabled>
             </div>
         </div>
-        <h5>*La contraseña se genera automaticamente enn base a esta formula: ucr.Carne</h5>
 
-
+        <div class="form-group">
+            @Html.Label("Rol", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <form action="/action_page.php">
+                    <label for="Administrador">Administrador</label>
+                    <input type="radio" name="rol" id="Administrador" value="Administrador"><br>
+                    <label for="Asistente">Asistente</label>
+                    <input type="radio" name="rol" id="Asistente" value="Asistente"><br>
+                    <label for="Estudiante">Estudiante</label>
+                    <input type="radio" name="rol" id="Estudiante" value="Estudiante" checked><br>
+                </form>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -94,8 +91,7 @@
             </div>
         </div>
 
-
-       
+        <h5>*La contraseña se genera automáticamente con base en el siguiente formato: ucr.Carne</h5>
     </div>
 }
 

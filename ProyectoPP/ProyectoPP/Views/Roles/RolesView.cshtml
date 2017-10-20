@@ -85,13 +85,20 @@
 </table>
 
 <p align="right">
-    <button onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))">Editar</button>
-    <button>Aceptar</button>
-    @using (Html.BeginForm("RolesView", "Roles"))
+    
+    @using (Html.BeginForm("RolesView", "Roles", new { }, FormMethod.Post, new
     {
-        <input type="submit" value="Cancelar"/>
+        @style="float:right;"
+    }))
+    {
+        <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))">Editar</button>
+        <button type="button">Aceptar</button>
+        <input type="submit" value="Cancelar" />
     }
 </p>
+
+<br />
+<br />
 
 <script>
     function Editar(numRoles, numPermisos)
