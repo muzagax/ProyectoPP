@@ -142,6 +142,7 @@ namespace ProyectoPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,email")] persona persona)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(persona).State = EntityState.Modified;
