@@ -2,24 +2,23 @@
 
 @functions 
 {
-    /*
-    private ProyectoPP.Models.patopurificEntities db = new ProyectoPP.Models.patopurificEntities();
+     
+    private ProyectoPP.Models.patopurificEntitiesRoles enRoles = new ProyectoPP.Models.patopurificEntitiesRoles();
 
-    private ProyectoPP.Models.ApplicationDbContext context = new ProyectoPP.Models.ApplicationDbContext();
+    private ProyectoPP.Models.patopurificEntitiesUserRoles pEUR = new ProyectoPP.Models.patopurificEntitiesUserRoles();
 
     private bool revisarPermisos(string permiso)
     {
-        
-        String userID = System.Web.HttpContext.Current.User.Identity.Name;
-        var rol = context.Users.Find(userID).Roles.First();
-        var permisoID = context..Where(m => m.nombre == permiso).First().codigo;
-        var listaRoles = db.Rol_Permisos.Where(m => m.permiso == permisoID).ToList().Select(n => n.rol);
-        bool userRol = listaRoles.Contains(rol.RoleId);
 
+        String userID = System.Web.HttpContext.Current.User.Identity.Name;
+        var rol = pEUR.AspNetUsers.Where(m => m.AspNetRoles.Any(n => n.Id == userID));
+
+        var permisoID = enRoles.permisos.Where(m => m.permiso == permiso).First().id_permiso;
+        var listaRoles = enRoles.AspNetRoles.Where(m => m.permisos.Any(c => c.id_permiso == permisoID)).ToList().Select(n => n.Id);
+        bool userRol = listaRoles.Contains(rol.Id);
         return userRol;
-        
     }
-    */
+
 }
 
 <html>
@@ -47,7 +46,14 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
-                        <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
+                        
+                        @if (Request.IsAuthenticated)
+                        {
+                            //if (revisarPermisos("ver accesos"))
+                            //{
+                                <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
+                            //}
+                        }
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
                 @Html.Partial("_LoginPartial")
