@@ -174,8 +174,8 @@ namespace ProyectoPP.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             persona persona = db.persona.Find(id);
-            db.persona.Remove(persona);
-            db.SaveChanges();
+            var user = UserManager.FindById(db.persona.Find(id).id);
+            UserManager.Delete(user);
             return RedirectToAction("Index");
         }
 
