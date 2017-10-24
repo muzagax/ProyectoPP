@@ -146,8 +146,6 @@ namespace ProyectoPP.Controllers
             {
                 db.Entry(persona).State = EntityState.Modified;
 
-                //string "UPDATE tblCustomers  SET Email = 'None'  WHERE  = 'Smith'
-              //  db.persona.SqlQuery();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
