@@ -203,15 +203,34 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\UsuarioRolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
-      <DependentUpon>ModelRoles.tt</DependentUpon>
+      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModeloUsuarioRoles.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloUsuarioRoles.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloUsuarioRoles.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloUsuarioRoles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloUsuarioRoles.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelRoles.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -246,9 +265,10 @@
       <DependentUpon>ModelRoles.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\persona.cs">
-      <DependentUpon>ModelUsuario.tt</DependentUpon>
+      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\UsuarioRol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -260,6 +280,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModeloUsuarioRoles.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloUsuarioRoles.edmx</DependentUpon>
+      <LastGenOutput>ModeloUsuarioRoles.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModeloUsuarioRoles.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloUsuarioRoles.edmx</DependentUpon>
+      <LastGenOutput>ModeloUsuarioRoles.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ModelRoles.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelRoles.edmx</DependentUpon>
@@ -298,6 +328,13 @@
     </EntityDeploy>
     <Content Include="Models\ModelRoles.edmx.diagram">
       <DependentUpon>ModelRoles.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ModeloUsuarioRoles.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloUsuarioRoles.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModeloUsuarioRoles.edmx.diagram">
+      <DependentUpon>ModeloUsuarioRoles.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -352,6 +389,7 @@
     <Content Include="Views\personas\Edit.cshtml" />
     <Content Include="Views\personas\Index.cshtml" />
     <Content Include="Views\Roles\RolesView.cshtml" />
+    <Content Include="Views\UsuarioRol\UsuarioRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

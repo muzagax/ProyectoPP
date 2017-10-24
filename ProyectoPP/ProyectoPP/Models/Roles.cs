@@ -19,6 +19,29 @@ namespace ProyectoPP.Models
             public string rol { get; set; }
             public string permiso  { get; set; }
         }
+
+        public class GuardarAux
+        {
+            public GuardarAux(string rolParam, int permisoParam, bool existeParam)
+            {
+                this.rol = rolParam;
+                this.permiso = permisoParam;
+                this.existe = existeParam;
+
+            }
+
+            public GuardarAux()
+            {
+            }
+            public string rol { get; set; }
+            public int permiso { get; set; }
+
+            public bool existe { get; set; }
+
+        }
+
+        public List<GuardarAux> ListaGuardar { get; set; }
+
         public permisos ModeloPermisos { get; set; }
         public AspNetRoles ModeloNetRoles { get; set; }
 
@@ -27,5 +50,7 @@ namespace ProyectoPP.Models
         public List<AspNetRoles> ListaRoles { get; set; }
 
         public List<Asociaciones>  ListaAscociaciones { get; set; }
+
+
 }
 }
