@@ -70,7 +70,7 @@ namespace ProyectoPP.Models
         [RegularExpression(@"^[a-zA-Z0-9\.\-]+@[a-zA-Z0-9\.\-]+\.[a-z]{1,3}$", ErrorMessage = "No es un formato de correo electronico válido")]
         [Display(Name = "Correo electrónico")]
         public string email { get; set; }
-        public string id { get; set; }
+        public string id { get; set; } 
         public string rol { get; set; }
     }
 

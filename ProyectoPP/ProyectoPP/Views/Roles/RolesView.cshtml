@@ -11,6 +11,9 @@
 
 </p>
 
+
+@using (Html.BeginForm("Aceptar", "Roles"))
+{
 <table class="table">
     <tr>
         <th>
@@ -52,8 +55,8 @@
                     )
                 {
                 <td>
-                        @Html.CheckBoxFor(model => Model.ListaGuardar.ElementAt(k).existe,
-                        new { @disabled = "disabled", @checked = "checked", @id = i + "_" + j })
+                        @Html.CheckBoxFor(model => Model.ListaGuardar[k].existe,
+                         new { @disabled = "disabled", @checked = "checked", @id = i + "_" + j })
                     </td>
                 }
 
@@ -73,7 +76,7 @@
 <p align="right">
     <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))" class="btn btn-default">Editar</button>
     @*<input type="button" value="Aceptar" class="btn btn-default" />*@
-    <button class="btn btn-default" onclick="location.href='@Url.Action("Aceptar", "Roles", new {mod = Model })';return false;">Aceptar</button> 
+    <button class="btn btn-default" type="submit">Aceptar</button> 
     <button class="btn btn-default" onclick="location.href='@Url.Action("RolesView", "Roles")';return false;">Cancelar</button>
     @*
     @using (Html.BeginForm("RolesView", "Roles", new { }, FormMethod.Post, new
@@ -90,7 +93,7 @@
 
 <br />
 <br />
-
+}
 <script>
     function Editar(numRoles, numPermisos)
     {
