@@ -83,7 +83,7 @@ namespace ProyectoPP.Controllers
         public async Task<ActionResult> Create(PersonaCrear persona)
         {
             // se crea un aplication user para el aspnetuser
-            var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
+            var user = new ApplicationUser { UserName = persona.cedula, Email = persona.email };
             
 
             //puesto que PersonaCrear posee más datos que los que necesita la base de datos se crea userentry
@@ -145,6 +145,9 @@ namespace ProyectoPP.Controllers
             
             if (ModelState.IsValid)
             {
+                var user = UserManager.FindByName(persona.cedula);
+                string ID = user.Id;
+                persona.id = ID;
                 db.Entry(persona).State = EntityState.Modified;
 
                 db.SaveChanges();
