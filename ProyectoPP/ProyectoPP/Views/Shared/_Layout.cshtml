@@ -1,26 +1,6 @@
 ﻿<!DOCTYPE html>
-@*
-@functions 
-{
-     
-    private ProyectoPP.Models.patopurificEntitiesRoles enRoles = new ProyectoPP.Models.patopurificEntitiesRoles();
+@using personasControler
 
-    private ProyectoPP.Models.patopurificEntitiesUserRoles pEUR = new ProyectoPP.Models.patopurificEntitiesUserRoles();
-/*
-    private bool revisarPermisos(string permiso)
-    {
-
-        String userID = System.Web.HttpContext.Current.User.Identity.Name;
-        var rol = pEUR.AspNetUsers.Where(m => m.AspNetRoles.Any(n => n.Id == userID));
-
-        var permisoID = enRoles.permisos.Where(m => m.permiso == permiso).First().id_permiso;
-        var listaRoles = enRoles.AspNetRoles.Where(m => m.permisos.Any(c => c.id_permiso == permisoID)).ToList().Select(n => n.Id);
-        bool userRol = listaRoles.Contains(rol.Id);
-        return userRol;
-    }
-    */
-}
-    *@
 
 <html>
 <head>
