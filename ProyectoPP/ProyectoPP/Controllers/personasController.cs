@@ -94,7 +94,6 @@ namespace ProyectoPP.Controllers
                 break;
 
             }
-            
 
             if (persona == null)
             {
@@ -161,7 +160,24 @@ namespace ProyectoPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = db.persona.Find(id);
+
+            persona personaTmp = db.persona.Find(id);
+
+            PersonaConRol persona = new PersonaConRol();
+            persona.apellido1 = personaTmp.apellido1;
+            persona.apellido2 = personaTmp.apellido2;
+            persona.nombre = personaTmp.nombre;
+            persona.cedula = personaTmp.cedula;
+            persona.carne = personaTmp.carne;
+            persona.email = personaTmp.email;
+
+            //Ahora obtenemos el ID de ASPNET para obtener el rol
+            var user = UserManager.FindByName(persona.cedula);
+            string ID = user.Id;
+
+            var aspUser = UserManager.FindById(ID);
+            var rol = aspUser.Roles.SingleOrDefault().RoleId;
+            
             if (persona == null)
             {
                 return HttpNotFound();

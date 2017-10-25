@@ -1,4 +1,4 @@
-﻿@model ProyectoPP.Models.persona
+﻿@model ProyectoPP.Models.PersonaConRol
 
 @{
     ViewBag.Title = "Edit";
@@ -71,12 +71,13 @@
             <div class="col-md-10">
                 <form action="/action_page.php">
                     <label for="Administrador">Administrador</label>
-                    <input type="radio" name="rol" id="Administrador" value="profesor" @if ( == ) { }><br>
+                    <input type="radio" name="rol" id="Administrador" value="profesor" checked ="@if (Model.rol == "2") { checked } "><br>
                     <label for="Asistente">Asistente</label>
                     <input type="radio" name="rol" id="Asistente" value="asistente"><br>
                     <label for="Estudiante">Estudiante</label>
-                    <input type="radio" name="rol" id="Estudiantes" value="estudiante" checked><br>
+                    <input type="radio" name="rol" id="Estudiantes" value="estudiante"><br>
                 </form>
+
             </div>
         </div>
 
