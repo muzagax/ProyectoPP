@@ -1,26 +1,54 @@
 ﻿<!DOCTYPE html>
-@*
+
 @functions 
 {
-     
+    /*
+    //using System.Threading.Tasks;
+    //using Microsoft.AspNet.Identity;
+    //using Microsoft.AspNet.Identity.Owin;
+
     private ProyectoPP.Models.patopurificEntitiesRoles enRoles = new ProyectoPP.Models.patopurificEntitiesRoles();
 
     private ProyectoPP.Models.patopurificEntitiesUserRoles pEUR = new ProyectoPP.Models.patopurificEntitiesUserRoles();
 
-    private bool revisarPermisos(string permiso)
+    private ApplicationUserManager _userManager;
+
+    public ApplicationUserManager UserManager
+    {
+        get
+        {
+            return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        }
+        private set
+        {
+            _userManager = value;
+        }
+    }
+
+    private async Microsoft.AspNet.IdentityTask<bool> revisarPermisos(string permiso)
     {
 
-        String userID = System.Web.HttpContext.Current.User.Identity.Name;
-        var rol = pEUR.AspNetUsers.Where(m => m.AspNetRoles.Any(n => n.Id == userID));
+        string userID = System.Web.HttpContext.Current.User.Identity.Name;
+        //var rol = pEUR.AspNetUsers.Where(m => m.AspNetRoles.Any(n => n.Id == userID));
+        var userRoles = await _userManager.GetRolesAsync(userID);
 
         var permisoID = enRoles.permisos.Where(m => m.permiso == permiso).First().id_permiso;
         var listaRoles = enRoles.AspNetRoles.Where(m => m.permisos.Any(c => c.id_permiso == permisoID)).ToList().Select(n => n.Id);
-        bool userRol = listaRoles.Contains(rol.Id);
+
+        //bool userRol = listaRoles.Contains(userRoles);
+        bool userRol = false;
+        foreach (var element in listaRoles)
+        {
+            foreach (var roles in userRoles)
+            {
+                if (element == roles)
+                    userRol = true;
+            }
+        }
         return userRol;
     }
-
+    */
 }
-    *@
 
 <html>
 <head>
@@ -47,7 +75,6 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
-                        <li>@Html.ActionLink("Asignar Roles", "UsuarioRol", "UsuarioRol")</li>
                         
                         @if (Request.IsAuthenticated)
                         {
