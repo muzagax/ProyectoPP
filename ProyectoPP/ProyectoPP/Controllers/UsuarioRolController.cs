@@ -8,10 +8,14 @@ namespace ProyectoPP.Models
 {
     public class UsuarioRolController : Controller
     {
+        patopurificEntitiesUserRoles db = new patopurificEntitiesUserRoles();
         // GET: UsuarioRol
         public ActionResult UsuarioRol()
         {
-            return View();
+            UsuarioRol modelo = new UsuarioRol();
+            //modelo.ListaPeronas = db.persona.ToList();
+            //modelo.ListaRoles = db.AspNetRoles.ToList();
+            return View(modelo);
         }
 
     }
