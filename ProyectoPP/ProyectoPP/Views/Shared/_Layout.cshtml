@@ -46,31 +46,29 @@
             </div>
             <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
-                        <li>@Html.ActionLink("Asignar Roles", "UsuarioRol", "UsuarioRol")</li>
                         
-                        @if (Request.IsAuthenticated)
-                        {
-                            //if (revisarPermisos("ver accesos"))
-                            //{
+                        @* @if (Request.IsAuthenticated) *@
+                            {
+                                <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
+                                <li>@Html.ActionLink("Asignar Roles", "UsuarioRol", "UsuarioRol")</li>
                                 <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
-                            //}
-                        }
-                    </ul>
-                @Html.Partial("_LoginPartial")
+                            }
+
+                        </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year -👍 Pato Purific </p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year -👍 Pato Purific </p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>

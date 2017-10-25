@@ -27,5 +27,6 @@ namespace ProyectoPP.Models
     
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<permisos> permisos { get; set; }
+
     }
 }
