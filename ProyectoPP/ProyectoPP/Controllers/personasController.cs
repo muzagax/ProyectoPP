@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using ProyectoPP.Models;
 using System.Text.RegularExpressions;
+using System.Runtime.Remoting.Contexts;
 
 namespace ProyectoPP.Controllers
 {
@@ -61,7 +62,40 @@ namespace ProyectoPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = db.persona.Find(id);
+            persona personaTmp = db.persona.Find(id);
+
+            PersonaConRol persona = new PersonaConRol();
+            persona.apellido1 = personaTmp.apellido1;
+            persona.apellido2 = personaTmp.apellido2;
+            persona.nombre = personaTmp.nombre;
+            persona.cedula = personaTmp.cedula;
+            persona.carne = personaTmp.carne;
+            persona.email = personaTmp.email;
+
+            //Ahora obtenemos el ID de ASPNET para obtener el rol
+            var user = UserManager.FindByName(persona.cedula);
+            string ID = user.Id;
+
+            var aspUser = UserManager.FindById(ID);
+            var rol = aspUser.Roles.SingleOrDefault().RoleId;
+
+            switch (rol)
+            {
+                case "1":
+                    persona.rol ="Estudiante";
+                break;
+
+                case "2":
+                    persona.rol ="Administrador";
+                break;
+
+                case "3":
+                    persona.rol = "Administrador";
+                break;
+
+            }
+            
+
             if (persona == null)
             {
                 return HttpNotFound();
@@ -80,10 +114,10 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(PersonaCrear persona)
+        public async Task<ActionResult> Create(PersonaConRol persona)
         {
             // se crea un aplication user para el aspnetuser
-            var user = new ApplicationUser { UserName = persona.carne, Email = persona.email };
+            var user = new ApplicationUser { UserName = persona.cedula, Email = persona.email };
             
 
             //puesto que PersonaCrear posee más datos que los que necesita la base de datos se crea userentry
@@ -97,7 +131,7 @@ namespace ProyectoPP.Controllers
             
 
             //genera el password generico
-            string pass = "ucr."+ persona.carne;
+            string pass = "Ucr."+ persona.cedula;
             //metodo para crear el usuario con su contraseña de aspnetuser
             var result = await UserManager.CreateAsync(user, pass);
 
@@ -145,6 +179,9 @@ namespace ProyectoPP.Controllers
             
             if (ModelState.IsValid)
             {
+                var user = UserManager.FindByName(persona.cedula);
+                string ID = user.Id;
+                persona.id = ID;
                 db.Entry(persona).State = EntityState.Modified;
 
                 db.SaveChanges();

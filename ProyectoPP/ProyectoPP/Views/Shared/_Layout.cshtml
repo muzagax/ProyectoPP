@@ -6,7 +6,7 @@
     private ProyectoPP.Models.patopurificEntitiesRoles enRoles = new ProyectoPP.Models.patopurificEntitiesRoles();
 
     private ProyectoPP.Models.patopurificEntitiesUserRoles pEUR = new ProyectoPP.Models.patopurificEntitiesUserRoles();
-
+/*
     private bool revisarPermisos(string permiso)
     {
 
@@ -18,7 +18,7 @@
         bool userRol = listaRoles.Contains(rol.Id);
         return userRol;
     }
-
+    */
 }
     *@
 
@@ -32,7 +32,8 @@
 
 </head>
 
-<body >
+<body background="pato4.jpg">
+    
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -45,7 +46,6 @@
             </div>
             <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
                         <li>@Html.ActionLink("Asignar Roles", "UsuarioRol", "UsuarioRol")</li>
                         
@@ -56,7 +56,6 @@
                                 <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
                             //}
                         }
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
                 @Html.Partial("_LoginPartial")
             </div>
