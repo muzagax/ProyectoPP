@@ -7,7 +7,9 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            Hola! User.Identity.GetUserName()
+
+            @Html.Name("¡Hola!"+ User.Identity.GetUserName())
+            
         </li>
         <li>
             @Html.ActionLink("Cambiar contraseña", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

@@ -47,7 +47,8 @@ namespace ProyectoPP.Models
         public string id { get; set; }
 
 }
-    public class PersonaCrear
+    /*Esta clase nos sirve para crear un nuevo usuario asi como para ver lo detalles de usuario por que ya posee un campo para rol*/
+    public class PersonaConRol
     {
         [Display(Name = "Nombre")]
         [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El nombre solo puede estar compuesto por letras")]
@@ -72,8 +73,9 @@ namespace ProyectoPP.Models
         [Display(Name = "Correo electrónico")]
         public string email { get; set; }
 
-        public string id { get; set; } 
+        public string id { get; set; }
 
+        [Display(Name ="Rol")]
         public string rol { get; set; }
     }
 
