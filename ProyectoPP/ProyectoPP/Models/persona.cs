@@ -43,7 +43,7 @@ namespace ProyectoPP.Models
         [Display(Name = "Correo electrónico")]
         public string email { get; set; }
 
-    public string id { get; set; }
+         public string id { get; set; }
 
 }
     public class PersonaCrear
