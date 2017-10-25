@@ -16,11 +16,10 @@ namespace ProyectoPP.Controllers
     {
 
         patopurificEntitiesRoles baseDatos = new patopurificEntitiesRoles();
+        
         // GET: Roles
 
         private ProyectoPP.Models.patopurificEntitiesRoles enRoles = new ProyectoPP.Models.patopurificEntitiesRoles();
-
-        private ProyectoPP.Models.patopurificEntitiesUserRoles pEUR = new ProyectoPP.Models.patopurificEntitiesUserRoles();
 
         private ApplicationUserManager _userManager;
 
@@ -39,24 +38,18 @@ namespace ProyectoPP.Controllers
         private async Task<bool> revisarPermisos(string permiso)
         {
 
-            string userID = System.Web.HttpContext.Current.User.Identity.Name;
-
-            string userIDLargo = UserManager.FindById(userID).Id;
-
-            var userRoles = await _userManager.GetRolesAsync(userID);
+            string userName = System.Web.HttpContext.Current.User.Identity.Name;
+            var user = UserManager.FindByName(userName);
+            var rol = user.Roles.SingleOrDefault().RoleId;
 
             var permisoID = enRoles.permisos.Where(m => m.permiso == permiso).First().id_permiso;
             var listaRoles = enRoles.AspNetRoles.Where(m => m.permisos.Any(c => c.id_permiso == permisoID)).ToList().Select(n => n.Id);
 
-            //bool userRol = listaRoles.Contains(userRoles);
             bool userRol = false;
             foreach (var element in listaRoles)
             {
-                foreach (var roles in userRoles)
-                {
-                    if (element == roles)
-                        userRol = true;
-                }
+                if (element == rol)
+                    userRol = true;
             }
             return userRol;
         }
@@ -64,8 +57,8 @@ namespace ProyectoPP.Controllers
         public ActionResult RolesView()
         {
             Roles modelo = new Roles();
-            if (revisarPermisos("ver accesos").Equals(true))
-            {
+            //if (revisarPermisos("ver accesos").Result)
+            //{
                 modelo.ListaRoles = baseDatos.AspNetRoles.ToList();
                 modelo.ListaPermisos = baseDatos.permisos.ToList();
                 modelo.ListaAscociaciones = new List<Roles.Asociaciones>();
@@ -105,11 +98,11 @@ namespace ProyectoPP.Controllers
                     }
                 }
                 return View(modelo);
-            }
-            else
-            {
-                return View("Views/Home/Index");
-            }
+            //}
+            //else
+            //{
+                //return RedirectToAction("Index", "Home");
+            //}
         }
 
         [HttpPost]
