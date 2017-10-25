@@ -97,7 +97,7 @@ namespace ProyectoPP.Controllers
             
 
             //genera el password generico
-            string pass = "ucr."+ persona.carne;
+            string pass = "Ucr."+ persona.cedula;
             //metodo para crear el usuario con su contraseña de aspnetuser
             var result = await UserManager.CreateAsync(user, pass);
 
