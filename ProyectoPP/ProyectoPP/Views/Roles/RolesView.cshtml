@@ -14,66 +14,67 @@
 
 @using (Html.BeginForm("Aceptar", "Roles"))
 {
-<table class="table">
-    <tr>
-        <th>
-            Funcionalidad
-        </th>
-        <th></th>
-        <th>
-            Rol
-        </th>
-    </tr>
-    <th>
-        
-    </th>
+    <p align="left">
+        <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))" class="btn btn-default">Editar</button>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    Funcionalidad
+                </th>
+                <th></th>
+                <th>
+                    Rol
+                </th>
+            </tr>
+            <th></th>
 
 
-    @for (int i = 0; i < Model.ListaRoles.Count; i++)
-    {
-        <td>
-            @Html.DisplayFor(modelItem => Model.ListaRoles.ElementAt(i).Name)
-        </td>
-
-
-
-    }
-
-    <tr></tr>
-
-    @for (int i = 0; i < Model.ListaPermisos.Count; i++)
-    {
-        <td>@Html.DisplayFor(modelItem => Model.ListaPermisos.ElementAt(i).permiso)</td>
-
-        for (int j = 0; j < Model.ListaRoles.Count; j++)
-        {
-            for (int k = 0; k < Model.ListaGuardar.Count; k++)
+            @for (int i = 0; i < Model.ListaRoles.Count; i++)
             {
-
-                if (Model.ListaGuardar.ElementAt(k).permiso == Model.ListaPermisos.ElementAt(i).id_permiso
-                    && Model.ListaGuardar.ElementAt(k).rol == Model.ListaRoles.ElementAt(j).Id
-                    )
-                {
                 <td>
-                        @Html.CheckBoxFor(model => Model.ListaGuardar[k].existe,
-                         new { @disabled = "disabled", @checked = "checked", @id = i + "_" + j })
-                    </td>
-                }
+                    @Html.DisplayFor(modelItem => Model.ListaRoles.ElementAt(i).Name)
+                </td>
+
 
 
             }
-        }
-        <tr></tr>
 
-    }
+            <tr></tr>
+
+            @for (int i = 0; i < Model.ListaPermisos.Count; i++)
+            {
+                <td>@Html.DisplayFor(modelItem => Model.ListaPermisos.ElementAt(i).permiso)</td>
+
+                for (int j = 0; j < Model.ListaRoles.Count; j++)
+                {
+                    for (int k = 0; k < Model.ListaGuardar.Count; k++)
+                    {
+
+                        if (Model.ListaGuardar.ElementAt(k).permiso == Model.ListaPermisos.ElementAt(i).id_permiso
+                            && Model.ListaGuardar.ElementAt(k).rol == Model.ListaRoles.ElementAt(j).Id
+                            )
+                        {
+                            <td>
+                                @Html.CheckBoxFor(model => Model.ListaGuardar[k].existe,
+                         new { @disabled = "disabled", @checked = "checked", @id = i + "_" + j })
+                            </td>
+                        }
+
+
+                    }
+                }
+                <tr></tr>
+
+            }
 
 
 
 
 
-</table>
+        </table>
 
-<p align="right">
+<p align="left">
     <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))" class="btn btn-default">Editar</button>
     @*<input type="button" value="Aceptar" class="btn btn-default" />*@
     <button class="btn btn-default" type="submit">Aceptar</button> 
