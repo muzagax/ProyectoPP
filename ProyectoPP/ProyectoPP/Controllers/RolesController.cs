@@ -112,8 +112,10 @@ namespace ProyectoPP.Controllers
             modelo.ListaRoles = baseDatos.AspNetRoles.ToList();
             modelo.ListaPermisos = baseDatos.permisos.ToList();
 
+            int numero = -1;
             foreach (var rol in modelo.ListaRoles)
             {
+                numero++;
                 rol.permisos.Clear();
                 foreach (var asoc in mod.ListaGuardar)
                 {
@@ -125,7 +127,8 @@ namespace ProyectoPP.Controllers
                             {
                                 if (permiso.id_permiso == asoc.permiso)
                                 {
-                                    rol.permisos.Add(permiso);
+                                    //rol.permisos.Add(permiso);
+                                    modelo.ListaRoles.ElementAt(numero).permisos.Add(permiso);
                                 }
                             }
                             
@@ -134,8 +137,12 @@ namespace ProyectoPP.Controllers
                 }
             }
 
+            int contador = -1;
+
             foreach (var permiso in modelo.ListaPermisos)
             {
+                contador++;
+                
                 permiso.AspNetRoles.Clear();
                 foreach (var asoc in mod.ListaGuardar)
                 {
@@ -147,7 +154,8 @@ namespace ProyectoPP.Controllers
                             {
                                 if (rol.Id == asoc.rol)
                                 {
-                                    permiso.AspNetRoles.Add(rol);
+                                    modelo.ListaPermisos.ElementAt(contador).AspNetRoles.Add(rol);
+                                    //permiso.AspNetRoles.Add(rol);
                                 }
                             }
                         }
@@ -156,13 +164,25 @@ namespace ProyectoPP.Controllers
 
                 }
             }
+            
 
 
             if (ModelState.IsValid)
             {
-                baseDatos.Entry(modelo.ModeloPermisos).State = EntityState.Modified;
-                baseDatos.Entry(modelo.ModeloNetRoles).State= EntityState.Modified;
-                baseDatos.SaveChanges();
+                
+                foreach (var permiso in modelo.ListaPermisos)
+                {
+                    //var algo = permiso.AspNetRoles;
+                    
+                    baseDatos.Entry(permiso).State = EntityState.Modified;
+
+                }
+                foreach (var roles in modelo.ListaRoles)
+                {
+                    baseDatos.Entry(roles).State = EntityState.Modified;
+                }
+                //baseDatos.Entry(modelo.ListaAscociaciones).State = EntityState.Modified;
+                //baseDatos.SaveChanges(); 
                 return RedirectToAction("RolesView");
             }
             return View(modelo);
