@@ -71,11 +71,11 @@
             <div class="col-md-10">
                 <form action="/action_page.php">
                     <label for="Administrador">Administrador</label>
-                    <input type="radio" name="rol" id="Administrador" value="profesor" checked ="@if (Model.rol == "2") { checked } "><br>
+                    <input type="radio" name="rol" id="Administrador" value="profesor" checked ="@( Model.rol == "2" ? true : false )"><br>
                     <label for="Asistente">Asistente</label>
-                    <input type="radio" name="rol" id="Asistente" value="asistente"><br>
+                    <input type="radio" name="rol" id="Asistente" value="asistente" checked ="@( Model.rol == "3" ? true : false )"><br>
                     <label for="Estudiante">Estudiante</label>
-                    <input type="radio" name="rol" id="Estudiantes" value="estudiante"><br>
+                    <input type="radio" name="rol" id="Estudiantes" value="estudiante" checked ="@( Model.rol == "1" ? true : false )"><br>
                 </form>
 
             </div>
