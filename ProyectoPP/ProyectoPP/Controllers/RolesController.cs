@@ -62,6 +62,7 @@ namespace ProyectoPP.Controllers
             return View(modelo);
         }
 
+        [HttpPost]
         public ActionResult Aceptar(Roles mod)
         {   
             Roles modelo = new Roles();
@@ -116,7 +117,8 @@ namespace ProyectoPP.Controllers
 
             if (ModelState.IsValid)
             {
-                baseDatos.Entry(modelo).State = EntityState.Modified;
+                baseDatos.Entry(modelo.ModeloPermisos).State = EntityState.Modified;
+                baseDatos.Entry(modelo.ModeloNetRoles).State= EntityState.Modified;
                 baseDatos.SaveChanges();
                 return RedirectToAction("RolesView");
             }
