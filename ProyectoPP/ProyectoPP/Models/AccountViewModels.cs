@@ -49,7 +49,7 @@ namespace ProyectoPP.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Carne")]
+        [Display(Name = "Cédula")]
         public string Email { get; set; }
 
         [Required]
@@ -57,7 +57,7 @@ namespace ProyectoPP.Models
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [Display(Name = "Recordarme?")]
+        [Display(Name = "¿Recordarme?")]
         public bool RememberMe { get; set; }
     }
 

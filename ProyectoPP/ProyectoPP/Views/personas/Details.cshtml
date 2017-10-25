@@ -1,4 +1,4 @@
-﻿@model ProyectoPP.Models.persona
+﻿@model ProyectoPP.Models.PersonaConRol
 
 @{
     ViewBag.Title = "Details";
@@ -59,6 +59,13 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.email)
+        </dd>
+        <br/>
+        <dt>
+            @Html.DisplayNameFor(model => model.rol)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.rol)
         </dd>
 
     </dl>
