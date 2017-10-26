@@ -14,7 +14,7 @@
 
 @using (Html.BeginForm("Aceptar", "Roles"))
 {
-    <p align="left">
+    <p align="right">
         <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))" class="btn btn-default">Editar</button>
         </p>
         <table class="table">
@@ -77,7 +77,6 @@
         </table>
 
 <p align="left">
-    <button type="button" onclick="Editar(@(Model.ListaRoles.Count),@(Model.ListaPermisos.Count))" class="btn btn-default">Editar</button>
     @*<input type="button" value="Aceptar" class="btn btn-default" />*@
     <button class="btn btn-default" type="submit">Aceptar</button> 
     <button class="btn btn-default" onclick="location.href='@Url.Action("RolesView", "Roles")';return false;">Cancelar</button>
