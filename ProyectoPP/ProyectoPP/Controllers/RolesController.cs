@@ -182,7 +182,7 @@ namespace ProyectoPP.Controllers
                     baseDatos.Entry(roles).State = EntityState.Modified;
                 }
                 //baseDatos.Entry(modelo.ListaAscociaciones).State = EntityState.Modified;
-                //baseDatos.SaveChanges(); 
+                baseDatos.SaveChanges(); 
                 return RedirectToAction("RolesView");
             }
             return View(modelo);

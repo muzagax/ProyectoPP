@@ -51,13 +51,15 @@
                     for (int k = 0; k < Model.ListaGuardar.Count; k++)
                     {
 
+
                         if (Model.ListaGuardar.ElementAt(k).permiso == Model.ListaPermisos.ElementAt(i).id_permiso
                             && Model.ListaGuardar.ElementAt(k).rol == Model.ListaRoles.ElementAt(j).Id
                             )
                         {
                             <td>
-                                @Html.CheckBoxFor(model => Model.ListaGuardar[k].existe,
-                         new { @disabled = "disabled", @checked = "checked", @id = i + "_" + j })
+                                @Html.CheckBoxFor(model => Model.ListaGuardar[k].existe,new { @disabled = "disabled", @checked = "checked", @id = i + "_" + j })
+                                @Html.HiddenFor(model => Model.ListaGuardar[k].permiso, i)
+                                @Html.HiddenFor(model => Model.ListaGuardar[k].rol,j)
                             </td>
                         }
 
