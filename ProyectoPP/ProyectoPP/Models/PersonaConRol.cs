@@ -9,7 +9,7 @@ namespace ProyectoPP.Models
         public class PersonaConRol
         {
             [Display(Name = "Nombre")]
-            [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El nombre solo puede estar compuesto por letras")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El nombre solo puede estar compuesto por letras.")]
             public string nombre { get; set; }
 
             [Display(Name = "Primer apellido")]
