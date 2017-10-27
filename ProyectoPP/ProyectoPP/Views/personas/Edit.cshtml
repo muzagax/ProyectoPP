@@ -75,30 +75,31 @@
                 bool adm = false;
                 bool asi = false;
 
-                if (Model.rol == "1") {     // Si el rol es de estudiante
+                if (Model.rol == "1")
+                {     // Si el rol es de estudiante
                     est = true;
                 }//if
-                else {
-                    if (Model.rol == "2"){ // Si el rol es de profesor
+                else
+                {
+                    if (Model.rol == "2")
+                    { // Si el rol es de profesor
                         adm = true;
                     }//if
-                    else {                //si el rol es de asistente
+                    else
+                    {                //si el rol es de asistente
                         asi = true;
                     }//else
                 }//else
-
+            }
+            
                 <div class="col-md-10">
-                    <form action="/action_page.php">
                         <label for="Administrador">Administrador</label>
-                        <input type="radio" name="rol" id="Administrador" value="profesor" checked="@adm"><br>
+                        <input type="radio" name="rol" id="Administrador" value="Profesor" checked="@adm"><br>
                         <label for="Asistente">Asistente</label>
-                        <input type="radio" name="rol" id="Asistente" value="asistente" checked="@asi"><br>
+                        <input type="radio" name="rol" id="Asistente" value="Asistente" checked="@asi"><br>
                         <label for="Estudiante">Estudiante</label>
-                        <input type="radio" name="rol" id="Estudiantes" value="estudiante" checked="@est"><br>
-                    </form>
+                        <input type="radio" name="rol" id="Estudiantes" value="Estudiante" checked="@est"><br>
                 </div>
-           }
-
         </div>
 
         <div class="form-group">
