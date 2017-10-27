@@ -12,21 +12,21 @@ namespace ProyectoPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class sprint
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public sprint()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
-            this.permisos = new HashSet<permisos>();
+            this.historiasDeUsuario = new HashSet<historiasDeUsuario>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string id { get; set; }
+        public System.DateTime fechaInicio { get; set; }
+        public Nullable<System.DateTime> fechaFinal { get; set; }
+        public string proyectoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<permisos> permisos { get; set; }
+        public virtual ICollection<historiasDeUsuario> historiasDeUsuario { get; set; }
+        public virtual proyecto proyecto { get; set; }
     }
 }
