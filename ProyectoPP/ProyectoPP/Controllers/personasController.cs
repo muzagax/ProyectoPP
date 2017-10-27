@@ -177,6 +177,8 @@ namespace ProyectoPP.Controllers
 
             var aspUser = UserManager.FindById(ID);
             var rol = aspUser.Roles.SingleOrDefault().RoleId;
+
+            persona.rol = rol;
             
             if (persona == null)
             {
@@ -190,7 +192,7 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,email")] persona persona)
+        public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,email,rol")] persona persona)
         {
             
             if (ModelState.IsValid)
