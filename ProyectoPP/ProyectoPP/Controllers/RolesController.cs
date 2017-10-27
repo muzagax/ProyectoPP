@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
+
+
 namespace ProyectoPP.Controllers
 {
     public class RolesController : Controller
@@ -182,7 +184,11 @@ namespace ProyectoPP.Controllers
                     baseDatos.Entry(roles).State = EntityState.Modified;
                 }
                 //baseDatos.Entry(modelo.ListaAscociaciones).State = EntityState.Modified;
-                baseDatos.SaveChanges(); 
+                baseDatos.SaveChanges();
+
+
+                TempData["msg"] = "<script>alert('Se asignaron los permisos a sus respectivos roles correctamente.');</script>";
+
                 return RedirectToAction("RolesView");
             }
             return View(modelo);
