@@ -209,13 +209,43 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
-      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\criteriosDeAceptacion.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fechas.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\historiasDeUsuario.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelGeneral.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelGeneral.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelGeneral.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelGeneral.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModeloUsuarioRoles.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -262,12 +292,24 @@
       <DependentUpon>ModelUsuario.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\permisos.cs">
-      <DependentUpon>ModelRoles.tt</DependentUpon>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\persona.cs">
-      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\progreso.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\proyecto.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\sprint.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tarea.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UsuarioRol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -279,6 +321,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModelGeneral.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelGeneral.edmx</DependentUpon>
+      <LastGenOutput>ModelGeneral.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelGeneral.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelGeneral.edmx</DependentUpon>
+      <LastGenOutput>ModelGeneral.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ModeloUsuarioRoles.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModeloUsuarioRoles.edmx</DependentUpon>
@@ -334,6 +386,13 @@
     </EntityDeploy>
     <Content Include="Models\ModeloUsuarioRoles.edmx.diagram">
       <DependentUpon>ModeloUsuarioRoles.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ModelGeneral.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelGeneral.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelGeneral.edmx.diagram">
+      <DependentUpon>ModelGeneral.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

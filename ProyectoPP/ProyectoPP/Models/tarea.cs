@@ -12,27 +12,24 @@ namespace ProyectoPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class persona
+    public partial class tarea
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public persona()
+        public tarea()
         {
-            this.proyecto = new HashSet<proyecto>();
-            this.tarea = new HashSet<tarea>();
+            this.progreso = new HashSet<progreso>();
+            this.persona = new HashSet<persona>();
         }
     
+        public string HU { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
-        public string apellido1 { get; set; }
-        public string apellido2 { get; set; }
-        public string cedula { get; set; }
-        public string carne { get; set; }
-        public string email { get; set; }
-        public string id { get; set; }
+        public int esfuerzo { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual historiasDeUsuario historiasDeUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<proyecto> proyecto { get; set; }
+        public virtual ICollection<progreso> progreso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tarea> tarea { get; set; }
+        public virtual ICollection<persona> persona { get; set; }
     }
 }
