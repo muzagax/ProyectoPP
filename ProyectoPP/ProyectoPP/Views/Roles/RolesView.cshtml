@@ -67,6 +67,7 @@
                     }
                 }
                 <tr></tr>
+                
 
             }
 
@@ -75,6 +76,7 @@
 
 
         </table>
+
 
 <p align="left">
     @*<input type="button" value="Aceptar" class="btn btn-default" />*@
@@ -91,10 +93,14 @@
         <input type="submit" value="Cancelar" />
     }
     *@
+
 </p>
 
 <br />
 <br />
+
+   @Html.Raw(TempData["msg"])
+
 }
 <script>
     function Editar(numRoles, numPermisos)
