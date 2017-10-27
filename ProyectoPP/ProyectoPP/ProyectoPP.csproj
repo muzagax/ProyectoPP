@@ -214,6 +214,8 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\persona.cs" />
+    <Compile Include="Models\PersonaConRol.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModeloUsuarioRoles.Context.cs">
@@ -263,9 +265,6 @@
     </Compile>
     <Compile Include="Models\permisos.cs">
       <DependentUpon>ModelRoles.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\persona.cs">
-      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\UsuarioRol.cs" />
