@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.carne, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.carne, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.EditorFor(model => model.carne, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.carne, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,17 +68,37 @@
 
         <div class="form-group">
             @Html.Label("Rol", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <form action="/action_page.php">
-                    <label for="Administrador">Administrador</label>
-                    <input type="radio" name="rol" id="Administrador" value="profesor" checked ="@( Model.rol == "2" ? true : false )"><br>
-                    <label for="Asistente">Asistente</label>
-                    <input type="radio" name="rol" id="Asistente" value="asistente" checked ="@( Model.rol == "3" ? true : false )"><br>
-                    <label for="Estudiante">Estudiante</label>
-                    <input type="radio" name="rol" id="Estudiantes" value="estudiante" checked ="@( Model.rol == "1" ? true : false )"><br>
-                </form>
+            
+            @{ // Booleans que determinan cuál checkbox está seleccionado cuando la vista se carga
 
-            </div>
+                bool est = false;
+                bool adm = false;
+                bool asi = false;
+
+                if (Model.rol == "1") {     // Si el rol es de estudiante
+                    est = true;
+                }//if
+                else {
+                    if (Model.rol == "2"){ // Si el rol es de profesor
+                        adm = true;
+                    }//if
+                    else {                //si el rol es de asistente
+                        asi = true;
+                    }//else
+                }//else
+
+                <div class="col-md-10">
+                    <form action="/action_page.php">
+                        <label for="Administrador">Administrador</label>
+                        <input type="radio" name="rol" id="Administrador" value="profesor" checked="@adm"><br>
+                        <label for="Asistente">Asistente</label>
+                        <input type="radio" name="rol" id="Asistente" value="asistente" checked="@asi"><br>
+                        <label for="Estudiante">Estudiante</label>
+                        <input type="radio" name="rol" id="Estudiantes" value="estudiante" checked="@est"><br>
+                    </form>
+                </div>
+           }
+
         </div>
 
         <div class="form-group">
