@@ -67,6 +67,7 @@
           <Property Name="contexto" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="evento" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="resultado" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="numeroEscenario" Type="int" />
         </EntityType>
         <EntityType Name="fechas">
           <Key>
@@ -84,7 +85,6 @@
           <Property Name="resultado" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="prioridad" Type="int" Nullable="false" />
           <Property Name="estimacion" Type="int" Nullable="false" />
-          <Property Name="numeroEscenario" Type="int" Nullable="false" />
           <Property Name="proyectoId" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="sprintId" Type="varchar" MaxLength="25" />
         </EntityType>
@@ -537,6 +537,7 @@
           <Property Name="evento" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="resultado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="historiasDeUsuario" Relationship="Self.FK__criteriosD__idHU__4B7734FF" FromRole="criteriosDeAceptacion" ToRole="historiasDeUsuario" />
+          <Property Name="numeroEscenario" Type="Int32" />
         </EntityType>
         <EntityType Name="fechas">
           <Key>
@@ -914,6 +915,7 @@
           <EntitySetMapping Name="criteriosDeAceptacion">
             <EntityTypeMapping TypeName="patopurificModelGeneral.criteriosDeAceptacion">
               <MappingFragment StoreEntitySet="criteriosDeAceptacion">
+                <ScalarProperty Name="numeroEscenario" ColumnName="numeroEscenario" />
                 <ScalarProperty Name="idHU" ColumnName="idHU" />
                 <ScalarProperty Name="numCriterio" ColumnName="numCriterio" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -939,7 +941,6 @@
                 <ScalarProperty Name="resultado" ColumnName="resultado" />
                 <ScalarProperty Name="prioridad" ColumnName="prioridad" />
                 <ScalarProperty Name="estimacion" ColumnName="estimacion" />
-                <ScalarProperty Name="numeroEscenario" ColumnName="numeroEscenario" />
                 <ScalarProperty Name="proyectoId" ColumnName="proyectoId" />
                 <ScalarProperty Name="sprintId" ColumnName="sprintId" />
               </MappingFragment>
