@@ -556,7 +556,6 @@
           <Property Name="resultado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prioridad" Type="Int32" Nullable="false" />
           <Property Name="estimacion" Type="Int32" Nullable="false" />
-          <Property Name="numeroEscenario" Type="Int32" Nullable="false" />
           <Property Name="proyectoId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sprintId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="criteriosDeAceptacion" Relationship="Self.FK__criteriosD__idHU__4B7734FF" FromRole="historiasDeUsuario" ToRole="criteriosDeAceptacion" />

@@ -47,6 +47,10 @@
                 <td>
                     @Html.DisplayFor(model => item.resultado)
                 </td>
+
+                <td>
+                    @Html.ActionLink("Detalles", "DetallePB", new { id = item.id})
+                </td>
             </tr>
         }
 

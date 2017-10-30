@@ -452,6 +452,7 @@
     <Content Include="Views\Roles\RolesView.cshtml" />
     <Content Include="Views\UsuarioRol\UsuarioRol.cshtml" />
     <Content Include="Views\PB\ProductBacklogIndex.cshtml" />
+    <Content Include="Views\PB\DetallePB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

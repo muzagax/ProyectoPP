@@ -27,7 +27,6 @@ namespace ProyectoPP.Models
         public string resultado { get; set; }
         public int prioridad { get; set; }
         public int estimacion { get; set; }
-        public int numeroEscenario { get; set; }
         public string proyectoId { get; set; }
         public string sprintId { get; set; }
     
