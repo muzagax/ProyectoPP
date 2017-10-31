@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PBController.cs" />
     <Compile Include="Controllers\personasController.cs" />
+    <Compile Include="Controllers\proyectoController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsuarioRolController.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,8 +214,14 @@
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\criteriosDeAceptacion.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
@@ -453,6 +460,11 @@
     <Content Include="Views\historiasDeUsuarios\Index.cshtml" />
     <Content Include="Views\PB\ProductBacklogIndex.cshtml" />
     <Content Include="Views\PB\DetallePB.cshtml" />
+    <Content Include="Views\proyecto\Create.cshtml" />
+    <Content Include="Views\proyecto\Delete.cshtml" />
+    <Content Include="Views\proyecto\Details.cshtml" />
+    <Content Include="Views\proyecto\Edit.cshtml" />
+    <Content Include="Views\proyecto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

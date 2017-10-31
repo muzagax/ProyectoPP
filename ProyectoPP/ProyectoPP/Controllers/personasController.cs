@@ -234,7 +234,23 @@ namespace ProyectoPP.Controllers
 
                 var rol = user.Roles.SingleOrDefault().RoleId;
 
-                var resultado = this.UserManager.RemoveFromRole(persona.id,"Profesor");
+                switch (rol)
+                {
+                    case "1":
+                        rol = "Estudiante";
+                        break;
+
+                    case "2":
+                        rol = "Profesor";
+                        break;
+
+                    case "3":
+                        rol = "Asistente";
+                        break;
+
+                }
+
+                var resultado = this.UserManager.RemoveFromRole(persona.id,rol);
 
                 UserManager.AddToRoles(persona.id,pcr.rol);
 
