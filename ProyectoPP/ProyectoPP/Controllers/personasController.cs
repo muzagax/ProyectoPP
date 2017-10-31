@@ -72,7 +72,10 @@ namespace ProyectoPP.Controllers
         // GET: personas
         public ActionResult Index()
         {
-            return View(db.persona.ToList());
+            //if (revisarPermisos("Ver usuarios").Result)
+                return View(db.persona.ToList());
+            //else
+                //return View(db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).ToList());
         }
 
         // GET: personas/Details/5
@@ -125,7 +128,10 @@ namespace ProyectoPP.Controllers
         // GET: personas/Create
         public ActionResult Create()
         {
-            return View();
+            //if (revisarPermisos("Crear usuarios").Result)
+                return View();
+            //else
+                //return RedirectToAction("Index", "personas");
         }
 
         // POST: personas/Create
@@ -259,16 +265,22 @@ namespace ProyectoPP.Controllers
         // GET: personas/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            //if (revisarPermisos("Crear usuarios").Result)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                persona persona = db.persona.Find(id);
+                if (persona == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(persona);
             }
-            persona persona = db.persona.Find(id);
-            if (persona == null)
-            {
-                return HttpNotFound();
-            }
-            return View(persona);
+           // else
+                //return RedirectToAction("Details", new { id = id });
+
         }
 
         // POST: personas/Delete/5
