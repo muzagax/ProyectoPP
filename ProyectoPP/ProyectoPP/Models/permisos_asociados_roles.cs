@@ -12,12 +12,11 @@ namespace ProyectoPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserLogins
+    public partial class permisos_asociados_roles
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public string UserId { get; set; }
+        public int id_permiso { get; set; }
+        public string id_rol { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual permisos permisos { get; set; }
     }
 }

@@ -199,6 +199,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\historiasDeUsuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\personasController.cs" />
@@ -211,14 +212,8 @@
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUserClaims.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogins.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
+      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\criteriosDeAceptacion.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
@@ -407,7 +402,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Shared\pato4.jpg" />
+    <Content Include="pato4.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -449,6 +444,11 @@
     <Content Include="Views\personas\Index.cshtml" />
     <Content Include="Views\Roles\RolesView.cshtml" />
     <Content Include="Views\UsuarioRol\UsuarioRol.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Create.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Delete.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Details.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Edit.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

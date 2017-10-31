@@ -90,7 +90,7 @@ namespace ProyectoPP.Controllers
                 break;
 
                 case "3":
-                    persona.rol = "Administrador";
+                    persona.rol = "Asistente";
                 break;
 
             }
@@ -177,6 +177,8 @@ namespace ProyectoPP.Controllers
 
             var aspUser = UserManager.FindById(ID);
             var rol = aspUser.Roles.SingleOrDefault().RoleId;
+
+            
 
             persona.rol = rol;
             
