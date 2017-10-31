@@ -11,7 +11,8 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class persona
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +21,26 @@ namespace ProyectoPP.Models
             this.proyecto = new HashSet<proyecto>();
             this.tarea = new HashSet<tarea>();
         }
-    
+
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
+
+        [Display(Name = "Primer apellido")]
         public string apellido1 { get; set; }
+
+        [Display(Name = "Segundo apellido")]
         public string apellido2 { get; set; }
+
+        [Display(Name = "Cédula")]
         public string cedula { get; set; }
+
+        [Display(Name = "Carné")]
         public string carne { get; set; }
+
+        [Display(Name = "Correo electrónico")]
         public string email { get; set; }
+
+
         public string id { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

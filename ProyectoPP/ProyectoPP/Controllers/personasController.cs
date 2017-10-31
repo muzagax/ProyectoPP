@@ -290,5 +290,19 @@ namespace ProyectoPP.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+        //** metodo para poder extraer el Nombre de la persona a partir de la cédula */
+        /* requiere: cedula
+         * modifica:nada
+         * retorna: el nombre de la persona
+         * */
+        public string ObtenerNombre(string id)
+        {
+            string nombre;
+            nombre = db.persona.Find(id).nombre;
+            return nombre;
+        }
     }
 }
