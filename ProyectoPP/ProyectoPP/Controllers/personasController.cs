@@ -144,8 +144,7 @@ namespace ProyectoPP.Controllers
                     db.SaveChanges();
 
                     var resultado = await this.UserManager.AddToRoleAsync(ID, persona.rol);
-
-
+                                       
                     return RedirectToAction("Index");
                 }
             }
@@ -173,13 +172,9 @@ namespace ProyectoPP.Controllers
 
             //Ahora obtenemos el ID de ASPNET para obtener el rol
             var user = UserManager.FindByName(persona.cedula);
-            string ID = user.Id;
 
-            var aspUser = UserManager.FindById(ID);
-            var rol = aspUser.Roles.SingleOrDefault().RoleId;
-
+            var rol = user.Roles.SingleOrDefault().RoleId;
             
-
             persona.rol = rol;
             
             if (persona == null)
@@ -194,20 +189,35 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,email,rol")] persona persona)
+        public ActionResult Edit([Bind(Include = "nombre,apellido1,apellido2,cedula,carne,email,rol")] PersonaConRol pcr)
         {
             
             if (ModelState.IsValid)
             {
+
+                persona persona = new persona();
+                persona.nombre = pcr.nombre;
+                persona.apellido1 = pcr.apellido1;
+                persona.apellido2 = pcr.apellido2;
+                persona.cedula = pcr.cedula;
+                persona.carne = pcr.carne;
+                persona.email = pcr.email;
+
                 var user = UserManager.FindByName(persona.cedula);
-                string ID = user.Id;
-                persona.id = ID;
+                persona.id = user.Id;
+
+                var rol = user.Roles.SingleOrDefault().RoleId;
+
+                var resultado = this.UserManager.RemoveFromRole(persona.id,"Profesor");
+
+                UserManager.AddToRoles(persona.id,pcr.rol);
+
                 db.Entry(persona).State = EntityState.Modified;
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(persona);
+            return View(pcr);
         }
 
         // GET: personas/Delete/5
