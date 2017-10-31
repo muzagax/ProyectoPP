@@ -12,14 +12,12 @@ namespace ProyectoPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class progreso
+    public partial class AspNetUserLogins
     {
-        public string HU { get; set; }
-        public int id { get; set; }
-        public System.DateTime fechaCorte { get; set; }
-        public int porcentaje { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
+        public string UserId { get; set; }
     
-        public virtual fechas fechas { get; set; }
-        public virtual tarea tarea { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
