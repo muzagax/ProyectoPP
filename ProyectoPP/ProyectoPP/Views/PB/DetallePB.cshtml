@@ -11,8 +11,11 @@
 <head>
 </head>
 
+
+
 <body>
     <h2>Detalles de historias de usuario</h2>
+    <h1>@Html.DisplayFor(model => model.proyecto.nombre)</h1>
 
     <p align="right">
         <button type="submit">Editar</button>
@@ -55,14 +58,6 @@
             @Html.DisplayFor(model => model.estimacion)
         </dd>
         <br>
-        <dt>
-            <label for="Proyecto">Proyecto</label>
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.proyecto.nombre)
-        </dd>
-        <br/>
-        <dt>
     </dl>
 
 
