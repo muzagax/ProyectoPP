@@ -11,7 +11,8 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class proyecto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,24 @@ namespace ProyectoPP.Models
             this.sprint = new HashSet<sprint>();
             this.persona = new HashSet<persona>();
         }
-    
+
+
+        [Display(Name = "Identificador")]
         public string id { get; set; }
+
+        [Display(Name = "Nombre del Proyecto")]
         public string nombre { get; set; }
+
+        [Display(Name = "Descripción")]
         public string descripcion { get; set; }
+
+        [Display(Name = "Fecha de Inicio")]
         public System.DateTime fechaInicio { get; set; }
+
+        [Display(Name = "Fecha de Finalización")]
         public Nullable<System.DateTime> fechaFinal { get; set; }
+
+        [Display(Name = "Líder del Equipo")]
         public string lider { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
