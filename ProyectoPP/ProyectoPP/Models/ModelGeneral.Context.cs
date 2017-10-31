@@ -33,10 +33,10 @@ namespace ProyectoPP.Models
         public virtual DbSet<fechas> fechas { get; set; }
         public virtual DbSet<historiasDeUsuario> historiasDeUsuario { get; set; }
         public virtual DbSet<permisos> permisos { get; set; }
-        public virtual DbSet<persona> persona { get; set; }
         public virtual DbSet<progreso> progreso { get; set; }
         public virtual DbSet<proyecto> proyecto { get; set; }
         public virtual DbSet<sprint> sprint { get; set; }
         public virtual DbSet<tarea> tarea { get; set; }
+        public virtual DbSet<persona> persona { get; set; }
     }
 }
