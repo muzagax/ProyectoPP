@@ -1,0 +1,83 @@
+﻿@model ProyectoPP.Models.historiasDeUsuario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>historiasDeUsuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.rol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.funcionalidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.funcionalidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resultado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resultado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estimacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estimacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroEscenario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeroEscenario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proyecto.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proyecto.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sprint.proyectoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sprint.proyectoId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

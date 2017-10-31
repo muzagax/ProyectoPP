@@ -20,6 +20,7 @@ namespace ProyectoPP.Models
         public string contexto { get; set; }
         public string evento { get; set; }
         public string resultado { get; set; }
+        public Nullable<int> numeroEscenario { get; set; }
     
         public virtual historiasDeUsuario historiasDeUsuario { get; set; }
     }

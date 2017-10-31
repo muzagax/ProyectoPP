@@ -199,8 +199,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\historiasDeUsuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PBController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsuarioRolController.cs" />
@@ -211,14 +213,8 @@
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUserClaims.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogins.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
+      <DependentUpon>ModeloUsuarioRoles.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\criteriosDeAceptacion.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
@@ -246,6 +242,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelGeneral.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloProductBacklog.cs" />
     <Compile Include="Models\ModeloUsuarioRoles.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -449,6 +446,13 @@
     <Content Include="Views\personas\Index.cshtml" />
     <Content Include="Views\Roles\RolesView.cshtml" />
     <Content Include="Views\UsuarioRol\UsuarioRol.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Create.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Delete.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Details.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Edit.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\Index.cshtml" />
+    <Content Include="Views\PB\ProductBacklogIndex.cshtml" />
+    <Content Include="Views\PB\DetallePB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
