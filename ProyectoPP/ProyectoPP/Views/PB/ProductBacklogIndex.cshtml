@@ -1,0 +1,60 @@
+﻿@model ProyectoPP.Models.ModeloProductBacklog
+
+@{
+    ViewBag.Title = "Product Backlog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<head>
+</head>
+<body>
+    <h2>Product Backlog</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Identificador
+            </th>
+            <th>
+                Rol
+            </th>
+            <th>
+                Funcionalidad
+            </th>
+            <th>
+                Resultado
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model.ListaPB)
+        {
+            <tr>
+                <td>
+                @Html.DisplayFor(model => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.rol)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.funcionalidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.resultado)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Detalles", "DetallePB", new { id = item.id})
+                </td>
+            </tr>
+        }
+
+</table>
+</body>
+
+
