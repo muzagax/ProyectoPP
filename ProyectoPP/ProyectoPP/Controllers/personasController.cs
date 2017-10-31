@@ -21,6 +21,8 @@ namespace ProyectoPP.Controllers
     public class personasController : Controller
     {
         private patopurificEntities db = new patopurificEntities();
+        private ProyectoPP.Models.patopurificEntitiesRoles enRoles = new ProyectoPP.Models.patopurificEntitiesRoles();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -48,6 +50,24 @@ namespace ProyectoPP.Controllers
             }
         }
 
+        private async Task<bool> revisarPermisos(string permiso)
+        {
+
+            string userName = System.Web.HttpContext.Current.User.Identity.Name;
+            var user = UserManager.FindByName(userName);
+            var rol = user.Roles.SingleOrDefault().RoleId;
+
+            var permisoID = enRoles.permisos.Where(m => m.permiso == permiso).First().id_permiso;
+            var listaRoles = enRoles.AspNetRoles.Where(m => m.permisos.Any(c => c.id_permiso == permisoID)).ToList().Select(n => n.Id);
+
+            bool userRol = false;
+            foreach (var element in listaRoles)
+            {
+                if (element == rol)
+                    userRol = true;
+            }
+            return userRol;
+        }
 
         // GET: personas
         public ActionResult Index()
