@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="patopurificModelGeneral.fechas" Width="1.5" PointX="16.5" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.historiasDeUsuario" Width="1.5" PointX="14.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.permisos" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="patopurificModelGeneral.persona" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.progreso" Width="1.5" PointX="18.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.proyecto" Width="1.5" PointX="9.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.sprint" Width="1.5" PointX="12" PointY="14.125" IsExpanded="true" />
@@ -20,12 +19,14 @@
         <AssociationConnector Association="patopurificModelGeneral.FK__historias__proye__47A6A41B" ManuallyRouted="false" />
         <AssociationConnector Association="patopurificModelGeneral.FK__historias__sprin__489AC854" ManuallyRouted="false" />
         <AssociationConnector Association="patopurificModelGeneral.FK__tarea__HU__4E53A1AA" ManuallyRouted="false" />
-        <AssociationConnector Association="patopurificModelGeneral.FK__proyecto__lider__41EDCAC5" ManuallyRouted="false" />
         <AssociationConnector Association="patopurificModelGeneral.FK__progreso__56E8E7AB" ManuallyRouted="false" />
         <AssociationConnector Association="patopurificModelGeneral.FK__sprint__proyecto__44CA3770" ManuallyRouted="false" />
         <AssociationConnector Association="patopurificModelGeneral.permisos_asociados_roles" ManuallyRouted="false" />
-        <AssociationConnector Association="patopurificModelGeneral.responsablesTarea" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="patopurificModelGeneral.persona" Width="1.5" PointX="12" PointY="9.375" />
+        <AssociationConnector Association="patopurificModelGeneral.FK__persona__IdProye__74794A92" />
+        <AssociationConnector Association="patopurificModelGeneral.FK__proyecto__lider__41EDCAC5" />
+        <AssociationConnector Association="patopurificModelGeneral.responsablesTarea" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

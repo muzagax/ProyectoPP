@@ -1,15 +1,39 @@
-﻿@model IEnumerable<ProyectoPP.Models.proyecto>
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Globalization;
+@using System.Linq;
+@using System.Security.Claims;
+@using System.Data;
+@using System.Data.Entity;
+@using System.Net;
+@using System.Web;
+@using System.Web.Mvc;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
+@using System.Threading.Tasks;
+@using ProyectoPP.Models;
+@using System.Text.RegularExpressions;
+@using System.Runtime.Remoting.Contexts;
+
+@model ProyectoPP.Models.proyecto
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listado de Proyectos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="form-group">
+    <div class="col-md-offset-10 col-md-10">
+        <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "proyecto")'">Insertar Nuevo</button>
+    </div>
+</div>
+
+<br /><br /><br /><br />
+
 <table class="table">
     <tr>
         <th>
@@ -25,7 +49,7 @@
             @Html.DisplayNameFor(model => model.fechaFinal)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.persona.nombre)
+            @Html.DisplayNameFor(UserManager.FindByName(userName); )
         </th>
         <th></th>
     </tr>
@@ -45,7 +69,7 @@
             @Html.DisplayFor(modelItem => item.fechaFinal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.persona.nombre)
+            @Html.DisplayFor(modelItem => item.lider)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
