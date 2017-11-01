@@ -138,6 +138,7 @@
           <Property Name="fechaInicio" Type="date" Nullable="false" />
           <Property Name="fechaFinal" Type="date" />
           <Property Name="lider" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="responsablesTarea">
           <Key>
@@ -617,6 +618,7 @@
           <NavigationProperty Name="sprint" Relationship="Self.FK__sprint__proyecto__44CA3770" FromRole="proyecto" ToRole="sprint" />
           <NavigationProperty Name="persona" Relationship="patopurificModelGeneral.FK__persona__IdProye__74794A92" FromRole="proyecto" ToRole="persona" />
           <NavigationProperty Name="persona1" Relationship="patopurificModelGeneral.FK__proyecto__lider__41EDCAC5" FromRole="proyecto" ToRole="persona" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sprint">
           <Key>
@@ -1005,6 +1007,7 @@
           <EntitySetMapping Name="proyecto">
             <EntityTypeMapping TypeName="patopurificModelGeneral.proyecto">
               <MappingFragment StoreEntitySet="proyecto">
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
