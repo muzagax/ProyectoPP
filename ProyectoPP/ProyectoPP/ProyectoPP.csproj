@@ -223,6 +223,7 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HUConIdSeparado.cs" />
     <Compile Include="Models\criteriosDeAceptacion.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>

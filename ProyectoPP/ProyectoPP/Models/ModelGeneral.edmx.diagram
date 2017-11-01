@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="15a4e25e67af49aabf2ee8899eccf46e" Name="Diagram1">
-        <EntityTypeShape EntityType="patopurificModelGeneral.AspNetRoles" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="patopurificModelGeneral.criteriosDeAceptacion" Width="1.5" PointX="16.5" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="patopurificModelGeneral.fechas" Width="1.5" PointX="16.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="patopurificModelGeneral.historiasDeUsuario" Width="1.5" PointX="14.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="patopurificModelGeneral.permisos" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="patopurificModelGeneral.AspNetRoles" Width="1.5" PointX="11.875" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="patopurificModelGeneral.criteriosDeAceptacion" Width="1.5" PointX="17" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="patopurificModelGeneral.fechas" Width="1.5" PointX="20.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="patopurificModelGeneral.historiasDeUsuario" Width="1.5" PointX="14.375" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="patopurificModelGeneral.permisos" Width="1.5" PointX="9.625" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.progreso" Width="1.5" PointX="18.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.proyecto" Width="1.5" PointX="9.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="patopurificModelGeneral.sprint" Width="1.5" PointX="12" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="patopurificModelGeneral.sprint" Width="1.5" PointX="12" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.tarea" Width="1.5" PointX="16.5" PointY="7.875" IsExpanded="true" />
         <AssociationConnector Association="patopurificModelGeneral.FK__criteriosD__idHU__4B7734FF" ManuallyRouted="false" />
         <AssociationConnector Association="patopurificModelGeneral.FK__progreso__fechaC__57DD0BE4" ManuallyRouted="false" />

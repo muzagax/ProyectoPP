@@ -15,6 +15,7 @@ namespace ProyectoPP.Models
             [Display(Name = "Primer apellido")]
             [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El primer apellido solo puede estar compuesto por letras")]
             public string apellido1 { get; set; }
+
             [Display(Name = "Segundo apellido")]
             [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El segundo apellido solo puede estar compuesto por letras")]
             public string apellido2 { get; set; }
