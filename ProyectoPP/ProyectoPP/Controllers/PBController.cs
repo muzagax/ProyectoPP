@@ -86,8 +86,7 @@ namespace ProyectoPP.Controllers
                 modelo.ListaPB = bd.historiasDeUsuario.Where(m => m.id == idproy).ToList();
             }
             //return View(db.proyecto.Where(m => m.id == (select id_proyecto from personas where cedula == System.Web.HttpContext.Current.User.Identity.Name)).ToList());
-            //var idproy = bd.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().id;
-            //modelo.ListaPB = bd.historiasDeUsuario.ToList();*/
+            */
             return View(modelo);
         }
         public ActionResult DetallePB(string id)
