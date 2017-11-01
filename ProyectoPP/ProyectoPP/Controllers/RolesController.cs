@@ -56,6 +56,16 @@ namespace ProyectoPP.Controllers
             return userRol;
         }
 
+        public string RevisarPermisosB(string permiso)
+        {
+            string respuesta="0";
+            if (this.revisarPermisos(permiso).Result)
+            {
+                respuesta = "1";
+            }
+            return respuesta;
+        }
+
         public ActionResult RolesView()
         {
             Roles modelo = new Roles();
