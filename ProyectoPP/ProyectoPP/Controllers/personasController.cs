@@ -72,10 +72,10 @@ namespace ProyectoPP.Controllers
         // GET: personas
         public ActionResult Index()
         {
-            //if (revisarPermisos("Ver usuarios").Result)
+            if (revisarPermisos("Ver usuarios").Result)
                 return View(db.persona.ToList());
-            //else
-                //return View(db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).ToList());
+            else
+                return View(db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).ToList());
         }
 
         // GET: personas/Details/5
@@ -128,10 +128,10 @@ namespace ProyectoPP.Controllers
         // GET: personas/Create
         public ActionResult Create()
         {
-            //if (revisarPermisos("Crear usuarios").Result)
+            if (revisarPermisos("Crear usuarios").Result)
                 return View();
-            //else
-                //return RedirectToAction("Index", "personas");
+            else
+                return RedirectToAction("Index", "personas");
         }
 
         // POST: personas/Create
@@ -233,26 +233,33 @@ namespace ProyectoPP.Controllers
                 persona.id = user.Id;
 
                 var rol = user.Roles.SingleOrDefault().RoleId;
-
-                switch (rol)
+                if (revisarPermisos("Editar usuarios").Result)
                 {
-                    case "1":
-                        rol = "Estudiante";
-                        break;
+                    switch (rol)
+                    {
+                        case "1":
+                            rol = "Estudiante";
+                            break;
 
-                    case "2":
-                        rol = "Profesor";
-                        break;
+                        case "2":
+                            rol = "Profesor";
+                            break;
 
-                    case "3":
-                        rol = "Asistente";
-                        break;
+                        case "3":
+                            rol = "Asistente";
+                            break;
 
+                    }
+                    var resultado = this.UserManager.RemoveFromRole(persona.id, rol);
+
+                    UserManager.AddToRoles(persona.id, pcr.rol);
                 }
+                
+                
 
-                var resultado = this.UserManager.RemoveFromRole(persona.id,rol);
+               
 
-                UserManager.AddToRoles(persona.id,pcr.rol);
+                
 
                 db.Entry(persona).State = EntityState.Modified;
 
@@ -265,7 +272,7 @@ namespace ProyectoPP.Controllers
         // GET: personas/Delete/5
         public ActionResult Delete(string id)
         {
-            //if (revisarPermisos("Crear usuarios").Result)
+            if (revisarPermisos("Crear usuarios").Result)
             {
                 if (id == null)
                 {
@@ -278,8 +285,8 @@ namespace ProyectoPP.Controllers
                 }
                 return View(persona);
             }
-           // else
-                //return RedirectToAction("Details", new { id = id });
+            else
+                return RedirectToAction("Details", new { id = id });
 
         }
 

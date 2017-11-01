@@ -11,7 +11,8 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class historiasDeUsuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +21,29 @@ namespace ProyectoPP.Models
             this.criteriosDeAceptacion = new HashSet<criteriosDeAceptacion>();
             this.tarea = new HashSet<tarea>();
         }
-    
+
+        [Display(Name = "Id")]
         public string id { get; set; }
+
+        [Display(Name = "Rol")]
         public string rol { get; set; }
+
+        [Display(Name = "Funcionalidad")]
         public string funcionalidad { get; set; }
+
+        [Display(Name = "Resultado")]
         public string resultado { get; set; }
+
+        [Display(Name = "Prioridad")]
         public int prioridad { get; set; }
+
+        [Display(Name = "Estimación")]
         public int estimacion { get; set; }
+
+        [Display(Name = "Id del proyecto")]
         public string proyectoId { get; set; }
+
+        [Display(Name = "Número de sprint")]
         public string sprintId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

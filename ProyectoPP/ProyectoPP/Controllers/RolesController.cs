@@ -59,8 +59,8 @@ namespace ProyectoPP.Controllers
         public ActionResult RolesView()
         {
             Roles modelo = new Roles();
-            //if (revisarPermisos("ver accesos").Result)
-            //{
+            if (revisarPermisos("ver accesos").Result)
+            {
                 modelo.ListaRoles = baseDatos.AspNetRoles.ToList();
                 modelo.ListaPermisos = baseDatos.permisos.ToList();
                 modelo.ListaAscociaciones = new List<Roles.Asociaciones>();
@@ -100,11 +100,11 @@ namespace ProyectoPP.Controllers
                     }
                 }
                 return View(modelo);
-            //}
-            //else
-            //{
-                //return RedirectToAction("Index", "Home");
-            //}
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
