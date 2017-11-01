@@ -48,10 +48,13 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nombre,descripcion,fechaInicio,fechaFinal,lider")] proyecto proyecto)
+        public ActionResult Create(proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
+
+                proyecto.id = proyecto.nombre + proyecto.lider;
+                proyecto.estado = "Pendiente";
                 db.proyecto.Add(proyecto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
