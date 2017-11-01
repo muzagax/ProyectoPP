@@ -28,10 +28,10 @@
 
                          @if (Request.IsAuthenticated) 
                         {
-                        <li>@Html.ActionLink("Administrar Usuarios", "Index", "personas")</li>
-                        <li>@Html.ActionLink("Administrar Roles", "RolesView", "Roles")</li>
-                        <li>@Html.ActionLink("Product Backlog", "Index", "historiasDeUsuarios")</li>
-                        <li>@Html.ActionLink("Administrar Proyectos", "Index", "proyecto")</li>
+                        <li>@Html.ActionLink("Usuarios", "Index", "personas")</li>
+                        <li>@Html.ActionLink("Roles", "RolesView", "Roles")</li>
+                        <li>@Html.ActionLink("Product Backlog", "ProductBacklogIndex", "PB")</li>
+                        <li>@Html.ActionLink("Proyectos", "Index", "proyecto")</li>
                         }
 
                     </ul>
