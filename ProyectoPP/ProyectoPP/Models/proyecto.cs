@@ -12,10 +12,11 @@
 namespace ProyectoPP.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class proyecto
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class proyecto
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,19 +31,25 @@ public partial class proyecto
 
     }
 
-
+    [Display(Name = "Identificador del Proyecto")]
     public string id { get; set; }
 
+    [Display(Name = "Nombre del Proyecto")]
     public string nombre { get; set; }
 
+    [Display(Name = "Descripción")]
     public string descripcion { get; set; }
 
+    [Display(Name = "Fecha de Inicio")]
     public System.DateTime fechaInicio { get; set; }
 
+    [Display(Name = "Fecha de término")]
     public Nullable<System.DateTime> fechaFinal { get; set; }
 
+    [Display(Name = "Líder del equipo")]
     public string lider { get; set; }
 
+    [Display(Name = "Estado del Proyecto")]
     public string estado { get; set; }
     /***/
 
