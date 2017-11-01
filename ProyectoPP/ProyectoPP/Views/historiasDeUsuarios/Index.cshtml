@@ -28,7 +28,7 @@
             @Html.DisplayNameFor(model => model.estimacion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.numeroEscenario)
+            @Html.DisplayNameFor(model => model.NumeroEscenario)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.proyecto.nombre)
@@ -57,7 +57,7 @@
             @Html.DisplayFor(modelItem => item.estimacion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.numeroEscenario)
+            @Html.DisplayFor(modelItem => item.NumeroEscenario)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.proyecto.nombre)
@@ -66,9 +66,7 @@
             @Html.DisplayFor(modelItem => item.sprint.proyectoId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Detalles", "Details", new { id=item.id })
         </td>
     </tr>
 }
