@@ -199,6 +199,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DocumentacionController.cs" />
     <Compile Include="Controllers\historiasDeUsuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -223,6 +224,10 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Documentacion.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentacionModel.cs" />
     <Compile Include="Models\HUConIdSeparado.cs" />
     <Compile Include="Models\criteriosDeAceptacion.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
@@ -511,6 +516,7 @@
     <Content Include="Views\proyecto\Details.cshtml" />
     <Content Include="Views\proyecto\Edit.cshtml" />
     <Content Include="Views\proyecto\Index.cshtml" />
+    <Content Include="Views\Documentacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
