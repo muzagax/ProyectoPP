@@ -92,14 +92,28 @@
                 }//else
             }
             
-                <div class="col-md-10">
+            @if (true)
+            {
+                string resp = Html.Action("RevisarPermisosB", "Roles", new { permiso = "Editar rol" }).ToString();
+                if (resp == "1")
+                {
+                    <div class="col-md-10">
                         <label for="Administrador">Administrador</label>
                         <input type="radio" name="rol" id="Administrador" value="Profesor" checked="@adm"><br>
                         <label for="Asistente">Asistente</label>
                         <input type="radio" name="rol" id="Asistente" value="Asistente" checked="@asi"><br>
                         <label for="Estudiante">Estudiante</label>
                         <input type="radio" name="rol" id="Estudiantes" value="Estudiante" checked="@est"><br>
-                </div>
+                    </div>
+                }
+                else
+                {
+                    <label for="Estudiante">Estudiante</label>
+                    <input type="radio" name="rol" id="Estudiantes" value="Estudiante" checked="@est"><br>
+
+                }
+            }
+
         </div>
 
         <div class="form-group">

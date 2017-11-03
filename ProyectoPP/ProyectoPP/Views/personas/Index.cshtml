@@ -6,15 +6,22 @@
 }
 
     <h2>Administración de Usuarios</h2>
+    @if (true)
+    {
+        string resp = Html.Action("RevisarPermisosB", "Roles", new { permiso = "Crear usuarios" }).ToString();
+        if (resp == "1")
+        {
+            <div class="form-group">
+                <div class="col-md-offset-10 col-md-10">
+                    <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
+                    <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "personas")'">Insertar usuario</button>
+                </div>
+            </div>
+        }
+    }
 
-    <div class="form-group">
-        <div class="col-md-offset-10 col-md-10">
-            <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "personas")'">Insertar Nuevo</button>
-        </div>
-    </div>    
 
-<br /><br /><br /><br />
+<br /><br />
 
 <table class="table">
     

@@ -13,7 +13,15 @@
         <div class="col-md-offset-6 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
             <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "personas", new { id = Model.cedula })'">Editar</button>
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "personas", new { id = Model.cedula })'">Eliminar</button>
+            @if(true)
+            {
+                string resp = Html.Action("RevisarPermisosB", "Roles", new{ permiso = "Borrar usuarios" }).ToString();
+                if ( resp == "1" )
+                {
+                <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "personas", new { id = Model.cedula })'">Eliminar</button>
+                }
+            }
+            
         </div>
     </div>
 
