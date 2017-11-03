@@ -255,12 +255,6 @@ namespace ProyectoPP.Controllers
                     UserManager.AddToRoles(persona.id, pcr.rol);
                 }
                 
-                
-
-               
-
-                
-
                 db.Entry(persona).State = EntityState.Modified;
 
                 db.SaveChanges();

@@ -55,7 +55,7 @@ namespace ProyectoPP.Controllers
         public ActionResult Create()
         {
 
-            ViewBag.liderazo = new SelectList(db.persona.Where(x=>x.IdProyecto == null), "cedula", "nombre");
+            ViewBag.lider = new SelectList(db.persona.Where(x=>x.IdProyecto == null), "cedula", "nombre");
             return View();
         }
 
@@ -96,7 +96,7 @@ namespace ProyectoPP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.lider = new SelectList(db.persona, "cedula", "nombre", proyecto.lider);
+            ViewBag.lider = new SelectList(db.persona.Where(x => x.IdProyecto == null || x.IdProyecto == id), "cedula", "nombre", proyecto.persona1.nombre);
             return View(proyecto);
         }
 
