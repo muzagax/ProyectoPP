@@ -69,6 +69,15 @@
           <Property Name="resultado" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="numeroEscenario" Type="int" />
         </EntityType>
+        <EntityType Name="Documentacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="200" />
+          <Property Name="Data" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="fechas">
           <Key>
             <PropertyRef Name="fechaCorte" />
@@ -406,6 +415,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="criteriosDeAceptacion" EntityType="Self.criteriosDeAceptacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documentacion" EntityType="Self.Documentacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fechas" EntityType="Self.fechas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="historiasDeUsuario" EntityType="Self.historiasDeUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="permisos" EntityType="Self.permisos" Schema="dbo" store:Type="Tables" />
@@ -840,6 +850,7 @@
             <End Role="persona" EntitySet="persona" />
             <End Role="tarea" EntitySet="tarea" />
           </AssociationSet>
+          <EntitySet Name="Documentacion" EntityType="patopurificModelGeneral.Documentacion" />
           </EntityContainer>
         <EntityType Name="persona">
           <Key>
@@ -900,6 +911,15 @@
           <End Type="patopurificModelGeneral.persona" Role="persona" Multiplicity="*" />
           <End Type="patopurificModelGeneral.tarea" Role="tarea" Multiplicity="*" />
         </Association>
+        <EntityType Name="Documentacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1076,6 +1096,16 @@
               <ScalarProperty Name="cedula" ColumnName="persona" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Documentacion">
+            <EntityTypeMapping TypeName="patopurificModelGeneral.Documentacion">
+              <MappingFragment StoreEntitySet="Documentacion">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -5,21 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar Proyecto</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Está seguro que desa eliminar este proyecto?</h3>
 
 <div>
 
     <h4>@Html.DisplayFor(model => model.nombre)</h4>
-
-    <div class="form-group">
-        <div class="col-md-offset-6 col-md-10">
-            <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "proyecto", new { id = Model.id })'">Editar</button>
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "proyecto", new { id = Model.id })'">Borrar</button>
-        </div>
-    </div>
 
     <dl class="dl-horizontal">
 
@@ -69,20 +61,21 @@
         <br />
 
     </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <input type="submit" value="Aceptar" class="btn btn-default" />
+                <button class="btn btn-default" onclick="location.href='@Url.Action("Details", "proyecto", new { id = Model.id })';return false;">Cancelar</button>
+            </div>
+        </div>
+    }
+
+    <br>
+
 </div>
-
-
-
-
-
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Borrar" class="btn btn-default" />
-                    </div>
-                }
 
 
 

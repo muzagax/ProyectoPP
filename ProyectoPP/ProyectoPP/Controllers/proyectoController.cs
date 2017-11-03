@@ -7,12 +7,27 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoPP.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ProyectoPP.Controllers
 {
     public class proyectoController : Controller
     {
         private patopurificEntitiesGeneral db = new patopurificEntitiesGeneral();
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return UserManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: proyecto
         public ActionResult Index()
@@ -39,7 +54,8 @@ namespace ProyectoPP.Controllers
         // GET: proyecto/Create
         public ActionResult Create()
         {
-            ViewBag.lider = new SelectList(db.persona, "cedula", "nombre");
+
+            ViewBag.liderazo = new SelectList(db.persona.Where(x=>x.IdProyecto == null), "cedula", "nombre");
             return View();
         }
 
@@ -55,6 +71,10 @@ namespace ProyectoPP.Controllers
 
                 proyecto.id = proyecto.nombre + proyecto.lider;
                 proyecto.estado = "Pendiente";
+
+                var persona = db.persona.Find(proyecto.lider);
+                persona.IdProyecto = proyecto.id;
+                
                 db.proyecto.Add(proyecto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
