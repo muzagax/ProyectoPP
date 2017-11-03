@@ -17,7 +17,6 @@
         <div class="col-md-offset-6 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
             <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "proyecto", new { id = Model.id })'">Editar</button>
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "proyecto", new { id = Model.id })'">Borrar</button>
         </div>
     </div>
 
@@ -80,7 +79,8 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-actions no-color">
-                        <input type="submit" value="Borrar" class="btn btn-default" />
+                        <input type="submit" value="Aceptar" class="btn btn-default" />
+                        <button class="btn btn-default" onclick="location.href='@Url.Action("Index", "Proyecto")';return false;">Cancelar</button>
                     </div>
                 }
 
