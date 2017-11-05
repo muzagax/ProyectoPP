@@ -37,6 +37,7 @@ namespace ProyectoPP.Controllers
             }
         }
 
+        //verifica si los usuarios tienen permisos para acceder a ventana.
         private async Task<bool> revisarPermisos(string permiso)
         {
 
@@ -56,6 +57,7 @@ namespace ProyectoPP.Controllers
             return userRol;
         }
 
+        //envía un valor diferente dependiendo de si el usuario tiene permiso o no.
         public string RevisarPermisosB(string permiso)
         {
             string respuesta="0";
@@ -66,16 +68,20 @@ namespace ProyectoPP.Controllers
             return respuesta;
         }
 
+        //Le envía la información necesaria a la vista para que se le presente al usuario
         public ActionResult RolesView()
         {
             Roles modelo = new Roles();
             if (revisarPermisos("ver accesos").Result)
             {
+                //se copia la información desde la base de datos en el modelo
                 modelo.ListaRoles = baseDatos.AspNetRoles.ToList();
                 modelo.ListaPermisos = baseDatos.permisos.ToList();
                 modelo.ListaAscociaciones = new List<Roles.Asociaciones>();
                 modelo.ListaGuardar = new List<Roles.GuardarAux>();
 
+                //Añade todos los roles con sus respectivos permisos al modelo, este modelo se usa sólo para cargar la
+                //información en la pantalla.
                 foreach (var AspNetRoles in modelo.ListaRoles)
                 {
 
@@ -85,6 +91,7 @@ namespace ProyectoPP.Controllers
                     }
                 }
 
+                //Prepara el modelo que se utilizará para guardar la información en la base de datos.
                 foreach (var AspNetRoles in modelo.ListaRoles)
                 {
                     foreach (var permisos in modelo.ListaPermisos)
@@ -117,13 +124,16 @@ namespace ProyectoPP.Controllers
             }
         }
 
+        // Contiene la funcionalidad del botón "Aceptar" que guarda los cambios que el usuario le quiere hacer a la base de datos.
         [HttpPost]
         public ActionResult Aceptar(Roles mod)
         {   
+            //Carga la información de la base de datos para luego modificarla.
             Roles modelo = new Roles();
             modelo.ListaRoles = baseDatos.AspNetRoles.ToList();
             modelo.ListaPermisos = baseDatos.permisos.ToList();
 
+            //Actualiza las llaves foráneas de roles.
             int numero = -1;
             foreach (var rol in modelo.ListaRoles)
             {
@@ -139,7 +149,6 @@ namespace ProyectoPP.Controllers
                             {
                                 if (permiso.id_permiso == asoc.permiso)
                                 {
-                                    //rol.permisos.Add(permiso);
                                     modelo.ListaRoles.ElementAt(numero).permisos.Add(permiso);
                                 }
                             }
@@ -149,8 +158,8 @@ namespace ProyectoPP.Controllers
                 }
             }
 
+            //Actualiza las llaves foráneas de permisos.
             int contador = -1;
-
             foreach (var permiso in modelo.ListaPermisos)
             {
                 contador++;
@@ -167,7 +176,6 @@ namespace ProyectoPP.Controllers
                                 if (rol.Id == asoc.rol)
                                 {
                                     modelo.ListaPermisos.ElementAt(contador).AspNetRoles.Add(rol);
-                                    //permiso.AspNetRoles.Add(rol);
                                 }
                             }
                         }
@@ -181,11 +189,9 @@ namespace ProyectoPP.Controllers
 
             if (ModelState.IsValid)
             {
-                
+                //Guarda los cambios de la actualización de la base de datos.
                 foreach (var permiso in modelo.ListaPermisos)
-                {
-                    //var algo = permiso.AspNetRoles;
-                    
+                {   
                     baseDatos.Entry(permiso).State = EntityState.Modified;
 
                 }
@@ -193,12 +199,9 @@ namespace ProyectoPP.Controllers
                 {
                     baseDatos.Entry(roles).State = EntityState.Modified;
                 }
-                //baseDatos.Entry(modelo.ListaAscociaciones).State = EntityState.Modified;
                 baseDatos.SaveChanges();
-
-
+                //Le notifica al usuario que la información se guardó exitosamente.
                 TempData["msg"] = "<script>alert('Se asignaron los permisos a sus respectivos roles correctamente.');</script>";
-
                 return RedirectToAction("RolesView");
             }
             return View(modelo);

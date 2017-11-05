@@ -29,6 +29,8 @@ namespace ProyectoPP.Controllers
             }
         }
 
+
+        // Carga la intefaz de Index del módulo de proyecto
         // GET: proyecto
         public ActionResult Index()
         {
@@ -36,6 +38,8 @@ namespace ProyectoPP.Controllers
             return View(proyecto.ToList());
         }
 
+
+        // Carga la intefaz de Details del módulo de proyecto
         // GET: proyecto/Details/5
         public ActionResult Details(string id)
         {
@@ -51,6 +55,7 @@ namespace ProyectoPP.Controllers
             return View(proyecto);
         }
 
+        // Carga la intefaz de Create del módulo de proyecto
         // GET: proyecto/Create
         public ActionResult Create()
         {
@@ -59,9 +64,8 @@ namespace ProyectoPP.Controllers
             return View();
         }
 
+        //Guarda el nuevo proyecto en la base de datos.
         // POST: proyecto/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(proyecto proyecto)
@@ -84,6 +88,7 @@ namespace ProyectoPP.Controllers
             return View(proyecto);
         }
 
+        //Guarda los cambios del proyecto en la base de datos.
         // GET: proyecto/Edit/5
         public ActionResult Edit(string id)
         {
@@ -117,6 +122,7 @@ namespace ProyectoPP.Controllers
             return View(proyecto);
         }
 
+        // Carga de interfaz de Delete del módulo de proyecto.
         // GET: proyecto/Delete/5
         public ActionResult Delete(string id)
         {
@@ -132,6 +138,7 @@ namespace ProyectoPP.Controllers
             return View(proyecto);
         }
 
+        // Borra de la base de datos el proyecto que se seleccionó.
         // POST: proyecto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
