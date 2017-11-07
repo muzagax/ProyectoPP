@@ -9,35 +9,52 @@
 
 namespace ProyectoPP.Models
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class patopurificEntitiesGeneral : DbContext
+
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+
+public partial class patopurificEntitiesGeneral : DbContext
+{
+    public patopurificEntitiesGeneral()
+        : base("name=patopurificEntitiesGeneral")
     {
-        public patopurificEntitiesGeneral()
-            : base("name=patopurificEntitiesGeneral")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<criteriosDeAceptacion> criteriosDeAceptacion { get; set; }
-        public virtual DbSet<fechas> fechas { get; set; }
-        public virtual DbSet<historiasDeUsuario> historiasDeUsuario { get; set; }
-        public virtual DbSet<permisos> permisos { get; set; }
-        public virtual DbSet<progreso> progreso { get; set; }
-        public virtual DbSet<proyecto> proyecto { get; set; }
-        public virtual DbSet<sprint> sprint { get; set; }
-        public virtual DbSet<tarea> tarea { get; set; }
-        public virtual DbSet<persona> persona { get; set; }
-        public virtual DbSet<Documentacion> Documentacion { get; set; }
+
     }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+
+    public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+
+    public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+
+    public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+
+    public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+
+    public virtual DbSet<criteriosDeAceptacion> criteriosDeAceptacion { get; set; }
+
+    public virtual DbSet<fechas> fechas { get; set; }
+
+    public virtual DbSet<historiasDeUsuario> historiasDeUsuario { get; set; }
+
+    public virtual DbSet<permisos> permisos { get; set; }
+
+    public virtual DbSet<progreso> progreso { get; set; }
+
+    public virtual DbSet<proyecto> proyecto { get; set; }
+
+    public virtual DbSet<sprint> sprint { get; set; }
+
+    public virtual DbSet<tarea> tarea { get; set; }
+
+    public virtual DbSet<persona> persona { get; set; }
+
+}
+
 }
