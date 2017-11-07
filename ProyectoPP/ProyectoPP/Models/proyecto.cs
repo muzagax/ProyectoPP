@@ -12,6 +12,7 @@ namespace ProyectoPP.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using System.Xml.Linq;
 
     public partial class proyecto
@@ -46,6 +47,9 @@ namespace ProyectoPP.Models
 
         [Display(Name = "Estado del Proyecto")]
         public string estado { get; set; }
+        public string[] listaAgrear { get; set; }
+        public string[] listaQuitar { get; set; }
+
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -55,5 +59,6 @@ namespace ProyectoPP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<persona> persona { get; set; }
         public virtual persona persona1 { get; set; }
+        
     }
 }
