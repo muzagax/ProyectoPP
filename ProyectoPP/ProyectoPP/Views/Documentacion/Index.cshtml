@@ -12,17 +12,15 @@
     <title>Index</title>
 </head>
 <body>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Index", "Documentacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <input type="file" name="postedFile" />
         <input type="submit" id="btnUpload" value="Upload" />
     }
-    @using (Html.BeginForm("DownloadFile", "Home", FormMethod.Post))
+    @using (Html.BeginForm("DownloadFile", "Documentacion", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />
         <input type="submit" id="btnDownload" value="Download" style="display:none" />
-    }
-        <hr />
 
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -31,23 +29,23 @@
                 <th style="width:80px">Download</th>
             </tr>
             
-                @foreach (var file in Model)
-                {
-                    <tr>
-                        <td>file.id</td>
-                        <td>file.nombre</td>
-                        <td><a href="javascript:;" onclick="DownloadFile(@file.Id)">Download</a></td>
-                    </tr>
-                }
-            
+            @foreach (var file in Model)
+            {
+                <tr>
+                    <td>@file.Id</td>
+                    <td>@file.Nombre</td>
+                    <td> <input type="submit" value="Descargar" class="btn btn-default" /> </td>
+                    <td><a href="javascript:;" onclick="DownloadFile(@file.Id)">Download</a></td>
+                </tr>
+            }
         </table>
-    
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-        function DownloadFile(fileId) {
-            $("#hfFileId").val(fileId);
-            $("#btnDownload")[0].click();
-        };
-    </script>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            function DownloadFile(fileId) {
+                $("#hfFileId").val(fileId);
+                $("#btnDownload")[0].click();
+            };
+        </script>
+    }
 </body>
 </html>

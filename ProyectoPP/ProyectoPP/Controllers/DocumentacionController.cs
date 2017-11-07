@@ -24,19 +24,24 @@ namespace ProyectoPP.Controllers
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase postedFile)
         {
+            var docId = db.Documentacion.Count();
+
+            docId++;
+            
             byte[] bytes;
             using (BinaryReader br = new BinaryReader(postedFile.InputStream))
             {
                 bytes = br.ReadBytes(postedFile.ContentLength);
             }
-            string constr = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO tblFiles VALUES (@Name, @ContentType, @Data)";
+                string query = "INSERT INTO Documentacion VALUES (@id, @nombre, @ContentType, @Data)";
                 using (SqlCommand cmd = new SqlCommand(query))
                 {
                     cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("@Name", Path.GetFileName(postedFile.FileName));
+                    cmd.Parameters.AddWithValue("@id", docId);
+                    cmd.Parameters.AddWithValue("@nombre", Path.GetFileName(postedFile.FileName));
                     cmd.Parameters.AddWithValue("@ContentType", postedFile.ContentType);
                     cmd.Parameters.AddWithValue("@Data", bytes);
                     con.Open();
@@ -49,7 +54,7 @@ namespace ProyectoPP.Controllers
         }
 
         [HttpPost]
-        public FileResult DownloadFile(int? fileId)
+        public ActionResult DownloadFile(int? fileId)
         {
             byte[] bytes;
             string fileName, contentType;
