@@ -7,11 +7,31 @@
 
 <h2>Editar Detalles</h2>
 
+@section Scripts {
+    <!--Todo esto es para el date picker-->
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <script type="text/javascript">
+
+                             $(document).ready(function () {
+                                 $('input[type=datetime]').datepicker({
+                                     dateFormat: "yy-mm-dd",
+                                     changeMonth: true,
+                                     changeYear: true,
+                                     yearRange: "-60:+0"
+                                 });
+
+                             });
+    </script>
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>@Html.DisplayFor(model => model.nombre)</h4>
         <hr />
@@ -37,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,11 +73,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.lider, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("lider", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.lider, (SelectList)ViewBag.Listalider, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.lider, "", new { @class = "text-danger" })
             </div>
         </div>
     
+        <div class="form-group">
+            @Html.Label("Grupo de Trabajo:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBox("trabajo", (SelectList)ViewBag.ListaGrupo, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.lider, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
     </div>
 
     <div class="form-group">
@@ -67,7 +95,4 @@
         </div>
     </div>
 
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

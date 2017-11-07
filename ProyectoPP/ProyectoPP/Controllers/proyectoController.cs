@@ -74,7 +74,6 @@ namespace ProyectoPP.Controllers
             {
 
                 proyecto.id = proyecto.nombre + proyecto.lider;
-                proyecto.estado = "Pendiente";
 
                 var persona = db.persona.Find(proyecto.lider);
                 persona.IdProyecto = proyecto.id;
@@ -84,7 +83,7 @@ namespace ProyectoPP.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.lider = new SelectList(db.persona, "cedula", "nombre", proyecto.lider);
+            ViewBag.lider = new SelectList(db.persona.Where(x => x.IdProyecto == null), "cedula", "nombre");
             return View(proyecto);
         }
 
@@ -101,7 +100,8 @@ namespace ProyectoPP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.lider = new SelectList(db.persona.Where(x => x.IdProyecto == null || x.IdProyecto == id), "cedula", "nombre", proyecto.persona1.nombre);
+            ViewBag.Listalider = new SelectList(db.persona.Where(x => x.IdProyecto == id), "cedula", "nombre", proyecto.persona1);
+            ViewBag.ListaGrupo = new SelectList(db.persona.Where(x => x.IdProyecto == null), "cedula", "nombre");
             return View(proyecto);
         }
 

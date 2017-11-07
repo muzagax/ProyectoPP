@@ -34,9 +34,11 @@ namespace ProyectoPP.Models
         public string descripcion { get; set; }
 
         [Display(Name = "Fecha de Inicio")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime fechaInicio { get; set; }
 
         [Display(Name = "Fecha de Término")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaFinal { get; set; }
 
         [Display(Name = "Líder del equipo")]
