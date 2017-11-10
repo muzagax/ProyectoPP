@@ -21,7 +21,9 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
+                
             </div>
+           
         </div>
 
         <div class="form-group">
@@ -29,6 +31,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.carne, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.carne, "", new { @class = "text-danger" })
+               
             </div>
         </div>
 
@@ -37,6 +40,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -45,6 +49,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -53,6 +58,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.apellido2, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.apellido2, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -61,6 +67,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                
             </div>
         </div>
 
@@ -80,6 +87,7 @@
                     <input type="radio" name="rol" id="Asistente" value="asistente"><br>
                     <label for="Estudiante">Estudiante</label>
                     <input type="radio" name="rol" id="Estudiantes" value="estudiante" checked><br>
+                    
             </div>
         </div>
 
@@ -91,6 +99,7 @@
         </div>
 
         <h5>*La contraseña se genera automáticamente con base en el siguiente formato: "Ucr."+Cedula</h5>
+        
     </div>
 }
 

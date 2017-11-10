@@ -141,40 +141,61 @@ namespace ProyectoPP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(PersonaConRol persona)
         {
-            // se crea un aplication user para el aspnetuser
-            var user = new ApplicationUser { UserName = persona.cedula, Email = persona.email };
-            
-
-            //puesto que PersonaCrear posee más datos que los que necesita la base de datos se crea userentry
-            var userEntry = new persona(); 
-            userEntry.apellido1 = persona.apellido1;
-            userEntry.apellido2 = persona.apellido2;
-            userEntry.nombre = persona.nombre;
-            userEntry.cedula = persona.cedula;
-            userEntry.carne = persona.carne;
-            userEntry.email = persona.email;
-            
-
-            //genera el password generico
-            string pass = "Ucr."+ persona.cedula;
-            //metodo para crear el usuario con su contraseña de aspnetuser
-            var result = await UserManager.CreateAsync(user, pass);
-
             if (ModelState.IsValid)
             {
-                if (result.Succeeded)
+                // se crea un aplication user para el aspnetuser
+            var user = new ApplicationUser { UserName = persona.cedula, Email = persona.email };
+            try
                 {
-                    string ID = user.Id.ToString();
-                    userEntry.id = ID;
-                    db.persona.Add(userEntry);
-                    db.SaveChanges();
+                    //puesto que PersonaCrear posee más datos que los que necesita la base de datos se crea userentry
+                    var userEntry = new persona();
+                    userEntry.apellido1 = persona.apellido1;
+                    userEntry.apellido2 = persona.apellido2;
+                    userEntry.nombre = persona.nombre;
+                    userEntry.cedula = persona.cedula;
+                    userEntry.carne = persona.carne + "";
+                    userEntry.email = persona.email;
 
-                    var resultado = await this.UserManager.AddToRoleAsync(ID, persona.rol);
-                                       
-                    return RedirectToAction("Index");
+
+                    //genera el password generico
+                    string pass = "Ucr." + persona.cedula;
+                    //metodo para crear el usuario con su contraseña de aspnetuser
+                    var result = await UserManager.CreateAsync(user, pass);
+
+
+                    if (result.Succeeded)
+                    {
+                        string ID = user.Id.ToString();
+                        userEntry.id = ID;
+                        db.persona.Add(userEntry);
+                        db.SaveChanges();
+
+                        var resultado = await this.UserManager.AddToRoleAsync(ID, persona.rol);
+
+                        return RedirectToAction("Index");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+
+                    await UserManager.DeleteAsync(user);
+
+                    // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+
+                    TempData["msg"] = "<script>alert('Ha ocurrido un error al crear al usuario');</script>";
+                    return View(persona);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    TempData["msg"] = "<script>alert('Ha ocurrido un error al crear al usuario');</script>";
+
+                    return View(persona);
                 }
             }
-
+            
             return View(persona);
         }
 
@@ -226,7 +247,7 @@ namespace ProyectoPP.Controllers
                 persona.apellido1 = pcr.apellido1;
                 persona.apellido2 = pcr.apellido2;
                 persona.cedula = pcr.cedula;
-                persona.carne = pcr.carne;
+                persona.carne = pcr.carne+"";
                 persona.email = pcr.email;
 
                 var user = UserManager.FindByName(persona.cedula);
