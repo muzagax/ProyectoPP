@@ -52,6 +52,8 @@ namespace ProyectoPP.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Grupo = new SelectList(db.persona.Where(x => x.IdProyecto == id && x.cedula != proyecto.lider), "cedula", "nombre");
             return View(proyecto);
         }
 
@@ -74,7 +76,6 @@ namespace ProyectoPP.Controllers
             {
 
                 proyecto.id = proyecto.nombre + proyecto.lider;
-                proyecto.estado = "Pendiente";
 
                 var persona = db.persona.Find(proyecto.lider);
                 persona.IdProyecto = proyecto.id;
@@ -84,7 +85,7 @@ namespace ProyectoPP.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.lider = new SelectList(db.persona, "cedula", "nombre", proyecto.lider);
+            ViewBag.lider = new SelectList(db.persona.Where(x => x.IdProyecto == null), "cedula", "nombre");
             return View(proyecto);
         }
 
@@ -101,7 +102,9 @@ namespace ProyectoPP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.lider = new SelectList(db.persona.Where(x => x.IdProyecto == null || x.IdProyecto == id), "cedula", "nombre", proyecto.persona1.nombre);
+            ViewBag.Listalider = new SelectList(db.persona.Where(x => x.IdProyecto == id), "cedula", "nombre", proyecto.persona1);
+            ViewBag.ListaAgregar = new SelectList(db.persona.Where(x => x.IdProyecto == null), "cedula", "nombre");
+            ViewBag.ListaQuitar = new SelectList(db.persona.Where(x => x.IdProyecto == id && x.cedula != proyecto.lider), "cedula", "nombre");
             return View(proyecto);
         }
 
@@ -110,10 +113,31 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nombre,descripcion,fechaInicio,fechaFinal,lider")] proyecto proyecto)
+        public ActionResult Edit(proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
+                if (proyecto.listaAgrear != null) // Reviso si la lista es null para evitar errores
+                {
+                    for (int a = 0; a < proyecto.listaAgrear.Length; a++) // para cada elemento de la lista
+                    {
+                        // le asigno el proyecto a la persona
+                        persona persona = db.persona.Find(proyecto.listaAgrear[a]);
+                        persona.IdProyecto = proyecto.id;
+                    }
+                }
+
+                if (proyecto.listaQuitar != null) // reviso si la lista es null para evitar errores
+                {
+
+                    for (int a = 0; a < proyecto.listaQuitar.Length; a++) // para cada elemento de la lista
+                    {
+                        // le quito el proyecto a la persona
+                        persona persona = db.persona.Find(proyecto.listaQuitar[a]);
+                        persona.IdProyecto = null;
+                    }
+                }
+
                 db.Entry(proyecto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
