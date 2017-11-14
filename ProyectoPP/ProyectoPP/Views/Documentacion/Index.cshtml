@@ -17,6 +17,7 @@
         <input type="file" name="postedFile" />
         <input type="submit" id="btnUpload" value="Upload" />
     }
+    <hr />
     @using (Html.BeginForm("DownloadFile", "Documentacion", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />
@@ -35,10 +36,12 @@
                     <td>@file.Id</td>
                     <td>@file.Nombre</td>
                     <td> <input type="submit" value="Descargar" class="btn btn-default" /> </td>
+                    <td> <input type="button" value="Descargar2" onclick="location.href='@Url.Action("DownloadFile", "Documentacion", (@file.Id))'" /> </td>
                     <td><a href="javascript:;" onclick="DownloadFile(@file.Id)">Download</a></td>
                 </tr>
             }
         </table>
+
         <script src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script type="text/javascript">
             function DownloadFile(fileId) {
