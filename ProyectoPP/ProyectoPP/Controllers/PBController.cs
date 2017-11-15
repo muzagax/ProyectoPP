@@ -74,23 +74,23 @@ namespace ProyectoPP.Controllers
         {
             ModeloProductBacklog modelo = new ModeloProductBacklog();
 
-            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre");
-
-            if (revisarPermisos("Ver proyecto").Result)
+            if (revisarPermisos("Ver proyecto").Result) // Si el usuario no es estudiante
             {
-                modelo.ListaPB = bd.historiasDeUsuario.ToList();
-                modelo.ProyectoID = "0";
+                              
+                // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
+                ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre");
             }
             
             else
             {
-                string tmp = System.Web.HttpContext.Current.User.Identity.Name;
-                var idpersona = bd.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().IdProyecto;
-                modelo.ListaPB = bd.historiasDeUsuario.Where(m => m.proyectoId == idpersona).ToList();
+                var idproyecto = bd.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().IdProyecto;
+                modelo.ListaPB = bd.historiasDeUsuario.Where(m => m.proyectoId == idproyecto).ToList();
+
+                // Seleccion para el dropdown de proyectos. Carga solo el proyecto donde participa el estudiante
+                ViewBag.Proyecto = new SelectList(bd.proyecto.Where(x => x.id == idproyecto), "id", "nombre");
+
             }
-            //return View(bd.proyecto.Where(m => m.id == ("select id_proyecto from personas where cedula" == System.Web.HttpContext.Current.User.Identity.Name)).ToList());
-            //var selectCedula = new SelectList(bd.persona.Where(x => x.id == System.Web.HttpContext.Current.User.Identity.Name));
-            //ViewBag.ListaPB = new SelectList(bd.proyecto.Where(x => x.id ==  selectCedula.ElementAt(0).ToString() ));
+
             return View(modelo);
         }
         public ActionResult DetallePB(string id)
@@ -107,13 +107,13 @@ namespace ProyectoPP.Controllers
             return View(hu);
         }
         
-        public ActionResult Actualizar(string id)
+        public ActionResult Actualizar(string proyectoID)
         {
             ModeloProductBacklog modelo = new ModeloProductBacklog();
 
-            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre", id);
+            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre", proyectoID);
 
-            modelo.ListaPB = (from H in bd.historiasDeUsuario where H.proyectoId == id select H).ToList();
+            modelo.ListaPB = (from H in bd.historiasDeUsuario where H.proyectoId == proyectoID select H).ToList();
 
             return View("ProductBacklogIndex", modelo);
         }

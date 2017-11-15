@@ -11,10 +11,7 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
-    using System.Xml.Linq;
-
+    
     public partial class proyecto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,33 +21,16 @@ namespace ProyectoPP.Models
             this.sprint = new HashSet<sprint>();
             this.persona = new HashSet<persona>();
         }
-
-        [Display(Name = "Identificador del Proyecto")]
+    
         public string id { get; set; }
-
-        [Display(Name = "Nombre del Proyecto")]
         public string nombre { get; set; }
-
-        [Display(Name = "Descripción del Proyecto")]
         public string descripcion { get; set; }
-
-        [Display(Name = "Fecha de Inicio")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime fechaInicio { get; set; }
-
-        [Display(Name = "Fecha de Término")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaFinal { get; set; }
-
-        [Display(Name = "Líder del equipo")]
         public string lider { get; set; }
-
-        [Display(Name = "Estado del Proyecto")]
         public string estado { get; set; }
-        public string[] listaAgrear { get; set; }
+        public string[] listaAgregar { get; set; }
         public string[] listaQuitar { get; set; }
-
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historiasDeUsuario> historiasDeUsuario { get; set; }
@@ -59,6 +39,6 @@ namespace ProyectoPP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<persona> persona { get; set; }
         public virtual persona persona1 { get; set; }
-        
+
     }
 }
