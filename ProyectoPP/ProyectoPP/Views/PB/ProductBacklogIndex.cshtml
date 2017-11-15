@@ -12,21 +12,30 @@
 
     <Br>
 
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function Actualizar(proyectoID) {
+            $("#Proyecto").val(proyectoID);
+            $("#Actualizar")[0].click();
+        };
+    </script>
+
     <div class="form-group">
         @Html.LabelFor(model => model.ProyectoID, htmlAttributes: new { @class = "control-label col-md-3" })
-        
+
         <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
-        <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios")'">Insertar H.U.</button>     
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios")'">Insertar H.U.</button>
         <button class="btn btn-default" onclick="location.href='@Url.Action("Actualizar", "PB")'">Actualizar</button>
 
         <div class="col-md-2">
-            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto, htmlAttributes: new { @class = "form-control col-md-2" })
+            @Html.DropDownList("Proyecto", (SelectList)ViewBag.Proyecto, htmlAttributes: new { @class = "form-control col-md-2" })
             @Html.ValidationMessageFor(model => model.ProyectoID, "", new { @class = "text-danger" })
-        <div class="col-md-offset-10 col-md-10">
-            
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios", new {nombreProyecto="EXTREMO!!" } )' ">Insertar H.U.</button>
+            <div class="col-md-offset-10 col-md-10">
+
+                <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios", new {nombreProyecto="EXTREMO!!" } )' ">Insertar H.U.</button>
+            </div>
         </div>
-     </div>
+    </div>
 
     <br /><br /><br>
 

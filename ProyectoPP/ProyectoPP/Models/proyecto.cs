@@ -29,7 +29,9 @@ namespace ProyectoPP.Models
         public Nullable<System.DateTime> fechaFinal { get; set; }
         public string lider { get; set; }
         public string estado { get; set; }
-    
+        public string[] listaAgregar { get; set; }
+        public string[] listaQuitar { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historiasDeUsuario> historiasDeUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -37,5 +39,6 @@ namespace ProyectoPP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<persona> persona { get; set; }
         public virtual persona persona1 { get; set; }
+
     }
 }

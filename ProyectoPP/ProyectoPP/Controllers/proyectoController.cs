@@ -117,12 +117,12 @@ namespace ProyectoPP.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (proyecto.listaAgrear != null) // Reviso si la lista es null para evitar errores
+                if (proyecto.listaAgregar != null) // Reviso si la lista es null para evitar errores
                 {
-                    for (int a = 0; a < proyecto.listaAgrear.Length; a++) // para cada elemento de la lista
+                    for (int a = 0; a < proyecto.listaAgregar.Length; a++) // para cada elemento de la lista
                     {
                         // le asigno el proyecto a la persona
-                        persona persona = db.persona.Find(proyecto.listaAgrear[a]);
+                        persona persona = db.persona.Find(proyecto.listaAgregar[a]);
                         persona.IdProyecto = proyecto.id;
                     }
                 }

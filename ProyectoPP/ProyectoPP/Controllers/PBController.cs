@@ -107,13 +107,13 @@ namespace ProyectoPP.Controllers
             return View(hu);
         }
         
-        public ActionResult Actualizar(ModeloProductBacklog modelo)
+        public ActionResult Actualizar(string proyectoID)
         {
-            //ModeloProductBacklog modelo = new ModeloProductBacklog();
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
 
-            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre" /*id*/);
+            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre", proyectoID);
 
-            //modelo.ListaPB = (from H in bd.historiasDeUsuario where H.proyectoId == id select H).ToList();
+            modelo.ListaPB = (from H in bd.historiasDeUsuario where H.proyectoId == proyectoID select H).ToList();
 
             return View("ProductBacklogIndex", modelo);
         }
