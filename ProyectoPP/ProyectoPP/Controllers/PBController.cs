@@ -76,19 +76,21 @@ namespace ProyectoPP.Controllers
 
             ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre");
 
-            //if (revisarPermisos("Ver proyecto").Result)
+            if (revisarPermisos("Ver proyecto").Result)
             {
                 modelo.ListaPB = bd.historiasDeUsuario.ToList();
                 modelo.ProyectoID = "0";
             }
-            /*
+            
             else
             {
-                var idproy = bd.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().id;
-                modelo.ListaPB = bd.historiasDeUsuario.Where(m => m.id == idproy).ToList();
+                string tmp = System.Web.HttpContext.Current.User.Identity.Name;
+                var idpersona = bd.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().IdProyecto;
+                modelo.ListaPB = bd.historiasDeUsuario.Where(m => m.proyectoId == idpersona).ToList();
             }
-            //return View(db.proyecto.Where(m => m.id == (select id_proyecto from personas where cedula == System.Web.HttpContext.Current.User.Identity.Name)).ToList());
-            */
+            //return View(bd.proyecto.Where(m => m.id == ("select id_proyecto from personas where cedula" == System.Web.HttpContext.Current.User.Identity.Name)).ToList());
+            //var selectCedula = new SelectList(bd.persona.Where(x => x.id == System.Web.HttpContext.Current.User.Identity.Name));
+            //ViewBag.ListaPB = new SelectList(bd.proyecto.Where(x => x.id ==  selectCedula.ElementAt(0).ToString() ));
             return View(modelo);
         }
         public ActionResult DetallePB(string id)
