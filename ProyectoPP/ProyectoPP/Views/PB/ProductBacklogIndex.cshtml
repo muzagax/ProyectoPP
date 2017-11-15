@@ -16,7 +16,7 @@
     <div class="form-group">
         <div class="col-md-offset-10 col-md-10">
             
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios",new { id = (model ) })' ">Insertar H.U.</button>
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios", new {nombreProyecto="EXTREMO!!" } )' ">Insertar H.U.</button>
         </div>
     </div>
     <br /><br />
@@ -58,7 +58,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Detalles", "DetallePB", new { id = item.id})
+                    @Html.ActionLink("Detalles", "DetallePB","historiasDeUsuarios", new { id = item.id}, null)
                 </td>
             </tr>
         }

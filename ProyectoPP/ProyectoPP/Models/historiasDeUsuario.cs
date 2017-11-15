@@ -12,10 +12,11 @@
 namespace ProyectoPP.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class historiasDeUsuario
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class historiasDeUsuario
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,17 +30,29 @@ public partial class historiasDeUsuario
     }
 
 
-    public string id { get; set; }
+        [Display(Name = "Id")]
+        public string id { get; set; }
 
-    public string rol { get; set; }
 
-    public string funcionalidad { get; set; }
+        [Display(Name = "Rol")]
+        public string rol { get; set; }
 
-    public string resultado { get; set; }
 
-    public int prioridad { get; set; }
+        [Display(Name = "Funcionalidad")]
+        public string funcionalidad { get; set; }
 
-    public int estimacion { get; set; }
+
+        [Display(Name = "Resultado")]
+        public string resultado { get; set; }
+
+
+        [Display(Name = "Prioridad")]
+        public int prioridad { get; set; }
+
+
+        [Display(Name = "Estimación")]
+        public int estimacion { get; set; }
+
 
     public string proyectoId { get; set; }
 
