@@ -17,7 +17,7 @@
 
         <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
         <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios", new {nombreProyecto="EXTREMO!!" } )' ">Insertar H.U.</button>
-        <button class="btn btn-default" onclick="location.href='@Url.Action("Actualizar", "PB")'">Actualizar</button>
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Actualizar", "historiasDeUsuarios")'">Actualizar</button>
 
         <div class="col-md-2">
             @Html.DropDownList("Proyecto", (SelectList)ViewBag.Proyecto, htmlAttributes: new { @class = "form-control col-md-2" })
@@ -74,7 +74,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Detalles", "DetallePB", "historiasDeUsuarios", new { id = item.id }, null)
+                    @Html.ActionLink("Detalles", "Details", "historiasDeUsuarios", new { id = item.id }, null)
                 </td>
             </tr>
         }
