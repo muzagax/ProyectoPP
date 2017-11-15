@@ -74,10 +74,12 @@ namespace ProyectoPP.Controllers
         {
             ModeloProductBacklog modelo = new ModeloProductBacklog();
 
+            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre");
 
             if (revisarPermisos("Ver proyecto").Result)
             {
                 modelo.ListaPB = bd.historiasDeUsuario.ToList();
+                modelo.ProyectoID = "0";
             }
             
             else
@@ -101,6 +103,17 @@ namespace ProyectoPP.Controllers
             }
             return View(hu);
         }
+        
+        public ActionResult Actualizar(string id)
+        {
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
 
+            ViewBag.Proyecto = new SelectList(bd.proyecto, "id", "nombre", id);
+
+            modelo.ListaPB = (from H in bd.historiasDeUsuario where H.proyectoId == id select H).ToList();
+
+            return View("ProductBacklogIndex", modelo);
+        }
+        
     }
 }
