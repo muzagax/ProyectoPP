@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="15a4e25e67af49aabf2ee8899eccf46e" Name="Diagram1" ZoomLevel="142">
+      <Diagram DiagramId="15a4e25e67af49aabf2ee8899eccf46e" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="patopurificModelGeneral.AspNetRoles" Width="1.5" PointX="11.875" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.criteriosDeAceptacion" Width="1.5" PointX="17" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="patopurificModelGeneral.fechas" Width="1.5" PointX="20.75" PointY="8.25" IsExpanded="true" />
