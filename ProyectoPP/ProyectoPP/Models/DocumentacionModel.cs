@@ -19,5 +19,8 @@ namespace ProyectoPP.Models
 
         [Display(Name = "Data")]
         public byte[] Data { get; set; }
+
+        [Display(Name = "HUId")]
+        public String HUid { get; set; }
     }
 }
