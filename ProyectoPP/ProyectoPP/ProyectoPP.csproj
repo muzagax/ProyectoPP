@@ -315,6 +315,7 @@
     <Compile Include="Models\proyecto.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProyectoConlistas.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\sprint.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>

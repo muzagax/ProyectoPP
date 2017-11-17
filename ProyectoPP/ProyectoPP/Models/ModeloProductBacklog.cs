@@ -17,7 +17,5 @@ namespace ProyectoPP.Models
         [Display(Name = "Nombre del Proyecto")]
         public string ProyectoID { get; set; }
 
-        public string IdSeleccionado { get; set; }
-        public string IdSeleccionadoTexto { get; set; }
     }
 }

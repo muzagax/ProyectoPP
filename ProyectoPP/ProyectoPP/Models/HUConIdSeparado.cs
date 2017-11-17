@@ -35,7 +35,10 @@ namespace ProyectoPP.Models
         [Display(Name = "Nombre del Proyecto")]
         public string proyectoId { get; set; }
 
-        
+        [Display(Name = "Número de escenario")]
+        public int NumeroEscenario { get; set; }
+
+
 
     }
 }
