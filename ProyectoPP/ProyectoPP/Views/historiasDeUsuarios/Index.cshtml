@@ -24,11 +24,20 @@
 {
     @Html.AntiForgeryToken()
 
-        <div class="col-md-3">
-            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto, "Seleccione un proyecto", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()"})
+       @if (true)
+
+       {
+           string resp = Html.Action("EsEstudiante", "Roles").ToString();
+           if (resp != "1")
+           {
+          <div class="col-md-3">
+            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto, "Seleccione un proyecto", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()" })
             @Html.ValidationMessageFor(model => model.ProyectoID, "", new { @class = "text-danger" })
 
-        </div>
+          </div>
+           }
+       }
+
 }
     <br /><br /><br>
 

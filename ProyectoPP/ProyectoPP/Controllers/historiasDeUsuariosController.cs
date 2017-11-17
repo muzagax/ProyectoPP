@@ -92,9 +92,9 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: historiasDeUsuarios/Create
-        public ActionResult Create(string nombreProyecto)
+        public ActionResult Create(ModeloProductBacklog nombreProyecto)
         {
-            ViewBag.proyectoId = nombreProyecto;
+            ViewBag.proyectoId = nombreProyecto.ProyectoID;
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
         }

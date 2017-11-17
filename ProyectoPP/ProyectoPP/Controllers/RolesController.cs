@@ -57,6 +57,16 @@ namespace ProyectoPP.Controllers
             return userRol;
         }
 
+        private string EsEstudiante()
+        {
+
+            string userName = System.Web.HttpContext.Current.User.Identity.Name;
+            var user = UserManager.FindByName(userName);
+            var rol = user.Roles.SingleOrDefault().RoleId;
+                     
+            return rol;
+        }
+
         //envía un valor diferente dependiendo de si el usuario tiene permiso o no.
         public string RevisarPermisosB(string permiso)
         {
