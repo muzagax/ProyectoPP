@@ -13,10 +13,9 @@
           <Property Name="apellido1" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="apellido2" Type="varchar" MaxLength="20" />
           <Property Name="cedula" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="carne" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="40" />
           <Property Name="id" Type="nvarchar" MaxLength="128" />
-          <Property Name="IdProyecto" Type="varchar" MaxLength="25" />
-          <Property Name="carne" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="patopurificModelStoreContainer">
           <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
@@ -36,10 +35,9 @@
           <Property Name="apellido1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="cedula" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="carne" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="carne" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IdProyecto" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -50,7 +48,6 @@
           <EntitySetMapping Name="persona">
             <EntityTypeMapping TypeName="patopurificModel.persona">
               <MappingFragment StoreEntitySet="persona">
-                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="carne" ColumnName="carne" />
