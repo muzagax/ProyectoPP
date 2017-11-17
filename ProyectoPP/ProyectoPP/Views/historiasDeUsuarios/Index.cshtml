@@ -12,22 +12,23 @@
 
     <Br>
 
-@using (Html.BeginForm("Actualizar", "historiasDeUsuarios", FormMethod.Post, new { id = "proyectoForm" }))
-{
-    @Html.AntiForgeryToken()
-
     <div class="form-group">
         @Html.LabelFor(model => model.ProyectoID, htmlAttributes: new { @class = "control-label col-md-3" })
 
         <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
         <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios")' ">Insertar H.U.</button>
-        
-        <div class="col-md-2">
-            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto, "Seleccione un proyecto...", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()" , @placeholder = "Selecct"})
+
+    </div>
+
+@using (Html.BeginForm("Actualizar", "historiasDeUsuarios", FormMethod.Post, new { id = "proyectoForm" }))
+{
+    @Html.AntiForgeryToken()
+
+        <div class="col-md-3">
+            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto, "Seleccione un proyecto", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()"})
             @Html.ValidationMessageFor(model => model.ProyectoID, "", new { @class = "text-danger" })
 
         </div>
-    </div>
 }
     <br /><br /><br>
 

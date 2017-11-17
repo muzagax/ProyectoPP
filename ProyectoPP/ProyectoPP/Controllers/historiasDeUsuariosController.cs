@@ -61,7 +61,7 @@ namespace ProyectoPP.Controllers
             {
 
                 // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
-                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre");
+                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre","Seleccione un Proyecto");
             }
 
             else
@@ -190,9 +190,14 @@ namespace ProyectoPP.Controllers
         [HttpPost]
         public ActionResult Actualizar(ModeloProductBacklog modelo)
         {
-            //ModeloProductBacklog modelo = new ModeloProductBacklog();
-
-            ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", modelo.ProyectoID);
+            if (revisarPermisos("Ver proyecto").Result) // Si el usuario no es estudiante
+            {
+                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", modelo.ProyectoID);
+            }
+            else
+            {
+                ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == modelo.ProyectoID), "id", "nombre");
+            }
 
             modelo.ListaPB = (from H in db.historiasDeUsuario where H.proyectoId == modelo.ProyectoID select H).ToList();
 
