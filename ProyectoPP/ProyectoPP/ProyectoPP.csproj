@@ -306,7 +306,7 @@
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\persona.cs">
-      <DependentUpon>ModelUsuario.tt</DependentUpon>
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonaConRol.cs" />
     <Compile Include="Models\progreso.cs">
