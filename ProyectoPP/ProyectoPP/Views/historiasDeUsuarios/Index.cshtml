@@ -14,9 +14,21 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.ProyectoID, htmlAttributes: new { @class = "control-label col-md-3" })
+        @if (true)
+        {
+            string resp = Html.Action("EsEstudiante", "Roles").ToString();
+            if (resp == "1")
+            {
+             <h4>@ViewBag.NombreProyecto</h4>
+            }
+           
+            <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios")' ">Insertar H.U.</button>
+            
 
-        <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
-        <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios")' ">Insertar H.U.</button>
+        }
+
+
 
     </div>
 
@@ -24,9 +36,7 @@
 {
     @Html.AntiForgeryToken()
 
-       @if (true)
-
-       {
+       
            string resp = Html.Action("EsEstudiante", "Roles").ToString();
            if (resp != "1")
            {
@@ -36,7 +46,7 @@
 
           </div>
            }
-       }
+       
 
 }
     <br /><br /><br>

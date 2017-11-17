@@ -57,7 +57,7 @@ namespace ProyectoPP.Controllers
             return userRol;
         }
 
-        private string EsEstudiante()
+        public string EsEstudiante()
         {
 
             string userName = System.Web.HttpContext.Current.User.Identity.Name;

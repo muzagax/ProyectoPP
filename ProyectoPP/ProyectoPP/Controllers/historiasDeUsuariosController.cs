@@ -71,7 +71,8 @@ namespace ProyectoPP.Controllers
 
                 // Seleccion para el dropdown de proyectos. Carga solo el proyecto donde participa el estudiante
                 ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == idproyecto), "id", "nombre");
-
+                ViewBag.NombreProyecto = db.proyecto.Where(m => m.id == idproyecto).First().nombre;
+                
             }
             return View(modelo);
         }
