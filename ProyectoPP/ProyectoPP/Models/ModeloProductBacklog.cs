@@ -14,7 +14,7 @@ namespace ProyectoPP.Models
         }
         public List<historiasDeUsuario> ListaPB{ get; set; }
 
-        [Display(Name = "Identificador del Proyecto")]
+        [Display(Name = "Nombre del Proyecto")]
         public string ProyectoID { get; set; }
 
         public string IdSeleccionado { get; set; }
