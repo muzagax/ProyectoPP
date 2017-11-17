@@ -27,6 +27,7 @@
         <AssociationConnector Association="patopurificModelGeneral.FK__proyecto__lider__41EDCAC5" />
         <AssociationConnector Association="patopurificModelGeneral.responsablesTarea" />
         <EntityTypeShape EntityType="patopurificModelGeneral.Documentacion" Width="1.5" PointX="14.375" PointY="17.25" />
+        <AssociationConnector Association="patopurificModelGeneral.FK__Documentac__HUid__7A3223E8" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
