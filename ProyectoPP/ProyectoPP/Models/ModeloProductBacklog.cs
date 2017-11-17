@@ -16,5 +16,8 @@ namespace ProyectoPP.Models
 
         [Display(Name = "Identificador del Proyecto")]
         public string ProyectoID { get; set; }
+
+        public string IdSeleccionado { get; set; }
+        public string IdSeleccionadoTexto { get; set; }
     }
 }
