@@ -103,22 +103,45 @@ namespace ProyectoPP.Controllers
             return View();
         }
 
+
         // POST: historiasDeUsuarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,rol,funcionalidad,resultado,prioridad,estimacion,numeroEscenario,proyectoId,sprintId")] historiasDeUsuario historiasDeUsuario)
+        public ActionResult Create(HUConIdSeparado historiasDeUsuario)
         {
             if (ModelState.IsValid)
             {
-                db.historiasDeUsuario.Add(historiasDeUsuario);
+                historiasDeUsuario nuevaHU = new Models.historiasDeUsuario();
+                if (historiasDeUsuario.numSprint == null )
+                {
+                    historiasDeUsuario.numSprint = "0";
+                }
+
+
+                /*string query = "SELECT id"
+                             + "FROM historiasDeUsuario "
+                             + "WHERE Discriminator = 'Student' "
+                             + "GROUP BY EnrollmentDate";
+                IEnumerable<EnrollmentDateGroup> data = db.Database.SqlQuery<EnrollmentDateGroup>(query);*/
+                
+
+                nuevaHU.id = "" + historiasDeUsuario.tipoDeRequerimiento+"-" + historiasDeUsuario.numSprint + "-" + historiasDeUsuario.modulo + "-"+ 1;
+                nuevaHU.rol = historiasDeUsuario.rol;
+                nuevaHU.funcionalidad = historiasDeUsuario.funcionalidad;
+                nuevaHU.resultado = historiasDeUsuario.resultado;
+                nuevaHU.prioridad = historiasDeUsuario.prioridad;
+                nuevaHU.estimacion = historiasDeUsuario.estimacion;
+                nuevaHU.NumeroEscenario = historiasDeUsuario.NumeroEscenario;
+
+                db.historiasDeUsuario.Add(nuevaHU);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", historiasDeUsuario.proyectoId);
-            ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId", historiasDeUsuario.sprintId);
+            //ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId", nuevaHU.sprintId);
             return View(historiasDeUsuario);
         }
 
