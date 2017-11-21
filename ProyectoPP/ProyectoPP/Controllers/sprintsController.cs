@@ -82,6 +82,7 @@ namespace ProyectoPP.Controllers
 
             ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre");
             ViewBag.Sprint = new SelectList(db.sprint, "id", "nombre");
+            ViewBag.HU = db.historiasDeUsuario.ToList();
 
             return View(sprint1);
         }
