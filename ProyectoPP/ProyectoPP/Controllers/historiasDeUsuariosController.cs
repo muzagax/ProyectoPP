@@ -303,7 +303,7 @@ namespace ProyectoPP.Controllers
         {
 
             //Le pasamos como parametro a la vista el nombre del proyecto
-            //ViewBag.proyectoId = ProyectoId;
+            ViewBag.proyectoId = ProyectoId;
             ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == ProyectoId).First().nombre.ToString();  
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
@@ -340,6 +340,7 @@ namespace ProyectoPP.Controllers
                 nuevaHU.prioridad = historiasDeUsuario.prioridad;
                 nuevaHU.estimacion = historiasDeUsuario.estimacion;
                 nuevaHU.NumeroEscenario = historiasDeUsuario.NumeroEscenario;
+                nuevaHU.proyectoId = historiasDeUsuario.proyectoId;
 
                 db.historiasDeUsuario.Add(nuevaHU);
                 db.SaveChanges();

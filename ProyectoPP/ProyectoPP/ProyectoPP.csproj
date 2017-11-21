@@ -321,6 +321,7 @@
     <Compile Include="Models\sprint.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sprint2.cs" />
     <Compile Include="Models\tarea.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
