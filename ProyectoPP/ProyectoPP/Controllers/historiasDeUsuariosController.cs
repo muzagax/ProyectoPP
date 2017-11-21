@@ -10,6 +10,7 @@ using ProyectoPP.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity.Validation;
 
 namespace ProyectoPP.Controllers
 {
@@ -113,6 +114,9 @@ namespace ProyectoPP.Controllers
         //GET: historiasDeUsuario/CrearCiterio
         public ActionResult CrearCriterio(string hu)
         {
+
+
+
             criteriosDeAceptacion modelo = new criteriosDeAceptacion();
             modelo.idHU = hu;
             return View(modelo);
@@ -124,26 +128,38 @@ namespace ProyectoPP.Controllers
         {
             //return RedirectToAction("Index");
             //return RedirectToAction(actionName: "Details",routeValues: new { id= criterio.idHU });
-
-
-            if (criterio.idHU == null)
+            criterio.numCriterio = db.criteriosDeAceptacion.Max(m => m.numCriterio)+1;
+            db.criteriosDeAceptacion.Add(criterio);
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.SaveChanges();
+
+                if (criterio.idHU == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+                modelo.Hu = db.historiasDeUsuario.Find(criterio.idHU);
+
+                if (modelo.Hu == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == criterio.idHU).ToList();
+                }
+
+                return View(viewName: "Details", model: modelo);
+
             }
-            ModeloProductBacklog modelo = new ModeloProductBacklog();
-
-            modelo.Hu = db.historiasDeUsuario.Find(criterio.idHU);
-
-            if (modelo.Hu == null)
+            catch (DbEntityValidationException ex)
             {
-                return HttpNotFound();
-            }
-            else
-            {
-                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == criterio.idHU).ToList();
+
             }
 
-            return View(viewName: "Details",model: modelo);
+            return View();
         }
 
 
