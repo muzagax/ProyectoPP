@@ -22,5 +22,6 @@ namespace ProyectoPP.Models
         [Display(Name = "Nombre del Proyecto")]
         public string ProyectoID { get; set; }
 
+        public DocumentacionModel Documento12 { get; set; }
     }
 }
