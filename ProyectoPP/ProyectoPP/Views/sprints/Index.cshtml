@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<ProyectoPP.Models.sprint>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SprintPlanning";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Sprint Planning</h2>
+<h2>SprintPlanning</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -24,23 +24,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaFinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.proyecto.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.proyecto.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

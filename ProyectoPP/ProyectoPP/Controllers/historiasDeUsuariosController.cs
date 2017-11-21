@@ -243,9 +243,12 @@ namespace ProyectoPP.Controllers
 
 
             // GET: historiasDeUsuarios/Create
-        public ActionResult Create(ModeloProductBacklog nombreProyecto)
+        public ActionResult Create(string ProyectoId)
         {
-            ViewBag.proyectoId = nombreProyecto.ProyectoID;
+
+            //Le pasamos como parametro a la vista el nombre del proyecto
+            //ViewBag.proyectoId = ProyectoId;
+            ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == ProyectoId).First().nombre.ToString();  
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
         }
@@ -260,6 +263,7 @@ namespace ProyectoPP.Controllers
             if (ModelState.IsValid)
             {
                 historiasDeUsuario nuevaHU = new Models.historiasDeUsuario();
+                // se deja como 0 en un caso default
                 if (historiasDeUsuario.numSprint == null )
                 {
                     historiasDeUsuario.numSprint = "0";
@@ -272,8 +276,8 @@ namespace ProyectoPP.Controllers
                              + "GROUP BY EnrollmentDate";
                 IEnumerable<EnrollmentDateGroup> data = db.Database.SqlQuery<EnrollmentDateGroup>(query);*/
                 
-
-                nuevaHU.id = "" + historiasDeUsuario.tipoDeRequerimiento+"-" + historiasDeUsuario.numSprint + "-" + historiasDeUsuario.modulo + "-"+ 1;
+                
+                nuevaHU.id = "" + historiasDeUsuario.tipoDeRequerimiento+"-" + historiasDeUsuario.numSprint + "-" + historiasDeUsuario.modulo + "-"+ historiasDeUsuario.numHU;
                 nuevaHU.rol = historiasDeUsuario.rol;
                 nuevaHU.funcionalidad = historiasDeUsuario.funcionalidad;
                 nuevaHU.resultado = historiasDeUsuario.resultado;

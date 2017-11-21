@@ -10,124 +10,112 @@ using ProyectoPP.Models;
 
 namespace ProyectoPP.Controllers
 {
-    public class sprintsController : Controller
+    public class tareasController : Controller
     {
         private patopurificEntitiesGeneral db = new patopurificEntitiesGeneral();
 
-        // GET: sprints
+        // GET: tareas
         public ActionResult Index()
         {
-            
-            var sprint = db.sprint.Include(s => s.proyecto);
-            return View(sprint.ToList());
-            
+            var tarea = db.tarea.Include(t => t.historiasDeUsuario);
+            return View(tarea.ToList());
         }
 
-        public ActionResult SprintPlanning()
-        {
-            sprint sprint1 = new sprint();
-
-            ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre");
-            ViewBag.Sprint = new SelectList(db.sprint, "id", "nombre");
-
-            return View(sprint1);
-        }
-
-        // GET: sprints/Details/5
+        // GET: tareas/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
-            if (sprint == null)
+            tarea tarea = db.tarea.Find(id);
+            if (tarea == null)
             {
                 return HttpNotFound();
             }
-            return View(sprint);
+            return View(tarea);
         }
 
-        // GET: sprints/Create
+        // GET: tareas/Create
         public ActionResult Create()
         {
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre");
+            ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol");
             return View();
         }
 
-        // POST: sprints/Create
+        // POST: tareas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,fechaInicio,fechaFinal,proyectoId")] sprint sprint)
+        public ActionResult Create([Bind(Include = "HU,id,nombre,esfuerzo")] tarea tarea)
         {
             if (ModelState.IsValid)
             {
-                db.sprint.Add(sprint);
+                db.tarea.Add(tarea);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
-            return View(sprint);
+            ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", tarea.HU);
+            return View(tarea);
         }
 
-        // GET: sprints/Edit/5
+        // GET: tareas/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
-            if (sprint == null)
+            tarea tarea = db.tarea.Find(id);
+            if (tarea == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
-            return View(sprint);
+            ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", tarea.HU);
+            return View(tarea);
         }
 
-        // POST: sprints/Edit/5
+        // POST: tareas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,fechaInicio,fechaFinal,proyectoId")] sprint sprint)
+        public ActionResult Edit([Bind(Include = "HU,id,nombre,esfuerzo")] tarea tarea)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sprint).State = EntityState.Modified;
+                db.Entry(tarea).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
-            return View(sprint);
+            ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", tarea.HU);
+            return View(tarea);
         }
 
-        // GET: sprints/Delete/5
+        // GET: tareas/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
-            if (sprint == null)
+            tarea tarea = db.tarea.Find(id);
+            if (tarea == null)
             {
                 return HttpNotFound();
             }
-            return View(sprint);
+            return View(tarea);
         }
 
-        // POST: sprints/Delete/5
+        // POST: tareas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            sprint sprint = db.sprint.Find(id);
-            db.sprint.Remove(sprint);
+            tarea tarea = db.tarea.Find(id);
+            db.tarea.Remove(tarea);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
