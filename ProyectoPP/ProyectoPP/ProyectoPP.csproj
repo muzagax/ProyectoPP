@@ -539,6 +539,7 @@
     <Content Include="Views\tareas\Details.cshtml" />
     <Content Include="Views\tareas\Edit.cshtml" />
     <Content Include="Views\tareas\Index.cshtml" />
+    <Content Include="Views\sprints\SprintPlanning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

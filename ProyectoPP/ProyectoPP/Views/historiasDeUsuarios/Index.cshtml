@@ -37,8 +37,6 @@
 
         }
 
-
-
     </div>
 
 @using (Html.BeginForm("Actualizar", "historiasDeUsuarios", FormMethod.Post, new { id = "proyectoForm" }))
@@ -50,13 +48,11 @@
            if (resp != "1")
            {
           <div class="col-md-3">
-            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto, "Seleccione un proyecto", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()" })
+            @Html.DropDownListFor(m => m.ProyectoID, (SelectList)ViewBag.Proyecto,"", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()" })
             @Html.ValidationMessageFor(model => model.ProyectoID, "", new { @class = "text-danger" })
 
           </div>
            }
-       
-
 }
     <br /><br /><br>
 

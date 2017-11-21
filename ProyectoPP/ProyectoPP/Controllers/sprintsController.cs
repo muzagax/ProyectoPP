@@ -17,8 +17,20 @@ namespace ProyectoPP.Controllers
         // GET: sprints
         public ActionResult Index()
         {
+            
             var sprint = db.sprint.Include(s => s.proyecto);
             return View(sprint.ToList());
+            
+        }
+
+        public ActionResult SprintPlanning()
+        {
+            sprint sprint1 = new sprint();
+
+            ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre");
+            ViewBag.Sprint = new SelectList(db.sprint, "id", "nombre");
+
+            return View(sprint1);
         }
 
         // GET: sprints/Details/5
