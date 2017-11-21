@@ -21,7 +21,7 @@ namespace ProyectoPP.Models
             this.tarea = new HashSet<tarea>();
             this.Documentacion = new HashSet<Documentacion>();
         }
-    
+
         public string id { get; set; }
         public string rol { get; set; }
         public string funcionalidad { get; set; }

@@ -530,6 +530,8 @@
     <Content Include="Views\sprints\Details.cshtml" />
     <Content Include="Views\sprints\Edit.cshtml" />
     <Content Include="Views\sprints\Index.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\DetallesCriterios.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\CrearCriterio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

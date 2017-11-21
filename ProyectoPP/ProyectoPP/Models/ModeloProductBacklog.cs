@@ -11,8 +11,13 @@ namespace ProyectoPP.Models
         public ModeloProductBacklog()
         {
             ListaPB = new List<historiasDeUsuario>();
+            Criterios = new List<criteriosDeAceptacion>();
         }
         public List<historiasDeUsuario> ListaPB{ get; set; }
+
+        public List<criteriosDeAceptacion> Criterios { get; set; }
+
+        public historiasDeUsuario Hu { get; set;}
 
         [Display(Name = "Nombre del Proyecto")]
         public string ProyectoID { get; set; }

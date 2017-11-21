@@ -1,80 +1,143 @@
-﻿@model ProyectoPP.Models.historiasDeUsuario
+﻿@model ProyectoPP.Models.ModeloProductBacklog
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>historiasDeUsuario</h4>
-    <hr />
+    <h4>Historias De Usuario</h4>
+    <hr/>
 
     <div class="form-group">
         <div class="col-md-offset-6 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "historiasDeUsuarios", new { id = Model.id })'">Editar</button>
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "historiasDeUsuarios", new { id = Model.id })'">Eliminar</button>
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "historiasDeUsuarios", new { id = Model.Hu.id })'">Editar</button>
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "historiasDeUsuarios", new { id =  Model.Hu.id })'">Eliminar</button>
         </div>
     </div>
 
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.rol)
+            <label>Rol</label>
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.rol)
+            @Html.DisplayFor(model => Model.Hu.rol)
+            <br>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.funcionalidad)
+            <label>Funcionalidad</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.funcionalidad)
+            @Html.DisplayFor(model => Model.Hu.funcionalidad)
+            <br>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resultado)
+            <label>Resultado</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.resultado)
+            @Html.DisplayFor(model => Model.Hu.resultado)
+            <br>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.prioridad)
+            <label>Prioridad</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.prioridad)
+            @Html.DisplayFor(model => Model.Hu.prioridad)
+            <br>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.estimacion)
+            <label>Estimación</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.estimacion)
+            @Html.DisplayFor(model => Model.Hu.estimacion)
+            <br>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.proyecto.nombre)
+            <label>Nombre</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.proyecto.nombre)
+            @Html.DisplayFor(model => Model.Hu.proyecto.nombre)
+            <br>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.sprint.proyectoId)
+            <label>Sprint</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.sprint.proyectoId)
+            @Html.DisplayFor(model => Model.Hu.sprint.proyectoId)
+            <br>
         </dd>
 
     </dl>
+
+    <h4>Criterios de Aceptacion</h4>
+
+    <div class="form-group">
+        <div class="col-md-offset-6 col-md-10">
+            <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
+            <button class="btn btn-default" onclick="location.href='@Url.Action("CrearCriterio", "historiasDeUsuarios", new { hu = Model.Hu.id})'">Insertar Criterio</button>
+        </div>
+    </div>
+
+    <table class="table">
+
+        <tr>
+            <th>
+                Número de Escenario
+            </th>
+
+            <th>
+                Contexto
+            </th>
+            <th>
+                Evento
+            </th>
+            <th>
+                Resultado
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Criterios)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.numeroEscenario)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.contexto)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.evento)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.resultado)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "DetallesCriterios", "historiasDeUsuarios", new { idHU = item.idHU,id = item.numCriterio}, null)
+                </td>
+            </tr>
+        }
+
+
+     </table>
+
+
 </div>

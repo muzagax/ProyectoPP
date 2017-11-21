@@ -84,22 +84,76 @@ namespace ProyectoPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            historiasDeUsuario historiasDeUsuario = db.historiasDeUsuario.Find(id);
-            if (historiasDeUsuario == null)
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu= db.historiasDeUsuario.Find(id);
+
+            if (modelo.Hu == null)
             {
                 return HttpNotFound();
             }
-            return View(historiasDeUsuario);
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == id).ToList();
+            }
+            return View(modelo);
         }
 
-        // GET: historiasDeUsuarios/Create
+        public ActionResult DetallesCriterios(string idHU,int  id)
+        {
+            criteriosDeAceptacion modelo = new criteriosDeAceptacion();
+            modelo = db.criteriosDeAceptacion.Find(idHU, id);
+            if (modelo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(modelo);
+        }
+
+        //GET: historiasDeUsuario/CrearCiterio
+        public ActionResult CrearCriterio(string hu)
+        {
+            criteriosDeAceptacion modelo = new criteriosDeAceptacion();
+            modelo.idHU = hu;
+            return View(modelo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CrearCriterio(criteriosDeAceptacion criterio)
+        {
+            //return RedirectToAction("Index");
+            //return RedirectToAction(actionName: "Details",routeValues: new { id= criterio.idHU });
+
+
+            if (criterio.idHU == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(criterio.idHU);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == criterio.idHU).ToList();
+            }
+
+            return View(viewName: "Details",model: modelo);
+        }
+
+
+            // GET: historiasDeUsuarios/Create
         public ActionResult Create(ModeloProductBacklog nombreProyecto)
         {
             ViewBag.proyectoId = nombreProyecto.ProyectoID;
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
         }
-
 
         // POST: historiasDeUsuarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
