@@ -17,6 +17,9 @@ namespace ProyectoPP.Models
         [Display(Name = "Número de sprint")]
         public string numSprint { get; set; }
 
+        [Display(Name = "Número de H.U.")]
+        public string numHU { get; set; }
+
         [Display(Name = "Rol")]
         public string rol { get; set; }
 

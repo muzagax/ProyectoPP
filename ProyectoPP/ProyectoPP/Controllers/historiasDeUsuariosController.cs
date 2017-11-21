@@ -12,6 +12,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity.Validation;
 
+using System.IO;
+using System.Configuration;
+using System.Data.SqlClient;
+
 namespace ProyectoPP.Controllers
 {
     public class historiasDeUsuariosController : Controller
@@ -96,8 +100,155 @@ namespace ProyectoPP.Controllers
             else
             {
                 modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == id).ToList();
+
             }
+            if (!(GetFiles(id).Count == 0))
+                modelo.Documento12 = GetFiles(id).First();
             return View(modelo);
+        }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase postedFile, String cHUid)
+        {
+            var docId = db.Documentacion.Count();
+
+            docId++;
+
+            byte[] bytes;
+            using (BinaryReader br = new BinaryReader(postedFile.InputStream))
+            {
+                bytes = br.ReadBytes(postedFile.ContentLength);
+            }
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "INSERT INTO Documentacion VALUES (@id, @nombre, @ContentType, @Data, @HUid)";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@id", docId);
+                    cmd.Parameters.AddWithValue("@nombre", Path.GetFileName(postedFile.FileName));
+                    cmd.Parameters.AddWithValue("@ContentType", postedFile.ContentType);
+                    cmd.Parameters.AddWithValue("@Data", bytes);
+                    cmd.Parameters.AddWithValue("@HUid", cHUid);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+            //////////////////////////////////////////////////////////
+
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(cHUid);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == cHUid).ToList();
+
+            }
+            if (!(GetFiles(cHUid).Count == 0))
+                modelo.Documento12 = GetFiles(cHUid).First();
+
+            return View(viewName: "Details", model: modelo);
+        }
+
+        [HttpPost]
+        public ActionResult DownloadFile(int? fileId)
+        {
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "SELECT nombre, Data, ContentType FROM Documentacion WHERE id=@Id";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["Data"];
+                        contentType = sdr["ContentType"].ToString();
+                        fileName = sdr["nombre"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+
+            return File(bytes, contentType, fileName);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteFile(int? fileId, String cHUid)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Documentacion WHERE id=@Id";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+            //////////////////////////////////////////////////////////
+
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(cHUid);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == cHUid).ToList();
+
+            }
+            if (!(GetFiles(cHUid).Count == 0))
+                modelo.Documento12 = GetFiles(cHUid).First();
+
+            return View(viewName: "Details", model: modelo);
+        }
+
+        private static List<ProyectoPP.Models.DocumentacionModel> GetFiles(String cHUid)
+        {
+            List<ProyectoPP.Models.DocumentacionModel> files = new List<ProyectoPP.Models.DocumentacionModel>();
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM Documentacion Where HUid = " + cHUid))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            files.Add(new Models.DocumentacionModel
+                            {
+                                Id = Convert.ToInt32(sdr["id"]),
+                                Nombre = sdr["nombre"].ToString()
+                            });
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            return files;
         }
 
         public ActionResult DetallesCriterios(string idHU,int  id)
@@ -164,9 +315,12 @@ namespace ProyectoPP.Controllers
 
 
             // GET: historiasDeUsuarios/Create
-        public ActionResult Create(ModeloProductBacklog nombreProyecto)
+        public ActionResult Create(string ProyectoId)
         {
-            ViewBag.proyectoId = nombreProyecto.ProyectoID;
+
+            //Le pasamos como parametro a la vista el nombre del proyecto
+            ViewBag.proyectoId = ProyectoId;
+            ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == ProyectoId).First().nombre.ToString();  
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
         }
@@ -181,6 +335,7 @@ namespace ProyectoPP.Controllers
             if (ModelState.IsValid)
             {
                 historiasDeUsuario nuevaHU = new Models.historiasDeUsuario();
+                // se deja como 0 en un caso default
                 if (historiasDeUsuario.numSprint == null )
                 {
                     historiasDeUsuario.numSprint = "0";
@@ -193,14 +348,15 @@ namespace ProyectoPP.Controllers
                              + "GROUP BY EnrollmentDate";
                 IEnumerable<EnrollmentDateGroup> data = db.Database.SqlQuery<EnrollmentDateGroup>(query);*/
                 
-
-                nuevaHU.id = "" + historiasDeUsuario.tipoDeRequerimiento+"-" + historiasDeUsuario.numSprint + "-" + historiasDeUsuario.modulo + "-"+ 1;
+                
+                nuevaHU.id = "" + historiasDeUsuario.tipoDeRequerimiento+"-" + historiasDeUsuario.numSprint + "-" + historiasDeUsuario.modulo + "-"+ historiasDeUsuario.numHU;
                 nuevaHU.rol = historiasDeUsuario.rol;
                 nuevaHU.funcionalidad = historiasDeUsuario.funcionalidad;
                 nuevaHU.resultado = historiasDeUsuario.resultado;
                 nuevaHU.prioridad = historiasDeUsuario.prioridad;
                 nuevaHU.estimacion = historiasDeUsuario.estimacion;
                 nuevaHU.NumeroEscenario = historiasDeUsuario.NumeroEscenario;
+                nuevaHU.proyectoId = historiasDeUsuario.proyectoId;
 
                 db.historiasDeUsuario.Add(nuevaHU);
                 db.SaveChanges();
