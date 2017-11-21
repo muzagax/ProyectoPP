@@ -101,8 +101,8 @@ namespace ProyectoPP.Controllers
                 modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == id).ToList();
 
             }
-            if (!(GetFiles().Count == 0))
-                modelo.Documento12 = GetFiles().First();
+            if (!(GetFiles(id).Count == 0))
+                modelo.Documento12 = GetFiles(id).First();
             return View(modelo);
         }
 
@@ -136,7 +136,25 @@ namespace ProyectoPP.Controllers
                 }
             }
 
-            return View(cHUid);
+            //////////////////////////////////////////////////////////
+
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(cHUid);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == cHUid).ToList();
+
+            }
+            if (!(GetFiles(cHUid).Count == 0))
+                modelo.Documento12 = GetFiles(cHUid).First();
+
+            return View(viewName: "Details", model: modelo);
         }
 
         [HttpPost]
@@ -167,13 +185,51 @@ namespace ProyectoPP.Controllers
             return File(bytes, contentType, fileName);
         }
 
-        private static List<ProyectoPP.Models.DocumentacionModel> GetFiles()
+        [HttpPost]
+        public ActionResult DeleteFile(int? fileId, String cHUid)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Documentacion WHERE id=@Id";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+            //////////////////////////////////////////////////////////
+
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(cHUid);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == cHUid).ToList();
+
+            }
+            if (!(GetFiles(cHUid).Count == 0))
+                modelo.Documento12 = GetFiles(cHUid).First();
+
+            return View(viewName: "Details", model: modelo);
+        }
+
+        private static List<ProyectoPP.Models.DocumentacionModel> GetFiles(String cHUid)
         {
             List<ProyectoPP.Models.DocumentacionModel> files = new List<ProyectoPP.Models.DocumentacionModel>();
             string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM Documentacion"))
+                using (SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM Documentacion Where HUid = " + cHUid))
                 {
                     cmd.Connection = con;
                     con.Open();
