@@ -74,7 +74,7 @@
             </th>
 
             <td>
-                @Html.ActionLink("Planificar", "Details", "historiasDeUsuarios", new { id = item.id }, null)
+                @Html.ActionLink("Planificar", "Index", "tareas", new { HU = item.id }, null)
             </td>
         </tr>
     }
