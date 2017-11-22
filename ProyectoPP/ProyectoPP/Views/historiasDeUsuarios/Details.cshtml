@@ -5,10 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles</h2>
-
 <div>
-    <h4>Historias De Usuario</h4>
+    <h2>Detalles de Historias De Usuario</h2>
     <hr/>
 
     <div class="form-group">
@@ -21,10 +19,11 @@
 
     <dl class="dl-horizontal">
         <dt>
-            <label>Rol</label>
+            <label>ID</label>
         </dt>
         <dd>
-            @Html.DisplayFor(model => Model.Hu.rol)
+            @Html.DisplayFor(model => Model.Hu.id)
+            <br>
             <br>
         </dd>
 
@@ -35,6 +34,7 @@
         <dd>
             @Html.DisplayFor(model => Model.Hu.funcionalidad)
             <br>
+            <br>
         </dd>
 
         <dt>
@@ -43,6 +43,7 @@
 
         <dd>
             @Html.DisplayFor(model => Model.Hu.resultado)
+            <br>
             <br>
         </dd>
 
@@ -53,6 +54,7 @@
         <dd>
             @Html.DisplayFor(model => Model.Hu.prioridad)
             <br>
+            <br>
         </dd>
 
         <dt>
@@ -62,86 +64,75 @@
         <dd>
             @Html.DisplayFor(model => Model.Hu.estimacion)
             <br>
-        </dd>
-
-        <dt>
-            <label>Nombre</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => Model.Hu.proyecto.nombre)
             <br>
         </dd>
 
         <dt>
-            <label>Sprint</label>
+            <label>Documentación</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => Model.Hu.sprint.proyectoId)
-            <br>
-        </dd>
+            @if (Model.Documento12 == null)
+            {
+                using (Html.BeginForm("Upload", "historiasDeUsuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="file" name="postedFile" />
+                    <input type="hidden" id="cHUid" name="cHUid" value="@Model.Hu.id" />
+                    <input type="submit" id="btnUpload" value="Guardar" />
+                }
+            }
 
+            @if (!(Model.Documento12 == null))
+            {
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th style="width:120px">Nombre</th>
+                        <th style="width:80px">Descarga</th>
+                        <th style="width:80px">Eliminar</th>
+                    </tr>
+
+                    <tr>
+                        <td>@Model.Documento12.Nombre</td>
+                        <td>
+                            @using (Html.BeginForm("DownloadFile", "historiasDeUsuarios", FormMethod.Post))
+                            {
+                                <input type="hidden" id="hfFileId" name="FileId" value="@Model.Documento12.Id" />
+                                <input type="submit" value="Descargar" class="btn btn-default" />
+                            }
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteFile", "historiasDeUsuarios", FormMethod.Post))
+                            {
+                                <input type="hidden" id="hfFileId" name="FileId" value="@Model.Documento12.Id" />
+                                <input type="hidden" id="cHUid" name="cHUid" value="@Model.Hu.id" />
+                                <input type="submit" value="Eliminar" class="btn btn-default" />
+                            }
+                        </td>
+
+                    </tr>
+                </table>
+            }
+            </dd>
+
+
+        <dt>
+            <br>
     </dl>
 
-    <h4> Documentacion </h4>
 
-    <hr />
 
-    @if (Model.Documento12 == null)
-    {
-        using (Html.BeginForm("Upload", "historiasDeUsuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <input type="file" name="postedFile" />
-            <input type="hidden" id="cHUid" name="cHUid" value="@Model.Hu.id" />
-            <input type="submit" id="btnUpload" value="Aceptar" />
-        }
-    }
 
-    @if (!(Model.Documento12 == null))
-    {
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th style="width:120px">Nombre</th>
-                <th style="width:80px">Descarga</th>
-                <th style="width:80px">Eliminar</th>
-            </tr>
-        
-            <tr>
-                <td>@Model.Documento12.Nombre</td>
-                <td>
-                    @using (Html.BeginForm("DownloadFile", "historiasDeUsuarios", FormMethod.Post))
-                    {
-                        <input type="hidden" id="hfFileId" name="FileId" value="@Model.Documento12.Id" />
-                            <input type="submit" value="Descargar" class="btn btn-default" />
-                    }
-                </td>
-                <td>
-                    @using (Html.BeginForm("DeleteFile", "historiasDeUsuarios", FormMethod.Post))
-                    {
-                        <input type="hidden" id="hfFileId" name="FileId" value="@Model.Documento12.Id" />
-                        <input type="hidden" id="cHUid" name="cHUid" value="@Model.Hu.id" />
-                        <input type="submit" value="Eliminar" class="btn btn-default" />
-                    }
-                </td>
-
-            </tr>
-        </table>
-    }
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-        function DownloadFile(fileId) {
-            $("#hfFileId").val(fileId);
-            $("#btnDownload")[0].click();
-        };
-    </script>
-
-    <h4>Criterios de Aceptacion</h4>
+    
+    <br>
+    <h2>Criterios de Aceptacion</h2>
+    <br>
 
     <div class="form-group">
         <div class="col-md-offset-6 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
             <button class="btn btn-default" onclick="location.href='@Url.Action("CrearCriterio", "historiasDeUsuarios", new { hu = Model.Hu.id})'">Insertar Criterio</button>
+            <br>
+            <br>
         </div>
     </div>
 
@@ -150,6 +141,10 @@
         <tr>
             <th>
                 Número de Escenario
+            </th>
+
+            <th>
+                Nombre
             </th>
 
             <th>
@@ -170,6 +165,10 @@
             <tr>
                 <td>
                     @Html.DisplayFor(model => item.numeroEscenario)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => item.nombre)
                 </td>
 
                 <td>
