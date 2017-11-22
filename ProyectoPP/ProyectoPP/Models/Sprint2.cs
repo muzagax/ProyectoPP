@@ -15,12 +15,15 @@ namespace ProyectoPP.Models
         }
 
         [Display(Name = "Número Sprint/Id")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string id { get; set; }
 
         [Display(Name = "Fecha inicial")]
+        [Required(ErrorMessage = "Campo requerido")]
         public System.DateTime fechaInicio { get; set; }
 
         [Display(Name = "Fecha final")]
+        [Required(ErrorMessage = "Campo requerido")]
         public Nullable<System.DateTime> fechaFinal { get; set; }
         public string proyectoId { get; set; }
 

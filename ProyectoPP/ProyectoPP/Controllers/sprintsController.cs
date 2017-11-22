@@ -106,8 +106,10 @@ namespace ProyectoPP.Controllers
         public ActionResult Create(string proyectoId)
         {
 
-            ViewBag.proyectoId = proyectoId;
-            return View();
+            ViewBag.nombreProyecto = db.proyecto.Where( p => p.id == proyectoId).First().nombre;
+            Sprint2 nuevoS = new Sprint2();
+            nuevoS.proyectoId = proyectoId;
+            return View(nuevoS);
         }
 
         // POST: sprints/Create
@@ -149,7 +151,8 @@ namespace ProyectoPP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
+            
+           // ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
             return View(sprint);
         }
 
@@ -205,16 +208,21 @@ namespace ProyectoPP.Controllers
             base.Dispose(disposing);
         }
 
-        /** Motodo para actualizar la vista una vez seleccionado un un proyecto*/
+
+
+        /** Metodo para actualizar la vista una vez seleccionado un un proyecto*/
         public ActionResult Actualizar(Sprint2 modelo)
         {
-            if (!System.Web.HttpContext.Current.User.IsInRole("1")) // Si el usuario no es estudiante
+            // Si el usuario no es estudiante
+            if (!System.Web.HttpContext.Current.User.IsInRole("1")) 
             {
+                ViewBag.Sprints = db.sprint.Where(m => m.proyectoId == modelo.proyectoId).ToList();
                 ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", modelo.proyectoId);
             }
+            // Si el usuario es estudiante
             else
             {
-                ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == modelo.proyectoId), "id", "nombre");
+                ViewBag.Sprints = new SelectList(db.sprint.Where(x => x.id == modelo.id), "id", "fechaInicio", "fechaFinal", "proyectoId", modelo.id);
             }
 
             //modelo.ListaPB = (from H in db.historiasDeUsuario where H.proyectoId == modelo.ProyectoID select H).ToList();
