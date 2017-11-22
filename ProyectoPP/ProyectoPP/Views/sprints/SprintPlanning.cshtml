@@ -1,5 +1,5 @@
 ﻿@using ProyectoPP.Models
-@model ProyectoPP.Models.sprint
+@model ProyectoPP.Models.DatosSprintPlanning
 
 @{
     ViewBag.Title = "Index";
@@ -9,19 +9,24 @@
 <h2>Sprint Planning</h2>
 <br><br>
 
-<div class="form-group">
+@using (Html.BeginForm("ActualizarSprintPlanning", "sprints", FormMethod.Post, new { id = "SPForm" }))
+{
+    @Html.AntiForgeryToken()
 
-    @Html.Label("Proyecto", htmlAttributes: new { @class = "control-label col-md-1" })
+    <div class="form-group">
 
-    @Html.DropDownListFor(m => m.proyectoId, (SelectList)ViewBag.Proyecto, "", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#proyectoForm\").submit()" })
-    @Html.ValidationMessageFor(model => model.proyectoId, "", new { @class = "text-danger" })
+        @Html.Label("Proyecto", htmlAttributes: new { @class = "control-label col-md-1" })
 
-    @Html.Label("Sprint", htmlAttributes: new { @class = "control-label col-md-1 col-md-offset-3" })
+        @Html.DropDownListFor(m => m.ProyectoId, (SelectList)ViewBag.Proyecto, "", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#SPForm\").submit()" })
+        @Html.ValidationMessageFor(model => model.ProyectoId, "", new { @class = "text-danger" })
 
-    @Html.DropDownListFor(m => m.id, (SelectList)ViewBag.Sprint, "", htmlAttributes: new { @class = "form-control col-md-1", onchange = "$(\"#proyectoForm\").submit()" })
-    @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
+        @Html.Label("Sprint", htmlAttributes: new { @class = "control-label col-md-1 col-md-offset-3" })
 
-</div>
+        @Html.DropDownListFor(m => m.SprintID, (SelectList)ViewBag.Sprint, "", htmlAttributes: new { @class = "form-control col-md-1", onchange = "$(\"#SPForm\").submit()" })
+        @Html.ValidationMessageFor(model => model.SprintID, "", new { @class = "text-danger" })
+
+    </div>
+}
 
 <br><br><br><br>
 
