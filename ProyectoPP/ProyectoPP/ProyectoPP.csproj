@@ -323,6 +323,7 @@
     <Compile Include="Models\sprint.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sprint2.cs" />
     <Compile Include="Models\tarea.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -542,6 +543,8 @@
     <Content Include="Views\tareas\Edit.cshtml" />
     <Content Include="Views\tareas\Index.cshtml" />
     <Content Include="Views\sprints\SprintPlanning.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\EditarCriterio.cshtml" />
+    <Content Include="Views\historiasDeUsuarios\EliminarCriterio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

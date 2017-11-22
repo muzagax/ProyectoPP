@@ -72,6 +72,7 @@ namespace ProyectoPP.Controllers
         // GET: personas
         public ActionResult Index()
         {
+             // revisa si tiene permiso de ver una lista de usuarios
             if (revisarPermisos("Ver usuarios").Result)
                 return View(db.persona.ToList());
             else
@@ -287,6 +288,7 @@ namespace ProyectoPP.Controllers
         // GET: personas/Delete/5
         public ActionResult Delete(string id)
         {
+            
             if (revisarPermisos("Crear usuarios").Result)
             {
                 if (id == null)

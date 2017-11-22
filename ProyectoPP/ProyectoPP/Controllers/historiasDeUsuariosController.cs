@@ -10,6 +10,7 @@ using ProyectoPP.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity.Validation;
 
 using System.IO;
 using System.Configuration;
@@ -101,8 +102,8 @@ namespace ProyectoPP.Controllers
                 modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == id).ToList();
 
             }
-            if (!(GetFiles().Count == 0))
-                modelo.Documento12 = GetFiles().First();
+            if (!(GetFiles(id).Count == 0))
+                modelo.Documento12 = GetFiles(id).First();
             return View(modelo);
         }
 
@@ -136,7 +137,25 @@ namespace ProyectoPP.Controllers
                 }
             }
 
-            return View(cHUid);
+            //////////////////////////////////////////////////////////
+
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(cHUid);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == cHUid).ToList();
+
+            }
+            if (!(GetFiles(cHUid).Count == 0))
+                modelo.Documento12 = GetFiles(cHUid).First();
+
+            return View(viewName: "Details", model: modelo);
         }
 
         [HttpPost]
@@ -167,13 +186,51 @@ namespace ProyectoPP.Controllers
             return File(bytes, contentType, fileName);
         }
 
-        private static List<ProyectoPP.Models.DocumentacionModel> GetFiles()
+        [HttpPost]
+        public ActionResult DeleteFile(int? fileId, String cHUid)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Documentacion WHERE id=@Id";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+            //////////////////////////////////////////////////////////
+
+            ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+            modelo.Hu = db.historiasDeUsuario.Find(cHUid);
+
+            if (modelo.Hu == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == cHUid).ToList();
+
+            }
+            if (!(GetFiles(cHUid).Count == 0))
+                modelo.Documento12 = GetFiles(cHUid).First();
+
+            return View(viewName: "Details", model: modelo);
+        }
+
+        private static List<ProyectoPP.Models.DocumentacionModel> GetFiles(String cHUid)
         {
             List<ProyectoPP.Models.DocumentacionModel> files = new List<ProyectoPP.Models.DocumentacionModel>();
             string constr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM Documentacion"))
+                using (SqlCommand cmd = new SqlCommand("SELECT id, nombre FROM Documentacion Where HUid = " + cHUid))
                 {
                     cmd.Connection = con;
                     con.Open();
@@ -205,9 +262,23 @@ namespace ProyectoPP.Controllers
             return View(modelo);
         }
 
+        //Get de editar criterios de aceptación
+        public ActionResult EditarCriterio(criteriosDeAceptacion modelo)
+        {
+            return View(modelo);
+        }
+        //Get de eliminar criterios de aceptacion
+        public ActionResult EliminarCriterio(criteriosDeAceptacion modelo)
+        {
+            return View(modelo);
+        }
+
         //GET: historiasDeUsuario/CrearCiterio
         public ActionResult CrearCriterio(string hu)
         {
+
+
+
             criteriosDeAceptacion modelo = new criteriosDeAceptacion();
             modelo.idHU = hu;
             return View(modelo);
@@ -219,26 +290,38 @@ namespace ProyectoPP.Controllers
         {
             //return RedirectToAction("Index");
             //return RedirectToAction(actionName: "Details",routeValues: new { id= criterio.idHU });
-
-
-            if (criterio.idHU == null)
+            criterio.numCriterio = db.criteriosDeAceptacion.Max(m => m.numCriterio)+1;
+            db.criteriosDeAceptacion.Add(criterio);
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.SaveChanges();
+
+                if (criterio.idHU == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ModeloProductBacklog modelo = new ModeloProductBacklog();
+
+                modelo.Hu = db.historiasDeUsuario.Find(criterio.idHU);
+
+                if (modelo.Hu == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == criterio.idHU).ToList();
+                }
+
+                return View(viewName: "Details", model: modelo);
+
             }
-            ModeloProductBacklog modelo = new ModeloProductBacklog();
-
-            modelo.Hu = db.historiasDeUsuario.Find(criterio.idHU);
-
-            if (modelo.Hu == null)
+            catch (DbEntityValidationException ex)
             {
-                return HttpNotFound();
-            }
-            else
-            {
-                modelo.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == criterio.idHU).ToList();
+
             }
 
-            return View(viewName: "Details",model: modelo);
+            return View();
         }
 
 
@@ -247,11 +330,13 @@ namespace ProyectoPP.Controllers
         {
 
             //Le pasamos como parametro a la vista el nombre del proyecto
-            //ViewBag.proyectoId = ProyectoId;
+            ViewBag.proyectoId = ProyectoId;
             ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == ProyectoId).First().nombre.ToString();  
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
         }
+
+        
 
         // POST: historiasDeUsuarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -284,6 +369,7 @@ namespace ProyectoPP.Controllers
                 nuevaHU.prioridad = historiasDeUsuario.prioridad;
                 nuevaHU.estimacion = historiasDeUsuario.estimacion;
                 nuevaHU.NumeroEscenario = historiasDeUsuario.NumeroEscenario;
+                nuevaHU.proyectoId = historiasDeUsuario.proyectoId;
 
                 db.historiasDeUsuario.Add(nuevaHU);
                 db.SaveChanges();

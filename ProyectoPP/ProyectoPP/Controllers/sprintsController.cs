@@ -53,10 +53,26 @@ namespace ProyectoPP.Controllers
         // GET: sprints
         public ActionResult Index()
         {
-            
-            var sprint = db.sprint.Include(s => s.proyecto);
-            return View(sprint.ToList());
-            
+
+            Sprint2 modelo = new Sprint2();
+
+            if ( !System.Web.HttpContext.Current.User.IsInRole("1") ) // Si el usuario no es estudiante
+            {
+
+                // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
+                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", "Seleccione un Proyecto");
+            }
+
+            else
+            {
+                var idproyecto = db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().IdProyecto;                
+
+                // Seleccion para el dropdown de proyectos. Carga solo el proyecto donde participa el estudiante
+                ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == idproyecto), "id", "nombre");
+                ViewBag.NombreProyecto = db.proyecto.Where(m => m.id == idproyecto).First().nombre;
+
+            }
+            return View(modelo);
         }
 
         public ActionResult SprintPlanning()
@@ -109,9 +125,10 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: sprints/Create
-        public ActionResult Create()
+        public ActionResult Create(string proyectoId)
         {
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre");
+
+            ViewBag.proyectoId = proyectoId;
             return View();
         }
 
@@ -120,11 +137,20 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,fechaInicio,fechaFinal,proyectoId")] sprint sprint)
+        public ActionResult Create( Sprint2 sprint)
         {
             if (ModelState.IsValid)
             {
-                db.sprint.Add(sprint);
+                sprint nuevoSprint = new sprint();
+
+                nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
+                nuevoSprint.id = sprint.id;
+                nuevoSprint.fechaInicio = sprint.fechaInicio;
+                nuevoSprint.fechaFinal = sprint.fechaFinal;
+                nuevoSprint.proyectoId = sprint.proyectoId;
+                nuevoSprint.proyecto = sprint.proyecto;
+            
+                db.sprint.Add(nuevoSprint);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -199,6 +225,23 @@ namespace ProyectoPP.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /** Motodo para actualizar la vista una vez seleccionado un un proyecto*/
+        public ActionResult Actualizar(Sprint2 modelo)
+        {
+            if (!System.Web.HttpContext.Current.User.IsInRole("1")) // Si el usuario no es estudiante
+            {
+                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", modelo.proyectoId);
+            }
+            else
+            {
+                ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == modelo.proyectoId), "id", "nombre");
+            }
+
+            //modelo.ListaPB = (from H in db.historiasDeUsuario where H.proyectoId == modelo.ProyectoID select H).ToList();
+
+            return View("Index", modelo);
         }
     }
 }
