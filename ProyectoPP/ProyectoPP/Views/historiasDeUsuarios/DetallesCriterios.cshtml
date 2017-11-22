@@ -4,12 +4,9 @@
     ViewBag.Title = "DetallesCriterios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>DetallesCriterios</h2>
-
 <div>
-    <h4>Criterios De Aceptacion</h4>
-    <hr />
+    <h4>Detalles de Criterios de Aceptacion</h4>
+    <hr/>
 
     <div class="form-group">
         <div class="col-md-offset-6 col-md-10">
@@ -22,12 +19,12 @@
     <dl class="dl-horizontal">
 
         <dt>
-            <label>Historia de Usuario</label>
+            <label>Id</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.historiasDeUsuario.rol)
-            <br>
+            @Html.DisplayFor(model => model.historiasDeUsuario.id)
+            <br><br>
         </dd>
 
         
@@ -38,7 +35,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.numeroEscenario)
-            <br>
+            <br><br>
         </dd>
 
         <dt>
@@ -47,7 +44,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.nombre)
-            <br>
+            <br><br>
         </dd>
 
         <dt>
@@ -56,7 +53,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.contexto)
-            <br>
+            <br><br>
         </dd>
 
         <dt>
@@ -65,7 +62,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.evento)
-            <br>
+            <br><br>
         </dd>
 
         <dt>
@@ -74,7 +71,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.resultado)
-            <br>
+            <br><br>
         </dd>
         
 

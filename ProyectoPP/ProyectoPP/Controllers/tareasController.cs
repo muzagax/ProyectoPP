@@ -15,9 +15,9 @@ namespace ProyectoPP.Controllers
         private patopurificEntitiesGeneral db = new patopurificEntitiesGeneral();
 
         // GET: tareas
-        public ActionResult Index()
+        public ActionResult Index(string HU)
         {
-            var tarea = db.tarea.Include(t => t.historiasDeUsuario);
+            var tarea = db.tarea.Where(t => t.HU == HU);
             return View(tarea.ToList());
         }
 
