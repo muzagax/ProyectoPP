@@ -262,6 +262,17 @@ namespace ProyectoPP.Controllers
             return View(modelo);
         }
 
+        //Get de editar criterios de aceptación
+        public ActionResult EditarCriterio(criteriosDeAceptacion modelo)
+        {
+            return View(modelo);
+        }
+        //Get de eliminar criterios de aceptacion
+        public ActionResult EliminarCriterio(criteriosDeAceptacion modelo)
+        {
+            return View(modelo);
+        }
+
         //GET: historiasDeUsuario/CrearCiterio
         public ActionResult CrearCriterio(string hu)
         {
@@ -324,6 +335,8 @@ namespace ProyectoPP.Controllers
             ViewBag.sprintId = new SelectList(db.sprint, "id", "proyectoId");
             return View();
         }
+
+        
 
         // POST: historiasDeUsuarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
