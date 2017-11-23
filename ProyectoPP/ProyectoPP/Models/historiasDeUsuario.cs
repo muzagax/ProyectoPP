@@ -21,7 +21,7 @@ namespace ProyectoPP.Models
             this.tarea = new HashSet<tarea>();
             this.Documentacion = new HashSet<Documentacion>();
         }
-    
+
         public string id { get; set; }
         public string rol { get; set; }
         public string funcionalidad { get; set; }
@@ -35,10 +35,10 @@ namespace ProyectoPP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<criteriosDeAceptacion> criteriosDeAceptacion { get; set; }
         public virtual proyecto proyecto { get; set; }
+        public virtual sprint sprint { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tarea> tarea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Documentacion> Documentacion { get; set; }
-        public virtual sprint sprint { get; set; }
     }
 }
