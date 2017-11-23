@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPP.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace ProyectoPP.Controllers
 {
