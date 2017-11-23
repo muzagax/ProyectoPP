@@ -30,6 +30,5 @@ namespace ProyectoPP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historiasDeUsuario> historiasDeUsuario { get; set; }
         public virtual proyecto proyecto { get; set; }
-
     }
 }
