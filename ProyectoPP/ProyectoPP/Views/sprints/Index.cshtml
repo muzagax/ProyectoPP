@@ -8,7 +8,7 @@
 <h2>Administrar Sprints</h2>
 
 <div class="form-group">
-    @Html.DisplayNameFor(model => model.proyectoId )
+    @Html.DisplayName("Nombre del Proyecto")
     @if (true)
     {
         string resp = Html.Action("EsEstudiante", "Roles").ToString();
@@ -23,14 +23,9 @@
             
         }
 
-
-
-
     }
 
 </div>
-
-
 
 @using (Html.BeginForm("Actualizar", "sprints", FormMethod.Post, new { id = "sprintForm" }))
 {
@@ -42,12 +37,14 @@
     if (resp != "1")
     {
         <div class="col-md-3">
-            @Html.DropDownListFor(m => m.proyectoId , (SelectList)ViewBag.Proyecto, "", htmlAttributes: new { @class = "form-control col-md-2", onchange = "$(\"#sprintForm\").submit()" })
+            @Html.DropDownListFor(m => m.proyectoId , (SelectList)ViewBag.Proyecto, "", htmlAttributes: new { @class = "form-control col-md-0", onchange = "$(\"#sprintForm\").submit()" })
             @Html.ValidationMessageFor(model => model.proyectoId, "", new { @class = "text-danger" })
 
         </div>
+        
     }
 }
+<br /><br /><br />
 
 <table class="table">
     <tr>
@@ -82,7 +79,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Detalles", "Details", "sprints", new { id = item.id }, null)
+                    @Html.ActionLink("Detalles", "Details", "sprints", new { id = item.id, proyectoId = item.proyectoId }, null)
                 </td>
             </tr>
         }
