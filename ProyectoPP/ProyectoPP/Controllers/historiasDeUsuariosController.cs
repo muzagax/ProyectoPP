@@ -270,6 +270,7 @@ namespace ProyectoPP.Controllers
         {
             return View(db.criteriosDeAceptacion.Where(m => m.numCriterio == id).ToList().First());
         }
+
         //Get de eliminar criterios de aceptacion
         public ActionResult EliminarCriterio(int id)
         {
@@ -279,9 +280,9 @@ namespace ProyectoPP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EliminarCriterio(criteriosDeAceptacion model)
+        public ActionResult EliminarCriterio(criteriosDeAceptacion criterio)
         {
-            criteriosDeAceptacion modelo = db.criteriosDeAceptacion.Where(m => m.numCriterio == model.numCriterio).ToList().First();
+            criteriosDeAceptacion modelo = db.criteriosDeAceptacion.Where(m => m.numCriterio == criterio.numCriterio).ToList().First();
             db.criteriosDeAceptacion.Remove(modelo);
             db.SaveChanges();
 
@@ -292,24 +293,36 @@ namespace ProyectoPP.Controllers
 
         }
 
-
-
-
-        //GET: historiasDeUsuario/CrearCiterio
-        public ActionResult CrearCriterio(string hu)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarCriterio(criteriosDeAceptacion criterio)
         {
-            criteriosDeAceptacion modelo = new criteriosDeAceptacion();
-            modelo.idHU = hu;
-            return View(modelo);
+            if (ModelState.IsValid)
+            {
+                db.Entry(criterio).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ModeloProductBacklog redirect = new ModeloProductBacklog();
+                redirect.Hu = db.historiasDeUsuario.Find(criterio.idHU);
+                redirect.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == criterio.idHU).ToList();
+                return View(viewName: "Details", model: redirect);
+            }
+            return View(db.criteriosDeAceptacion.Where(m => m.numCriterio == criterio.numCriterio).ToList().First());
         }
 
-        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CrearCriterio(criteriosDeAceptacion criterio)
+        public ActionResult CreaarCriterio(criteriosDeAceptacion criterio)
         {
-            criterio.numCriterio = db.criteriosDeAceptacion.Max(m => m.numCriterio)+1;
+            try
+            {
+                criterio.numCriterio = db.criteriosDeAceptacion.Max(m => m.numCriterio) + 1;
+            }
+            catch (System.InvalidOperationException)
+            {
+                criterio.numCriterio = 1;
+            }
             db.criteriosDeAceptacion.Add(criterio);
             try
             {
@@ -342,6 +355,30 @@ namespace ProyectoPP.Controllers
 
             return View();
         }
+
+
+
+
+        //GET: historiasDeUsuario/CrearCiterio
+        public ActionResult CrearCriterio(string hu)
+        {
+            criteriosDeAceptacion modelo = new criteriosDeAceptacion();
+
+
+            modelo.idHU = hu;
+            modelo.nombre = "";
+            modelo.numCriterio = 0;
+            modelo.numeroEscenario = 0;
+            modelo.resultado = "";
+            modelo.contexto = "";
+            modelo.evento = "";
+            modelo.historiasDeUsuario = db.historiasDeUsuario.Find(hu);
+
+            return View(modelo);
+        }
+
+        
+
 
 
             // GET: historiasDeUsuarios/Create
