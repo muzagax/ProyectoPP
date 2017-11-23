@@ -11,14 +11,21 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class criteriosDeAceptacion
     {
+        [Required(ErrorMessage = "Campo requerido")]
         public string idHU { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public int numCriterio { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string nombre { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string contexto { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string evento { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string resultado { get; set; }
         public Nullable<int> numeroEscenario { get; set; }
     

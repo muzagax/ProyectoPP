@@ -16,6 +16,7 @@ using System.IO;
 using System.Configuration;
 using System.Data.SqlClient;
 
+
 namespace ProyectoPP.Controllers
 {
     public class historiasDeUsuariosController : Controller
@@ -36,6 +37,8 @@ namespace ProyectoPP.Controllers
                 _userManager = value;
             }
         }
+
+
 
         private async Task<bool> revisarPermisos(string permiso)
         {
@@ -66,7 +69,7 @@ namespace ProyectoPP.Controllers
             {
 
                 // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
-                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre","Seleccione un Proyecto");
+                ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", "Seleccione un Proyecto");
             }
 
             else
@@ -77,7 +80,7 @@ namespace ProyectoPP.Controllers
                 // Seleccion para el dropdown de proyectos. Carga solo el proyecto donde participa el estudiante
                 ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == idproyecto), "id", "nombre");
                 ViewBag.NombreProyecto = db.proyecto.Where(m => m.id == idproyecto).First().nombre;
-                
+
             }
             return View(modelo);
         }
@@ -91,7 +94,7 @@ namespace ProyectoPP.Controllers
             }
             ModeloProductBacklog modelo = new ModeloProductBacklog();
 
-            modelo.Hu= db.historiasDeUsuario.Find(id);
+            modelo.Hu = db.historiasDeUsuario.Find(id);
 
             if (modelo.Hu == null)
             {
@@ -251,7 +254,7 @@ namespace ProyectoPP.Controllers
             return files;
         }
 
-        public ActionResult DetallesCriterios(string idHU,int  id)
+        public ActionResult DetallesCriterios(string idHU, int id)
         {
             criteriosDeAceptacion modelo = new criteriosDeAceptacion();
             modelo = db.criteriosDeAceptacion.Find(idHU, id);
@@ -263,33 +266,49 @@ namespace ProyectoPP.Controllers
         }
 
         //Get de editar criterios de aceptación
-        public ActionResult EditarCriterio(criteriosDeAceptacion modelo)
+        public ActionResult EditarCriterio(int id)
         {
-            return View(modelo);
+            return View(db.criteriosDeAceptacion.Where(m => m.numCriterio == id).ToList().First());
         }
         //Get de eliminar criterios de aceptacion
-        public ActionResult EliminarCriterio(criteriosDeAceptacion modelo)
+        public ActionResult EliminarCriterio(int id)
         {
-            return View(modelo);
+            return View(db.criteriosDeAceptacion.Where(m => m.numCriterio == id).ToList().First());
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EliminarCriterio(criteriosDeAceptacion model)
+        {
+            criteriosDeAceptacion modelo = db.criteriosDeAceptacion.Where(m => m.numCriterio == model.numCriterio).ToList().First();
+            db.criteriosDeAceptacion.Remove(modelo);
+            db.SaveChanges();
+
+            ModeloProductBacklog redirect = new ModeloProductBacklog();
+            redirect.Hu = db.historiasDeUsuario.Find(modelo.idHU);
+            redirect.Criterios = db.criteriosDeAceptacion.Where(m => m.idHU == modelo.idHU).ToList();
+            return View(viewName: "Details", model: redirect);
+
+        }
+
+
+
 
         //GET: historiasDeUsuario/CrearCiterio
         public ActionResult CrearCriterio(string hu)
         {
-
-
-
             criteriosDeAceptacion modelo = new criteriosDeAceptacion();
             modelo.idHU = hu;
             return View(modelo);
         }
 
+        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CrearCriterio(criteriosDeAceptacion criterio)
         {
-            //return RedirectToAction("Index");
-            //return RedirectToAction(actionName: "Details",routeValues: new { id= criterio.idHU });
             criterio.numCriterio = db.criteriosDeAceptacion.Max(m => m.numCriterio)+1;
             db.criteriosDeAceptacion.Add(criterio);
             try
