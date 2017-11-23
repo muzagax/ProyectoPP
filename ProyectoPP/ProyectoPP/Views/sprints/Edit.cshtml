@@ -1,4 +1,4 @@
-﻿@model ProyectoPP.Models.Sprint2
+﻿@model ProyectoPP.Models.sprint
 
 @{
     ViewBag.Title = "Edit";
@@ -39,7 +39,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Aceptar" class="btn btn-default" />
-                <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "sprints",new {id = Model.id  })';return false;">Cancelar</button>
+                <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "sprints",new { id = Model.id, proyectoId = Model.proyectoId   })';return false;">Cancelar</button>
             </div>
         </div>
 
@@ -50,3 +50,23 @@
 
 
 
+@section Scripts {
+    <!--Todo esto es para el date picker-->
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <script type="text/javascript">
+
+                             $(document).ready(function () {
+                                 $('input[type=datetime]').datepicker({
+                                     dateFormat: "yy-mm-dd",
+                                     changeMonth: true,
+                                     changeYear: true,
+                                     yearRange: "-60:+0"
+                                 });
+
+                             });
+    </script>
+}

@@ -8,8 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoPP.Models;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ProyectoPP.Controllers
 {
@@ -113,28 +113,42 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: sprints/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id, string proyectoId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id, proyectoId);
+            Sprint2 s = new Sprint2();
+            s.fechaInicio = sprint.fechaInicio;
+            s.fechaFinal = sprint.fechaFinal;
+            s.id = sprint.id;
+            s.proyectoId = sprint.proyectoId;
+
             if (sprint == null)
             {
                 return HttpNotFound();
             }
-            return View(sprint);
+            return View(s);
         }
 
         // GET: sprints/Create
+        
         public ActionResult Create(string proyectoId)
         {
-
-            ViewBag.nombreProyecto = db.proyecto.Where( p => p.id == proyectoId).First().nombre;
-            Sprint2 nuevoS = new Sprint2();
-            nuevoS.proyectoId = proyectoId;
-            return View(nuevoS);
+            if (proyectoId != null)
+            {
+                ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == proyectoId).First().nombre;
+                //Sprint2 nuevoS = new Sprint2();
+                var max = db.sprint.Where(s => s.proyectoId == proyectoId).Max(s => s.id);
+                int n = Int32.Parse(max);
+                n = n + 1;
+                ViewBag.proyectoId = proyectoId;
+                ViewBag.id = "" + n;
+                return View();
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: sprints/Create
@@ -148,7 +162,9 @@ namespace ProyectoPP.Controllers
             {
                 sprint nuevoSprint = new sprint();
 
-                nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
+                
+
+                //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
                 nuevoSprint.id = sprint.id;
                 nuevoSprint.fechaInicio = sprint.fechaInicio;
                 nuevoSprint.fechaFinal = sprint.fechaFinal;
@@ -165,13 +181,13 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: sprints/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string proyectoId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id, proyectoId);
             if (sprint == null)
             {
                 return HttpNotFound();
@@ -199,13 +215,13 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: sprints/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string proyectoId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id,proyectoId);
             if (sprint == null)
             {
                 return HttpNotFound();
@@ -216,9 +232,9 @@ namespace ProyectoPP.Controllers
         // POST: sprints/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string proyectoId)
         {
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id, proyectoId);
             db.sprint.Remove(sprint);
             db.SaveChanges();
             return RedirectToAction("Index");
