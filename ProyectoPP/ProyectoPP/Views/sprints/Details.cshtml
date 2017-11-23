@@ -15,15 +15,10 @@
     <div class="form-group">
         <div class="col-md-offset-6 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "personas", new { id = Model.id })'">Editar</button>
-            @if (true)
-            {
-                string resp = Html.Action("RevisarPermisosB", "Roles", new { permiso = "Borrar usuarios" }).ToString();
-                if (resp == "1")
-                {
-                    <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "personas", new { id = Model.id })'">Eliminar</button>
-                }
-            }
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "sprints", new { id = Model.id, proyectoId  = Model.proyectoId })'">Editar</button>
+            
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "sprints", new { id = Model.id, proyectoId = Model.proyectoId  })'">Eliminar</button>
+               
 
         </div>
     </div>
@@ -37,9 +32,6 @@
         <dd>
             @Html.DisplayFor(model => model.proyecto.nombre)
         </dd>
-        
-
-
         <br />
         <dt>
             @Html.DisplayNameFor(model => model.fechaInicio)

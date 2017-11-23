@@ -119,12 +119,18 @@ namespace ProyectoPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id,proyectoId);
+            sprint sprint = db.sprint.Find(id, proyectoId);
+            Sprint2 s = new Sprint2();
+            s.fechaInicio = sprint.fechaInicio;
+            s.fechaFinal = sprint.fechaFinal;
+            s.id = sprint.id;
+            s.proyectoId = sprint.proyectoId;
+
             if (sprint == null)
             {
                 return HttpNotFound();
             }
-            return View(sprint);
+            return View(s);
         }
 
         // GET: sprints/Create
@@ -150,7 +156,7 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( sprint sprint)
+        public ActionResult Create( Sprint2 sprint)
         {
             if (ModelState.IsValid)
             {
@@ -158,7 +164,7 @@ namespace ProyectoPP.Controllers
 
                 
 
-                nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
+                //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
                 nuevoSprint.id = sprint.id;
                 nuevoSprint.fechaInicio = sprint.fechaInicio;
                 nuevoSprint.fechaFinal = sprint.fechaFinal;
@@ -181,7 +187,7 @@ namespace ProyectoPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id, proyectoId);
             if (sprint == null)
             {
                 return HttpNotFound();
@@ -209,13 +215,13 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: sprints/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string proyectoId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id,proyectoId);
             if (sprint == null)
             {
                 return HttpNotFound();
@@ -226,9 +232,9 @@ namespace ProyectoPP.Controllers
         // POST: sprints/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string proyectoId)
         {
-            sprint sprint = db.sprint.Find(id);
+            sprint sprint = db.sprint.Find(id, proyectoId);
             db.sprint.Remove(sprint);
             db.SaveChanges();
             return RedirectToAction("Index");
