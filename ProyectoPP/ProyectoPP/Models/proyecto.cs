@@ -11,7 +11,8 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class proyecto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace ProyectoPP.Models
         }
     
         public string id { get; set; }
+        [Display(Name = "Nombre del proyecto")]
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public System.DateTime fechaInicio { get; set; }

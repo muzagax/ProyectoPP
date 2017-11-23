@@ -11,7 +11,8 @@ namespace ProyectoPP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class historiasDeUsuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,14 +22,35 @@ namespace ProyectoPP.Models
             this.tarea = new HashSet<tarea>();
             this.Documentacion = new HashSet<Documentacion>();
         }
-    
+
+        [Display(Name = "Id")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string id { get; set; }
+
+        [Display(Name = "Rol")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string rol { get; set; }
+
+        [Display(Name = "Funcionalidad")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string funcionalidad { get; set; }
+
+        [Display(Name = "Resultado")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string resultado { get; set; }
+
+        [Display(Name = "Prioridad")]
+        [Required(ErrorMessage = "Campo requerido")]
         public int prioridad { get; set; }
+
+        [Display(Name = "Estimacion")]
+        [Required(ErrorMessage = "Campo requerido")]
         public int estimacion { get; set; }
+
+        
         public string proyectoId { get; set; }
+
+
         public string sprintId { get; set; }
         public Nullable<int> NumeroEscenario { get; set; }
     

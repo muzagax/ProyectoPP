@@ -22,6 +22,7 @@ namespace ProyectoPP.Models
         [Required(ErrorMessage = "Campo requerido")]
         public System.DateTime fechaInicio { get; set; }
 
+
         [Display(Name = "Fecha final")]
         [Required(ErrorMessage = "Campo requerido")]
         public Nullable<System.DateTime> fechaFinal { get; set; }
@@ -29,6 +30,8 @@ namespace ProyectoPP.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historiasDeUsuario> historiasDeUsuario { get; set; }
+
+        [Display(Name = "Nombre del Proyecto")]
         public virtual proyecto proyecto { get; set; }
 
     }

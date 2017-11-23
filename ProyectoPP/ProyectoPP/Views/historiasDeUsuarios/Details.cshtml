@@ -10,7 +10,7 @@
     <hr/>
 
     <div class="form-group">
-        <div class="col-md-offset-6 col-md-10">
+        <div class="col-md-offset-10 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
             <button class="btn btn-default" onclick="location.href='@Url.Action("Edit", "historiasDeUsuarios", new { id = Model.Hu.id })'">Editar</button>
             <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "historiasDeUsuarios", new { id =  Model.Hu.id })'">Eliminar</button>
@@ -78,7 +78,7 @@
                 {
                     <input type="file" name="postedFile" />
                     <input type="hidden" id="cHUid" name="cHUid" value="@Model.Hu.id" />
-                    <input type="submit" id="btnUpload" value="Guardar" />
+                    <input type="submit" id="btnUpload" value="Guardar" class="btn btn-default" />
                 }
             }
 
@@ -128,7 +128,7 @@
     <br>
 
     <div class="form-group">
-        <div class="col-md-offset-6 col-md-10">
+        <div class="col-md-offset-10 col-md-10">
             <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
             <button class="btn btn-default" onclick="location.href='@Url.Action("CrearCriterio", "historiasDeUsuarios", new { hu = Model.Hu.id})'">Insertar Criterio</button>
             <br>

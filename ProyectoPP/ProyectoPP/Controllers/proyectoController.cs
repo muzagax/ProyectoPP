@@ -34,8 +34,18 @@ namespace ProyectoPP.Controllers
         // GET: proyecto
         public ActionResult Index()
         {
-            var proyecto = db.proyecto.Include(p => p.persona);
-            return View(proyecto.ToList());
+            
+            if (System.Web.HttpContext.Current.User.IsInRole("Estudiante")) // Si el usuario es estudiante
+            {
+
+                var idproyecto = db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().IdProyecto;
+                ViewBag.NombreProyecto = db.proyecto.Where(m => m.id == idproyecto).First().nombre;
+                var proyecto = db.proyecto.Where(p => p.id == idproyecto);
+                return View(proyecto.ToList());
+            }
+            var proyectos = db.proyecto.Include(p => p.persona);
+
+            return View(proyectos.ToList());
         }
 
 

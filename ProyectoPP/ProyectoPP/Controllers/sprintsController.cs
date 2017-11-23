@@ -56,7 +56,7 @@ namespace ProyectoPP.Controllers
 
             Sprint2 modelo = new Sprint2();
 
-            if ( !System.Web.HttpContext.Current.User.IsInRole("1") ) // Si el usuario no es estudiante
+            if ( !System.Web.HttpContext.Current.User.IsInRole("Estudiante")) // Si el usuario no es estudiante
             {
 
                 // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
@@ -122,9 +122,17 @@ namespace ProyectoPP.Controllers
             sprint sprint = db.sprint.Find(id, proyectoId);
             Sprint2 s = new Sprint2();
             s.fechaInicio = sprint.fechaInicio;
-            s.fechaFinal = sprint.fechaFinal;
+
+
+            /*string[] fecha = sprint.fechaFinal.ToString().Split('/');
+            int año = Int32.Parse(fecha[2]);
+
+            s.fechaFinal = new DateTime(Int32.Parse(fecha[2]), Int32.Parse(fecha[1]), Int32.Parse(fecha[1])  ); */
+            s.fechaFinal = sprint.fechaFinal;          
             s.id = sprint.id;
             s.proyectoId = sprint.proyectoId;
+
+            ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == proyectoId).FirstOrDefault().nombre;
 
             if (sprint == null)
             {
@@ -139,15 +147,22 @@ namespace ProyectoPP.Controllers
         {
             if (proyectoId != null)
             {
+
                 ViewBag.nombreProyecto = db.proyecto.Where(p => p.id == proyectoId).First().nombre;
-                //Sprint2 nuevoS = new Sprint2();
+
+                //autogenero el numero de sprint
                 var max = db.sprint.Where(s => s.proyectoId == proyectoId).Max(s => s.id);
+                if (max == null) max = "0";
                 int n = Int32.Parse(max);
                 n = n + 1;
+
+                //asigno valores que ya deben de ir por defecto y no se pueden modificar
                 ViewBag.proyectoId = proyectoId;
                 ViewBag.id = "" + n;
+        
                 return View();
             }
+            TempData["msg"] = "<script>alert('Primero seleccione un pryecto');</script>";
             return RedirectToAction("Index");
         }
 
@@ -160,20 +175,31 @@ namespace ProyectoPP.Controllers
         {
             if (ModelState.IsValid)
             {
-                sprint nuevoSprint = new sprint();
+                try
+                {
+                    sprint nuevoSprint = new sprint();
 
-                
 
-                //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
-                nuevoSprint.id = sprint.id;
-                nuevoSprint.fechaInicio = sprint.fechaInicio;
-                nuevoSprint.fechaFinal = sprint.fechaFinal;
-                nuevoSprint.proyectoId = sprint.proyectoId;
-                nuevoSprint.proyecto = sprint.proyecto;
-            
-                db.sprint.Add(nuevoSprint);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                    //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
+                    nuevoSprint.id = sprint.id;
+                    nuevoSprint.fechaInicio = sprint.fechaInicio;
+                    nuevoSprint.fechaFinal = sprint.fechaFinal;
+                    nuevoSprint.proyectoId = sprint.proyectoId;
+                    nuevoSprint.proyecto = sprint.proyecto;
+
+                    db.sprint.Add(nuevoSprint);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    TempData["msg"] = "<script>alert('Ha ocurrido un error al crear el sprint');</script>";
+
+                    return View(sprint);
+                }
+
             }
 
             ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
@@ -187,11 +213,27 @@ namespace ProyectoPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            sprint sprint = db.sprint.Find(id, proyectoId);
-            if (sprint == null)
+
+            // se busca en la base de datos el sprinta editar
+            sprint sprintTMP = db.sprint.Find(id, proyectoId);
+            Sprint2 sprint = new Sprint2();
+
+            // en caso de que no lo encuentre
+            if (sprintTMP == null)
             {
                 return HttpNotFound();
             }
+
+            // Aqui se le asignan los campos a una clase que no es autogenerada para poder asi editar los nombres desplegados
+            sprint.proyectoId = sprintTMP.proyectoId;
+            sprint.id = sprintTMP.id;
+            sprint.fechaInicio = sprintTMP.fechaInicio;
+
+            /*string[] fecha = sprintTMP.fechaFinal.ToString().Split('/');
+
+            sprint.fechaFinal = new DateTime(Int32.Parse(fecha[0]), Int32.Parse(fecha[1]), Int32.Parse(fecha[2]) );*/
+            sprint.fechaFinal = sprintTMP.fechaFinal;
+
             
            // ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
             return View(sprint);

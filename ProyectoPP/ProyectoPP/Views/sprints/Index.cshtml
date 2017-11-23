@@ -8,7 +8,7 @@
 <h2>Administrar Sprints</h2>
 
 <div class="form-group">
-    @Html.DisplayName("Nombre del Proyecto")
+    <h4>Nombre del proyecto</h4>
     @if (true)
     {
         string resp = Html.Action("EsEstudiante", "Roles").ToString();
@@ -19,7 +19,7 @@
         }
         else
         {
-            <button class="btn btn-default col-md-offset-10" onclick="location.href='@Url.Action("Create", "sprints", new {proyectoId = Model.proyectoId  } )'">Nuevo Sprint</button>
+            <button class="btn btn-default col-md-offset-10" onclick="location.href='@Url.Action("Create", "sprints", new {proyectoId = Model.proyectoId  } )'">Insertar Sprint</button>
             
         }
 
@@ -72,10 +72,10 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(model => item.fechaInicio)
+                    <text>@item.fechaInicio.ToShortDateString()</text>
                 </td>
                 <td>
-                    @Html.DisplayFor(model => item.fechaFinal)
+                    <text>@item.fechaFinal.ToString()</text>
                 </td>
 
                 <td>

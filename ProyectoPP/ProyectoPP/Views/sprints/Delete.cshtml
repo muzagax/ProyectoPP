@@ -12,21 +12,6 @@
     <h4>sprint</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaFinal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaFinal)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.proyecto.nombre)
@@ -36,13 +21,35 @@
             @Html.DisplayFor(model => model.proyecto.nombre)
         </dd>
 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFinal)
+        </dd>
+
+        
+
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            <input type="submit" value="Aceptar" class="btn btn-default" />
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "sprints", new { id = Model.id, proyectoId = Model.proyectoId  })';return false;">Cancelar</button> 
             
         </div>
     }

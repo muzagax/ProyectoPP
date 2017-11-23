@@ -20,13 +20,13 @@
             if (resp == "1")
             {
              <h4>@ViewBag.NombreProyecto</h4>
-             <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios",new { ProyectoId = ViewBag.NombreProyecto })' ">Insertar H.U.</button>
+
+            <button class="btn btn-default col-md-offset-10" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios",new { ProyectoId = ViewBag.NombreProyecto })' ">Insertar H.U.</button>
             }
             else
             {
-                <button class="btn btn-default col-md-offset-6" onclick="location.href='@Url.Action("Create", "sprints")'">Nuevo Sprint</button>
-                <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios",new { ProyectoId =Model.ProyectoID })' ">Insertar H.U.</button>
+               
+                <button class="btn btn-default col-md-offset-10" onclick="location.href='@Url.Action("Create", "historiasDeUsuarios",new { ProyectoId =Model.ProyectoID })' ">Insertar H.U.</button>
             }
 
         }
