@@ -18,17 +18,18 @@ namespace ProyectoPP.Controllers
         public ActionResult Index(string HU)
         {
             var tarea = db.tarea.Where(t => t.HU == HU);
+            ViewBag.HUid = HU;
             return View(tarea.ToList());
         }
 
         // GET: tareas/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string HU, int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tarea tarea = db.tarea.Find(id);
+            tarea tarea = db.tarea.Find(HU, id);
             if (tarea == null)
             {
                 return HttpNotFound();
@@ -37,10 +38,12 @@ namespace ProyectoPP.Controllers
         }
 
         // GET: tareas/Create
-        public ActionResult Create()
+        public ActionResult Create(string HU)
         {
             ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol");
-            return View();
+            tarea tarea = new tarea();
+            tarea.HU = HU;
+            return View(tarea);
         }
 
         // POST: tareas/Create
@@ -48,27 +51,28 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HU,id,nombre,esfuerzo")] tarea tarea)
+        public ActionResult Create(tarea tarea)
         {
             if (ModelState.IsValid)
             {
                 db.tarea.Add(tarea);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { HU = tarea.HU });
             }
 
             ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", tarea.HU);
-            return View(tarea);
+
+            return View();
         }
 
         // GET: tareas/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string HU, int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tarea tarea = db.tarea.Find(id);
+            tarea tarea = db.tarea.Find(HU, id);
             if (tarea == null)
             {
                 return HttpNotFound();
@@ -82,26 +86,26 @@ namespace ProyectoPP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HU,id,nombre,esfuerzo")] tarea tarea)
+        public ActionResult Edit(tarea tarea)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(tarea).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { HU = tarea.HU });
             }
             ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", tarea.HU);
             return View(tarea);
         }
 
         // GET: tareas/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string HU, int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tarea tarea = db.tarea.Find(id);
+            tarea tarea = db.tarea.Find(HU, id);
             if (tarea == null)
             {
                 return HttpNotFound();
@@ -112,12 +116,12 @@ namespace ProyectoPP.Controllers
         // POST: tareas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string HU, int id)
         {
-            tarea tarea = db.tarea.Find(id);
+            tarea tarea = db.tarea.Find(HU, id);
             db.tarea.Remove(tarea);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { HU = tarea.HU });
         }
 
         protected override void Dispose(bool disposing)

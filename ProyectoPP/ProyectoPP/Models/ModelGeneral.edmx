@@ -163,6 +163,7 @@
         <EntityType Name="sprint">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="proyectoId" />
           </Key>
           <Property Name="id" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="fechaInicio" Type="date" Nullable="false" />
@@ -192,7 +193,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Documentac__HUid__7A3223E8">
-          <End Role="historiasDeUsuario" Type="Self.historiasDeUsuario" Multiplicity="0..1" />
+          <End Role="historiasDeUsuario" Type="Self.historiasDeUsuario" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Documentacion" Type="Self.Documentacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="historiasDeUsuario">
@@ -215,15 +218,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__historias__sprin__489AC854">
+        <Association Name="FK__historiasDeUsuar__7FEAFD3E">
           <End Role="sprint" Type="Self.sprint" Multiplicity="0..1" />
           <End Role="historiasDeUsuario" Type="Self.historiasDeUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="sprint">
               <PropertyRef Name="id" />
+              <PropertyRef Name="proyectoId" />
             </Principal>
             <Dependent Role="historiasDeUsuario">
               <PropertyRef Name="sprintId" />
+              <PropertyRef Name="proyectoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -451,7 +456,7 @@
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__historias__sprin__489AC854" Association="Self.FK__historias__sprin__489AC854">
+          <AssociationSet Name="FK__historiasDeUsuar__7FEAFD3E" Association="Self.FK__historiasDeUsuar__7FEAFD3E">
             <End Role="sprint" EntitySet="sprint" />
             <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
           </AssociationSet>
@@ -606,10 +611,10 @@
           <Property Name="sprintId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="criteriosDeAceptacion" Relationship="Self.FK__criteriosD__idHU__4B7734FF" FromRole="historiasDeUsuario" ToRole="criteriosDeAceptacion" />
           <NavigationProperty Name="proyecto" Relationship="Self.FK__historias__proye__47A6A41B" FromRole="historiasDeUsuario" ToRole="proyecto" />
-          <NavigationProperty Name="sprint" Relationship="Self.FK__historias__sprin__489AC854" FromRole="historiasDeUsuario" ToRole="sprint" />
           <NavigationProperty Name="tarea" Relationship="Self.FK__tarea__HU__4E53A1AA" FromRole="historiasDeUsuario" ToRole="tarea" />
           <Property Name="NumeroEscenario" Type="Int32" />
           <NavigationProperty Name="Documentacion" Relationship="patopurificModelGeneral.FK__Documentac__HUid__7A3223E8" FromRole="historiasDeUsuario" ToRole="Documentacion" />
+          <NavigationProperty Name="sprint" Relationship="patopurificModelGeneral.FK__historiasDeUsuar__7FEAFD3E" FromRole="historiasDeUsuario" ToRole="sprint" />
         </EntityType>
         <EntityType Name="permisos">
           <Key>
@@ -643,21 +648,10 @@
           <Property Name="fechaFinal" Type="DateTime" Precision="0" />
           <Property Name="lider" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="historiasDeUsuario" Relationship="Self.FK__historias__proye__47A6A41B" FromRole="proyecto" ToRole="historiasDeUsuario" />
-          <NavigationProperty Name="sprint" Relationship="Self.FK__sprint__proyecto__44CA3770" FromRole="proyecto" ToRole="sprint" />
           <NavigationProperty Name="persona" Relationship="patopurificModelGeneral.FK__persona__IdProye__74794A92" FromRole="proyecto" ToRole="persona" />
           <NavigationProperty Name="persona1" Relationship="patopurificModelGeneral.FK__proyecto__lider__41EDCAC5" FromRole="proyecto" ToRole="persona" />
           <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="sprint">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="fechaFinal" Type="DateTime" Precision="0" />
-          <Property Name="proyectoId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="historiasDeUsuario" Relationship="Self.FK__historias__sprin__489AC854" FromRole="sprint" ToRole="historiasDeUsuario" />
-          <NavigationProperty Name="proyecto" Relationship="Self.FK__sprint__proyecto__44CA3770" FromRole="sprint" ToRole="proyecto" />
+          <NavigationProperty Name="sprint" Relationship="patopurificModelGeneral.FK__sprint__proyecto__44CA3770" FromRole="proyecto" ToRole="sprint" />
         </EntityType>
         <EntityType Name="tarea">
           <Key>
@@ -736,18 +730,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__historias__sprin__489AC854">
-          <End Role="sprint" Type="Self.sprint" Multiplicity="0..1" />
-          <End Role="historiasDeUsuario" Type="Self.historiasDeUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sprint">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="historiasDeUsuario">
-              <PropertyRef Name="sprintId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__tarea__HU__4E53A1AA">
           <End Role="historiasDeUsuario" Type="Self.historiasDeUsuario" Multiplicity="1" />
           <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
@@ -774,18 +756,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__sprint__proyecto__44CA3770">
-          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
-          <End Role="sprint" Type="Self.sprint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="proyecto">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="sprint">
-              <PropertyRef Name="proyectoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -805,7 +775,6 @@
           <EntitySet Name="permisos" EntityType="Self.permisos" />
           <EntitySet Name="progreso" EntityType="Self.progreso" />
           <EntitySet Name="proyecto" EntityType="Self.proyecto" />
-          <EntitySet Name="sprint" EntityType="Self.sprint" />
           <EntitySet Name="tarea" EntityType="Self.tarea" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -827,10 +796,6 @@
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__historias__sprin__489AC854" Association="Self.FK__historias__sprin__489AC854">
-            <End Role="sprint" EntitySet="sprint" />
-            <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
-          </AssociationSet>
           <AssociationSet Name="FK__tarea__HU__4E53A1AA" Association="Self.FK__tarea__HU__4E53A1AA">
             <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
             <End Role="tarea" EntitySet="tarea" />
@@ -838,10 +803,6 @@
           <AssociationSet Name="FK__progreso__56E8E7AB" Association="Self.FK__progreso__56E8E7AB">
             <End Role="tarea" EntitySet="tarea" />
             <End Role="progreso" EntitySet="progreso" />
-          </AssociationSet>
-          <AssociationSet Name="FK__sprint__proyecto__44CA3770" Association="Self.FK__sprint__proyecto__44CA3770">
-            <End Role="proyecto" EntitySet="proyecto" />
-            <End Role="sprint" EntitySet="sprint" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -872,6 +833,15 @@
           <AssociationSet Name="FK__Documentac__HUid__7A3223E8" Association="patopurificModelGeneral.FK__Documentac__HUid__7A3223E8">
             <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
             <End Role="Documentacion" EntitySet="Documentacion" />
+          </AssociationSet>
+          <EntitySet Name="sprint" EntityType="patopurificModelGeneral.sprint" />
+          <AssociationSet Name="FK__historiasDeUsuar__7FEAFD3E" Association="patopurificModelGeneral.FK__historiasDeUsuar__7FEAFD3E">
+            <End Role="sprint" EntitySet="sprint" />
+            <End Role="historiasDeUsuario" EntitySet="historiasDeUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sprint__proyecto__44CA3770" Association="patopurificModelGeneral.FK__sprint__proyecto__44CA3770">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="sprint" EntitySet="sprint" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="persona">
@@ -953,6 +923,44 @@
             </Principal>
             <Dependent Role="Documentacion">
               <PropertyRef Name="HUid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sprint">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="proyectoId" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFinal" Type="DateTime" Precision="0" />
+          <Property Name="proyectoId" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="historiasDeUsuario" Relationship="patopurificModelGeneral.FK__historiasDeUsuar__7FEAFD3E" FromRole="sprint" ToRole="historiasDeUsuario" />
+          <NavigationProperty Name="proyecto" Relationship="patopurificModelGeneral.FK__sprint__proyecto__44CA3770" FromRole="sprint" ToRole="proyecto" />
+        </EntityType>
+        <Association Name="FK__historiasDeUsuar__7FEAFD3E">
+          <End Type="patopurificModelGeneral.sprint" Role="sprint" Multiplicity="0..1" />
+          <End Type="patopurificModelGeneral.historiasDeUsuario" Role="historiasDeUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sprint">
+              <PropertyRef Name="id" />
+              <PropertyRef Name="proyectoId" />
+            </Principal>
+            <Dependent Role="historiasDeUsuario">
+              <PropertyRef Name="sprintId" />
+              <PropertyRef Name="proyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sprint__proyecto__44CA3770">
+          <End Type="patopurificModelGeneral.proyecto" Role="proyecto" Multiplicity="1" />
+          <End Type="patopurificModelGeneral.sprint" Role="sprint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sprint">
+              <PropertyRef Name="proyectoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1073,16 +1081,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sprint">
-            <EntityTypeMapping TypeName="patopurificModelGeneral.sprint">
-              <MappingFragment StoreEntitySet="sprint">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
-                <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
-                <ScalarProperty Name="proyectoId" ColumnName="proyectoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tarea">
             <EntityTypeMapping TypeName="patopurificModelGeneral.tarea">
               <MappingFragment StoreEntitySet="tarea">
@@ -1139,6 +1137,16 @@
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="ContentType" ColumnName="ContentType" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sprint">
+            <EntityTypeMapping TypeName="patopurificModelGeneral.sprint">
+              <MappingFragment StoreEntitySet="sprint">
+                <ScalarProperty Name="proyectoId" ColumnName="proyectoId" />
+                <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
