@@ -33,35 +33,45 @@
 
     <div class="form-horizontal">
         <hr />
-
         <div class="form-group">
-            @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Sprint", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(m => Model.id)
+            @Html.HiddenFor(m => Model.proyecto)
+            @Html.HiddenFor(m => Model.proyectoId)
+
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                <input type="text" name="pass" value=@(Model.id) disabled><br><br />
             </div>
         </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <br>
-        <div class="form-group">
-            @Html.LabelFor(model => model.fechaFinal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaFinal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaFinal, "", new { @class = "text-danger" })
+
+            <br>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fechaFinal, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fechaFinal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <br>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Aceptar" class="btn btn-default" />
+                    <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "sprints",new { id = Model.id, proyectoId = Model.proyectoId  } )';return false;">Cancelar</button>
+                </div>
             </div>
         </div>
-
-        
-
-        <br>
-        
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Aceptar" class="btn btn-default" />
-                <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "sprints",new { id = Model.id, proyectoId = Model.proyectoId  } )';return false;">Cancelar</button>
-            </div>
-        </div>
-    </div>
 }

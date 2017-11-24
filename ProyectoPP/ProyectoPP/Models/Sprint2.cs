@@ -34,5 +34,7 @@ namespace ProyectoPP.Models
         [Display(Name = "Nombre del Proyecto")]
         public virtual proyecto proyecto { get; set; }
 
+        public string nombreProyecto { get; set; }
+
     }
 }

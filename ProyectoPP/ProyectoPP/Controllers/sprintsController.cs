@@ -159,8 +159,14 @@ namespace ProyectoPP.Controllers
                 //asigno valores que ya deben de ir por defecto y no se pueden modificar
                 ViewBag.proyectoId = proyectoId;
                 ViewBag.id = "" + n;
-        
-                return View();
+                
+                Sprint2 mod = new Sprint2();
+                mod.proyectoId = proyectoId;
+                mod.nombreProyecto = db.proyecto.Where(p => p.id == proyectoId).First().nombre;
+                mod.id = "" + n;
+
+
+                return View(mod);
             }
             TempData["msg"] = "<script>alert('Primero seleccione un pryecto');</script>";
             return RedirectToAction("Index");
@@ -173,25 +179,23 @@ namespace ProyectoPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( Sprint2 sprint)
         {
-            if (ModelState.IsValid)
-            {
+            sprint nuevoSprint = new sprint();
+            //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
+            nuevoSprint.id = sprint.id;
+            nuevoSprint.fechaInicio = sprint.fechaInicio;
+            nuevoSprint.fechaFinal = sprint.fechaFinal;
+            nuevoSprint.proyectoId = sprint.proyectoId;
+            nuevoSprint.proyecto = sprint.proyecto;
+            db.sprint.Add(nuevoSprint);
                 try
                 {
-                    sprint nuevoSprint = new sprint();
+                    
 
-
-
-                    //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
-                    nuevoSprint.id = sprint.id;
-                    nuevoSprint.fechaInicio = sprint.fechaInicio;
-                    nuevoSprint.fechaFinal = sprint.fechaFinal;
-                    nuevoSprint.proyectoId = sprint.proyectoId;
-                    nuevoSprint.proyecto = sprint.proyecto;
-
-                    db.sprint.Add(nuevoSprint);
+                    
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+            
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
@@ -200,10 +204,8 @@ namespace ProyectoPP.Controllers
                     return View(sprint);
                 }
 
-            }
-
-            ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
-            return View(sprint);
+            //ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
+            //return View(sprint);
         }
 
         // GET: sprints/Edit/5

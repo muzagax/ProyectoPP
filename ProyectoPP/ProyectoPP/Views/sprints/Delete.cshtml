@@ -9,7 +9,6 @@
 
 <h3>¿Desea eliminar este sprint?</h3>
 <div>
-    <h4>sprint</h4>
     <hr />
     <dl class="dl-horizontal">
 
@@ -18,26 +17,26 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.proyecto.nombre)
+            @Html.DisplayFor(model => model.proyecto.nombre)<br><br>
         </dd>
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
+            <label>Fecha de inicio</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
+            @Html.DisplayFor(model => model.fechaInicio)<br><br>
         </dd>
 
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.fechaFinal)
+            <label>Fecha de final</label>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fechaFinal)
+            @Html.DisplayFor(model => model.fechaFinal)<br><br><br>
         </dd>
 
         
@@ -49,7 +48,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Aceptar" class="btn btn-default" />
-            <button class="btn btn-default" onclick="location.href='@Url.Action("Delete", "sprints", new { id = Model.id, proyectoId = Model.proyectoId  })';return false;">Cancelar</button> 
+            <button class="btn btn-default" onclick="location.href='@Url.Action("Details", "sprints", new { id = Model.id, proyectoId = Model.proyectoId  })';return false;">Cancelar</button> 
             
         </div>
     }
