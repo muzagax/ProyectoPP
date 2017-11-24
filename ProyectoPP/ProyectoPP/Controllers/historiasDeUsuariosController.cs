@@ -311,8 +311,7 @@ namespace ProyectoPP.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("CreaarCriterio")]
         public ActionResult CreaarCriterio(criteriosDeAceptacion criterio)
         {
             try
