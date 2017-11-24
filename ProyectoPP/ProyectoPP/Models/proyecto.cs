@@ -26,10 +26,15 @@ namespace ProyectoPP.Models
         public string id { get; set; }
         [Display(Name = "Nombre del proyecto")]
         public string nombre { get; set; }
+        [Display(Name = "Descripción")]
         public string descripcion { get; set; }
+        [Display(Name = "Fecha de Inicio")]
         public System.DateTime fechaInicio { get; set; }
+        [Display(Name = "Fecha de finalización")]
         public Nullable<System.DateTime> fechaFinal { get; set; }
+        [Display(Name = "Líder del Equipo")]
         public string lider { get; set; }
+        [Display(Name = "Estado del proyecto")]
         public string estado { get; set; }
 
 

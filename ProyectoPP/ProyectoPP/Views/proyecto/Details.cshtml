@@ -9,7 +9,7 @@
 
 <div>
 
-    <h4>@Html.DisplayFor(model => model.nombre)</h4>
+    <h4>Nombre del Proyecto: @Html.DisplayFor(model => model.nombre)</h4>
         
     <div class="form-group">
         <div class="col-md-offset-6 col-md-10">
@@ -62,6 +62,15 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.persona1.nombre)
+        </dd>
+
+        <br>
+
+        <dt>
+            <label for="estado">Estado</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.estado)
         </dd>
 
         <br>

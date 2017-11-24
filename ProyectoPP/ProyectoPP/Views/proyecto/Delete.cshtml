@@ -8,11 +8,9 @@
 <h2>Eliminar Proyecto</h2>
 
 <h3>Está seguro que desa eliminar este proyecto?</h3>
-
+<br>
 <div>
-    <!-- Nombre del proyecto que se ba a borrar(título) -->
-    <h4>@Html.DisplayFor(model => model.nombre)</h4>
-
+    
     <dl class="dl-horizontal">
 
         <dt>
@@ -66,8 +64,18 @@
             <!-- Nombre del lider del proyecto que se ba a borrar -->
             @Html.DisplayFor(model => model.persona1.nombre)
         </dd>
+        <br>
 
-        <br />
+        <dt>
+            <!-- Etiqueta para el estado del proyecto que se ba a borrar -->
+            <label for="estado">Estado</label>
+        </dt>
+        <dd>
+            <!-- Estado del proyecto que se ba a borrar -->
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <br>
 
     </dl>
 

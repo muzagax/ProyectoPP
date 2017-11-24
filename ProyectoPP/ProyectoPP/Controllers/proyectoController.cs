@@ -150,7 +150,7 @@ namespace ProyectoPP.Controllers
 
                 db.Entry(proyecto).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = proyecto.id});
             }
             ViewBag.lider = new SelectList(db.persona, "cedula", "nombre", proyecto.lider);
             return View(proyecto);

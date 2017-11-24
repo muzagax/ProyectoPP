@@ -33,7 +33,8 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@Html.DisplayFor(model => model.nombre)</h4>
+        <h4>Nombre del Proyecto: @Html.DisplayFor(model => model.nombre)</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
@@ -75,6 +76,26 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.lider, (SelectList)ViewBag.Listalider, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.lider, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @{
+
+                    IList<SelectListItem> listaEstados = new List<SelectListItem>
+                        {
+                        new SelectListItem{Text = "Pendiente", Value = "Pendiente"},
+                        new SelectListItem{Text = "En Progreso", Value = "En Progreso"},
+                        new SelectListItem{Text = "Cancelado", Value = "Cancelado"},
+                        new SelectListItem{Text = "Completado", Value = "Completado"}
+                        };
+                }
+
+                @Html.DropDownListFor(m => m.estado, listaEstados, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
             </div>
         </div>
     
