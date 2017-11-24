@@ -74,7 +74,7 @@ namespace ProyectoPP.Controllers
         {
              // revisa si tiene permiso de ver una lista de usuarios
             if (revisarPermisos("Ver usuarios").Result)
-                return View(db.persona.ToList());
+                return View(db.persona.ToList().OrderBy(x=> x.nombre));
             else
                 return View(db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).ToList());
         }

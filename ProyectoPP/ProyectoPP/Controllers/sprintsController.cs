@@ -80,14 +80,14 @@ namespace ProyectoPP.Controllers
 
             DatosSprintPlanning modelo = new DatosSprintPlanning();
 
-            if (!System.Web.HttpContext.Current.User.IsInRole("1")) // Si el usuario no es estudiante
+            if (!System.Web.HttpContext.Current.User.IsInRole("Estudiante")) // Si el usuario no es estudiante
             {
 
                 // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
                 ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre");
 
-                // El dropdown de sprints queda en blanco porque no sabemos aún cuál proyecto se va a seleccionar. Para esto solamente busco los sprints que id ""
-                ViewBag.Sprint = new SelectList(db.sprint.Where(x => x.proyectoId == ""), "id", "nombre");
+                // El dropdown de sprints queda en blanco porque no sabemos aún cuál proyecto se va a seleccionar. Para esto solamente busco los sprints donde el id es igual ""
+                ViewBag.Sprint = new SelectList(db.sprint.Where(x => x.proyectoId == ""), "id", "id");
                 
                 // Repito el proceso con las HU, busco las que tengan ID ""
                 ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == "").ToList();
@@ -102,7 +102,7 @@ namespace ProyectoPP.Controllers
                 ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == idproyecto), "id", "nombre");
 
                 // Seleccion para el dropdown de sprints. Carga todos los sprints que hay asociados al proyecto seleccionado
-                ViewBag.Sprint = new SelectList(db.sprint.Where(x => x.proyectoId == idproyecto), "id", "nombre");
+                ViewBag.Sprint = new SelectList(db.sprint.Where(x => x.proyectoId == idproyecto), "id", "id");
 
                 // Lss hitorias de usuario no se cargan ya que necesito seleccionar un sprint
                 ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == "").ToList();
@@ -299,7 +299,7 @@ namespace ProyectoPP.Controllers
         public ActionResult Actualizar(Sprint2 modelo)
         {
             // Si el usuario no es estudiante
-            if (!System.Web.HttpContext.Current.User.IsInRole("1")) 
+            if (!System.Web.HttpContext.Current.User.IsInRole("Estudiante")) 
             {
                 ViewBag.Sprints = db.sprint.Where(m => m.proyectoId == modelo.proyectoId).ToList();
                 ViewBag.Proyecto = new SelectList(db.proyecto, "id", "nombre", modelo.proyectoId);
@@ -318,7 +318,7 @@ namespace ProyectoPP.Controllers
         public ActionResult ActualizarSprintPlanning(DatosSprintPlanning modelo)
         {
 
-            if (!System.Web.HttpContext.Current.User.IsInRole("1")) // Si el usuario no es estudiante
+            if (!System.Web.HttpContext.Current.User.IsInRole("Estudiante")) // Si el usuario no es estudiante
             {
 
                 // Seleccion para el dropdown de proyectos. Carga todos los proyectos que hay
@@ -328,7 +328,7 @@ namespace ProyectoPP.Controllers
                 ViewBag.Sprint = new SelectList(db.sprint.Where(x => x.proyectoId == modelo.ProyectoId), "id", "id", modelo.SprintID);
                 
                 // El dropdonw de las hisotrias de usuario se hace con la combinación de ambas cosas
-                ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == modelo.ProyectoId && x.id == modelo.SprintID).ToList();
+                ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == modelo.ProyectoId && x.sprintId == modelo.SprintID).ToList();
 
             }
 
@@ -337,12 +337,12 @@ namespace ProyectoPP.Controllers
                 var idproyecto = db.persona.Where(m => m.cedula == System.Web.HttpContext.Current.User.Identity.Name).First().IdProyecto;
 
                 // Seleccion para el dropdown de proyectos. Carga solo el proyecto donde participa el estudiante
-                ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == idproyecto), "id", "id", modelo.ProyectoId);
+                ViewBag.Proyecto = new SelectList(db.proyecto.Where(x => x.id == idproyecto), "id", "nombre", modelo.ProyectoId);
 
                 // Seleccion para el dropdown de sprints. Carga todos los sprints que hay asociados al proyecto seleccionado
                 ViewBag.Sprint = new SelectList(db.sprint.Where(x => x.proyectoId == idproyecto), "id", "id", modelo.SprintID);
 
-                ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == idproyecto && x.id == modelo.SprintID).ToList();
+                ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == idproyecto && x.sprintId == modelo.SprintID).ToList();
 
             }
 
