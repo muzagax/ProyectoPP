@@ -208,6 +208,47 @@ namespace ProyectoPP.Controllers
             //return View(sprint);
         }
 
+        public ActionResult CreateHito()
+        {
+            return View();
+
+            TempData["msg"] = "<script>alert('Primero seleccione un pryecto');</script>";
+            return RedirectToAction("Index");
+        }
+
+        // POST: sprints/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateHito(fechas fecha)
+        {
+            //sprint nuevoSprint = new sprint();
+            //nuevoSprint.historiasDeUsuario = sprint.historiasDeUsuario;
+            //nuevoSprint.id = sprint.id;
+            //nuevoSprint.fechaInicio = sprint.fechaInicio;
+            //nuevoSprint.fechaFinal = sprint.fechaFinal;
+            //nuevoSprint.proyectoId = sprint.proyectoId;
+            //nuevoSprint.proyecto = sprint.proyecto;
+            db.fechas.Add(fecha);
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("SprintPlanning");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                TempData["msg"] = "<script>alert('Ha ocurrido un error al crear el sprint');</script>";
+
+                return View();
+            }
+
+            //ViewBag.proyectoId = new SelectList(db.proyecto, "id", "nombre", sprint.proyectoId);
+            //return View(sprint);
+        }
+
         // GET: sprints/Edit/5
         public ActionResult Edit(string id, string proyectoId)
         {

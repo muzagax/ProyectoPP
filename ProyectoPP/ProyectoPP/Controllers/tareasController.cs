@@ -30,6 +30,7 @@ namespace ProyectoPP.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tarea tarea = db.tarea.Find(HU, id);
+            tarea.progreso = db.progreso.Where(t => t.HU == HU && t.id == id).ToList();
             if (tarea == null)
             {
                 return HttpNotFound();
@@ -61,6 +62,35 @@ namespace ProyectoPP.Controllers
             }
 
             ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", tarea.HU);
+
+            return View();
+        }
+
+        public ActionResult addProgreso(string HU, int id)
+        {
+            ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol");
+            progreso progreso = new progreso();
+            progreso.HU = HU;
+            progreso.id = id;
+            ViewBag.fechaCorte = new SelectList(db.fechas, "fechaCorte");
+            return View(progreso);
+        }
+
+        // POST: tareas/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult addProgreso(progreso progreso)
+        {
+            if (ModelState.IsValid)
+            {
+                db.progreso.Add(progreso);
+                db.SaveChanges();
+                return RedirectToAction("Index", new { HU = progreso.HU });
+            }
+
+            ViewBag.HU = new SelectList(db.historiasDeUsuario, "id", "rol", progreso.HU);
 
             return View();
         }
