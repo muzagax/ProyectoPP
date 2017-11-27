@@ -86,9 +86,35 @@
 
 </table>
 
+<br>
+<h2>Hitos</h2>
+<br>
+
+<div class="form-group">
+    <div class="col-md-offset-10 col-md-10">
+        <!--Estos botones funcionan como los action links. Solo que el orden de los parametros es un poco distinto en el orden-->
+        <button class="btn btn-default" onclick="location.href='@Url.Action("AgregarFecha", "SprintPlanning")'">Agregar Fecha</button>
+        <br>
+        <br>
+    </div>
+</div>
+
+<table class="table">
+
+    <tr>
+        <th>
+            Fecha
+        </th>
+    </tr>
+
+    @foreach (var item in Model.fechaC)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.fechaCorte)
+            </td>
+        </tr>
+    }
 
 
-
-
-
-
+</table>

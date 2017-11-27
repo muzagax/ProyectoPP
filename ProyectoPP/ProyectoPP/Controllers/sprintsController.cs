@@ -108,7 +108,7 @@ namespace ProyectoPP.Controllers
                 ViewBag.HU = db.historiasDeUsuario.Where(x => x.proyectoId == "").ToList();
 
             }
-
+            modelo.fechaC = db.fechas.ToList();
             return View(modelo);
         }
 

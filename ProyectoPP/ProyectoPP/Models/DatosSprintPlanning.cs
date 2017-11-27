@@ -12,5 +12,6 @@ namespace ProyectoPP.Models
 
         public string SprintID { get; set; }
 
+        public virtual ICollection<fechas> fechaC { get; set; }
     }
 }

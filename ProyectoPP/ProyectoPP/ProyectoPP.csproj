@@ -546,6 +546,7 @@
     <Content Include="Views\sprints\SprintPlanning.cshtml" />
     <Content Include="Views\historiasDeUsuarios\EditarCriterio.cshtml" />
     <Content Include="Views\historiasDeUsuarios\EliminarCriterio.cshtml" />
+    <Content Include="Views\sprints\CreateHito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
