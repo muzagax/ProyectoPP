@@ -51,7 +51,8 @@ namespace ProyectoPP.Models
         [Display(Name = "Número de escenario")]
         [Required(ErrorMessage = "Campo requerido")]
         public int NumeroEscenario { get; set; }
-
+        [Display(Name = "Sprint Id")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string id { get; set; }
 
 

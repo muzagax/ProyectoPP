@@ -31,7 +31,7 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.numSprint, "sprintId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Número de Sprint</label>
             <div class="col-md-10">
                 @Html.DropDownList("sprintId", (SelectList)ViewBag.sprintId, "0", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.numSprint, "", new { @class = "text-danger" })

@@ -31,7 +31,7 @@
 
         <dd>
             <text>@ViewBag.nombreProyecto</text>
-            @Html.DisplayFor(model => model.proyecto.nombre)
+            @Html.DisplayFor(model => model.proyecto.nombre)<br><br>
         </dd>
 
 
@@ -42,7 +42,7 @@
             @Html.DisplayNameFor(model => model.fechaInicio)
         </dt>
         <dd>
-            <text>@Model.fechaInicio.ToShortDateString()</text>
+            <text>@Model.fechaInicio.ToShortDateString()</text><br><br>
         </dd>
 
 
@@ -53,7 +53,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fechaFinal)
+            @Html.DisplayFor(model => model.fechaFinal)<br><br>
         </dd>
 
         

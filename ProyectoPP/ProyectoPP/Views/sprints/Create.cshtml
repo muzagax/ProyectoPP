@@ -35,6 +35,7 @@
         <hr />
         <div class="form-group">
             @Html.Label("Sprint", htmlAttributes: new { @class = "control-label col-md-2" })
+
             @Html.HiddenFor(m => Model.id)
             @Html.HiddenFor(m => Model.proyecto)
             @Html.HiddenFor(m => Model.proyectoId)
@@ -45,10 +46,11 @@
         </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <br>@Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                    <br />
                 </div>
             </div>
 
@@ -59,6 +61,7 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.fechaFinal, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.fechaFinal, "", new { @class = "text-danger" })
+                    <br /><br />
                 </div>
             </div>
 
